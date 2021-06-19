@@ -8,12 +8,6 @@ import javax.mail.internet.*;
  */
 public class App{
     public static void main(String[] args) {
-//      //Declare recipient's & sender's e-mail id.
-//      String destmailid = "1930526@upv.edu.com";
-//      String sendrmailid = "jesusuriegas18@gmail.com";	  
-//     //Mention user name and password as per your configuration
-//      final String uname = "jesusuriegas18@gmail.com";
-//      final String pwd = "y#91LC*FB2djSU4y%%a%fq61";
 
         final String fromEmail = "1930526@upv.edu.mx"; //requires valid gmail id
 		final String password = ""; // correct password for gmail id
