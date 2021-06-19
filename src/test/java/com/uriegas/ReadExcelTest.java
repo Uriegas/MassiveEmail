@@ -13,7 +13,6 @@ import org.junit.runners.Parameterized;
 @RunWith(Parameterized.class)
 public class ReadExcelTest {
     String path;//The path to read
-    ReadExcel read;
     ArrayList<List<String>> expected;
     /**
      * Before instantiating this class run this setUp
@@ -21,7 +20,6 @@ public class ReadExcelTest {
     @Before
     public void setUp(){
         path = System.getProperty("user.dir") + "/src/main/resources/ITI-lista.xlsx";
-        read = new ReadExcel();
     }
     /**
      * Constructor with expected value injection
@@ -31,7 +29,7 @@ public class ReadExcelTest {
         expected = e;
     }
     /**
-     * Parameters to add to the constructor @see{@link com.uriegas.ReadExcelTest#ReadExcelTest(ArrayList)}
+     * Parameters to add to the constructor @see{@link com.uriegas.Utilities#readExcel(ArrayList)}
      * @return Collection of tables
      */
     @Parameterized.Parameters
@@ -51,7 +49,7 @@ public class ReadExcelTest {
     @Test
     public void testExcel() throws IOException{
         System.out.println(path);
-        ArrayList<List<String>> actual = read.readFile(path);//Get list
+        ArrayList<List<String>> actual = Utilities.readExcel(path);//Get list
         //The Read Excel function doesnt work well yet, it is reading empty cells in columns
         assertEquals(expected.get(0), actual.get(0));//Compare first row
         assertEquals(expected.get(expected.size()-1), actual.get(actual.size()-1));//Compare last row
