@@ -7,53 +7,52 @@ import java.util.*;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-
+/**
+ * Test correctness of excel file reading
+ */
 @RunWith(Parameterized.class)
 public class ReadExcelTest {
     String path;//The path to read
     ReadExcel read;
     ArrayList<List<String>> expected;
-
+    /**
+     * Before instantiating this class run this setUp
+     */
     @Before
     public void setUp(){
         path = System.getProperty("user.dir") + "/src/main/resources/ITI-lista.xlsx";
         read = new ReadExcel();
-
-//        List<List<Exp>> values = new ArrayList<List<Exp>>();
-//        values.add(new ArrayList<Exp>());
-//        values.add(new ArrayList<Exp>());
-//        values.get(0).add(new Exp.NumberNode("0.0"));
-//        values.get(0).add(new Exp.NumberNode("1.0"));
-//        values.get(0).add(new Exp.NumberNode("2.0"));
-//        values.get(1).add(new Exp.NumberNode("10.0"));
-//        values.get(1).add(new Exp.NumberNode("9.0"));
-//        values.get(1).add(new Exp.NumberNode("8.0"));
-//
-//        expected.define("x_1", values.get(0));
-//        expected.define("x_2", values.get(1));
     }
+    /**
+     * Constructor with expected value injection
+     * @param e expected table
+     */
     public ReadExcelTest(ArrayList<List<String>> e){
         expected = e;
     }
+    /**
+     * Parameters to add to the constructor @see{@link com.uriegas.ReadExcelTest#ReadExcelTest(ArrayList)}
+     * @return Collection of tables
+     */
     @Parameterized.Parameters
     public static Collection<ArrayList<List<String>>> getTestData(){
         ArrayList<List<String>> data = new ArrayList<List<String>>();
 
         data.add(Arrays.asList("NUM", "MATRÍCULA", "NOMBRE", "PROMEDIO ENERO ABRIL 2021", "MATERIAS REPROBADAS ENERO ABRIL 2021"));//First line
-        data.add(Arrays.asList("216", "1930315", "MORENO MOCTEZUMA JOSUE RAUL", "67,33333", "3"));//Last line
+        data.add(Arrays.asList("216.0", "1930315.0", "MORENO MOCTEZUMA JOSUE RAUL", "67.33333", "3.0"));//Last line
         Collection<ArrayList<List<String>>> ret = Arrays.asList(data);
         return ret;
     }
 
     /**
-     * Test load of variables into an environment
-     * @throws Exception
+     * Test the correctness of the first and last expected rows, it would be hard to check all the rows.
+     * @throws IOException
      */
     @Test
     public void testExcel() throws IOException{
         System.out.println(path);
         ArrayList<List<String>> actual = read.readFile(path);//Get list
-
+        //The Read Excel function doesnt work well yet, it is reading empty cells in columns
         assertEquals(expected.get(0), actual.get(0));//Compare first row
         assertEquals(expected.get(expected.size()-1), actual.get(actual.size()-1));//Compare last row
         //Print list
@@ -62,7 +61,5 @@ public class ReadExcelTest {
                 System.out.print(j + ' ');
             System.out.println();
         }
-        //environment = read.readFile("archivo1.xlsx", interpreter);
-        //assertTrue("Error", environment.equals(expected));
     }
 }
