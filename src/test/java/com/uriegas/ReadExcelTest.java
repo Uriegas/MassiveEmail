@@ -1,7 +1,6 @@
 package com.uriegas;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.io.*;
 import java.util.*;
@@ -19,7 +18,6 @@ public class ReadExcelTest {
     public void setUp(){
         path = System.getProperty("user.dir") + "/src/main/resources/ITI-lista.xlsx";
         read = new ReadExcel();
-        expected = new ArrayList<List<String>>();
 
 //        List<List<Exp>> values = new ArrayList<List<Exp>>();
 //        values.add(new ArrayList<Exp>());
