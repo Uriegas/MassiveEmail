@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -23,6 +24,7 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
 
     GuardarCuentas save = new GuardarCuentas();
+    LeerCuentas cuentas = new LeerCuentas();
 
     @FXML
     private TextField TfUsuario;
@@ -38,14 +40,23 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        LeerCuentas lcuentas = new LeerCuentas();
-        lcuentas.Leer();
+        cuentas.Leer();
         
-        for(int i = 0; i < lcuentas.getNumCuentas(); i++) {
-            if(lcuentas.getCuentas().get(i).contains("@upv.edu.mx")) {
-                LvCuentas.getItems().add(lcuentas.getCuentas().get(i));
+        for(int i = 0; i < cuentas.getNumCuentas(); i++) {
+            if(cuentas.getCuentas().get(i).contains("@upv.edu.mx")) {
+                LvCuentas.getItems().add(cuentas.getCuentas().get(i));
             }
         }
+    }
+
+
+    @FXML
+    protected void SelectCuenta(){
+        TfUsuario.setText(LvCuentas.getSelectionModel().getSelectedItem());
+        System.out.println(LvCuentas.getSelectionModel().getSelectedItem());
+        int x = LvCuentas.getSelectionModel().getSelectedIndex();
+        TfContra.setText(cuentas.getCuentas().get(x+1));
+        System.out.println(cuentas.getCuentas().get(x+1));
     }
 
     @FXML
@@ -58,17 +69,20 @@ public class LoginController implements Initializable {
         }
         else {
             String encriptado = EncryptAccounts.encriptar(pass);
-            //String desencriptado = encrypt.desencriptar(encriptado);
-            save.Escribir_Cuentas(email, encriptado);
+            if(cuentas.CompararCuentas(email)){
+            }
+            else {
+                save.Escribir_Cuentas(email, encriptado);
+            }
 
         /*Login login = new Login();
         login.setFromEmail(email);
-        login.setPassword(pass);
+        login.setPassword(pass);*/
 
         goToVentanaPrincipal();
         Node source = (Node) e.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();*/
+        stage.close();
         }
     }
 

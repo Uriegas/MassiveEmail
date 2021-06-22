@@ -1,7 +1,6 @@
 package com.uriegas;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
 
@@ -16,25 +15,42 @@ public class GenerarLlave {
         return false;
     }
 
-    public void GuardarLlave(String pass){
+    public void EncriptarLlave(String pass){
+
+        String llave = null;
+
+        EncryptAccounts.setClave_encriptacion("Private_Keys.key");
+        EncryptAccounts.setLlave();
         try {
-            FileWriter salida = new FileWriter("src/main/resources/llave.key", true);
-            salida.write(pass);
+            llave = EncryptAccounts.encriptar(pass);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            FileWriter salida = new FileWriter("src/main/resources/Private_Keys.key", true);
+            salida.write(llave);
             salida.close();
         }catch(Exception e){e.printStackTrace();}
     }
 
     public boolean CompararLlave(String pass){
+        EncryptAccounts.setClave_encriptacion("Private_Keys.key");
+        EncryptAccounts.setLlave();
+
         String llave = null;
+        String desencriptada = null;
+
         File file = new File("src/main/resources/llave.key");
         try {
             Scanner s = new Scanner(file);
             llave = s.nextLine();
-        } catch (FileNotFoundException e) {
+            desencriptada = EncryptAccounts.desencriptar(llave);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if(pass.equals(llave)){
+        if(pass.equals(desencriptada)){
             return true;
         }
         return false;

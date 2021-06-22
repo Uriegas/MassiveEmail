@@ -27,7 +27,7 @@
                <Blend />
             </effect>
          </SplitMenuButton>
-         <Button fx:id="BtnInsertar" ellipsisString="." graphicTextGap="1.0" layoutX="214.0" layoutY="395.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="+" textOverrun="CLIP" />
+         <Button fx:id="BtnInsertar" ellipsisString="." graphicTextGap="1.0" layoutX="214.0" layoutY="395.0" minWidth="30.0" mnemonicParsing="false" onAction="#ClickAdjuntar" prefHeight="30.0" prefWidth="30.0" text="+" textOverrun="CLIP" />
          <Button fx:id="btnCambiarCuenta" layoutX="72.0" layoutY="3.0" mnemonicParsing="false" onAction="#ClickCambiarCuenta" text="cambiar" />
          <Button fx:id="btnConfig" layoutX="8.0" layoutY="3.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="59.0" text="Config" />
       </children></AnchorPane>

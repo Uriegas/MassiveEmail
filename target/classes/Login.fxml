@@ -33,7 +33,7 @@
             </image>
          </ImageView>
          <PasswordField fx:id="TfContra" layoutX="104.0" layoutY="309.0" prefHeight="23.0" prefWidth="399.0" promptText="Contraseña" />
-         <ListView fx:id="LvCuentas" layoutX="102.0" layoutY="121.0" prefHeight="93.0" prefWidth="402.0" />
+         <ListView fx:id="LvCuentas" layoutX="102.0" layoutY="121.0" prefHeight="93.0" prefWidth="402.0" onMouseClicked="#SelectCuenta"/>
          <Label fx:id="lError" layoutX="168.0" layoutY="231.0" textFill="RED">
             <font>
                <Font size="11.0" />

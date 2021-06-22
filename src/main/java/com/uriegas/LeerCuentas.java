@@ -22,6 +22,34 @@ public class LeerCuentas {
         }catch(Exception e){e.printStackTrace();}
     }
 
+    public boolean CompararCuentas(String cuentaNueva){
+        Scanner s = null;
+
+        try{
+            s = new Scanner(file);
+            while(s.hasNextLine()){
+                String cuentas = s.nextLine();
+                if(cuentas.equals(cuentaNueva))
+                {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("No se encotró el archivo de cuentas");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (s != null){
+                    s.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Problemas para cerrar el archivo");
+            }
+        }
+
+        return false;
+    }
+
     public int getNumCuentas(){
         return this.Cuentas.size();
     }
@@ -50,7 +78,7 @@ public class LeerCuentas {
             }
 
         } catch (Exception e) {
-            System.out.println("No se encotró el archivo de cuentas");
+            System.out.println("No se encontró el archivo de cuentas");
             e.printStackTrace();
         } finally {
             try {
