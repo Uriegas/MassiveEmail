@@ -35,7 +35,7 @@ public class LeerCuentas {
                 }
             }
         } catch (Exception e) {
-            System.out.println("No se encotró el archivo de cuentas");
+            System.out.println("No se encontró el archivo de cuentas");
             e.printStackTrace();
         } finally {
             try {
