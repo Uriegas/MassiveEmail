@@ -1,11 +1,13 @@
 package com.uriegas;
+
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class LeerCuentas {
-    private ArrayList<String> Cuentas = new ArrayList<>();
+public class AccountsUtilities {
+    private ArrayList<Cuenta> listaCuentas = new ArrayList<>();
     private File file = new File("src/main/resources/cuentas.txt");
 
     /**
@@ -51,13 +53,7 @@ public class LeerCuentas {
             System.out.println("No se encontró el archivo de cuentas");
             e.printStackTrace();
         } finally {
-            try {
-                if (s != null){
-                    s.close();
-                }
-            } catch (Exception e) {
-                System.out.println("Problemas para cerrar el archivo");
-            }
+            s.close();
         }
 
         return false;
@@ -68,36 +64,32 @@ public class LeerCuentas {
      * @return retorna la cantidad de cuentas guardadas en el archivo
      */
     public int getNumCuentas(){
-        return this.Cuentas.size();
+        return this.listaCuentas.size();
     }
 
     /**
      *
      * @return retorna el ArrayList con las cuentas guardadas en el archivo
      */
-    public ArrayList<String> getCuentas(){
-        return this.Cuentas;
+    public ArrayList<Cuenta> getCuentas(){
+        return this.listaCuentas;
     }
 
     /**
      * lee las cuentas almacenadas en el archivo y las almacena en un ArrayList
      * Tambien manda a desencriptar las contraseñas y las almacen en el ArrayList
      */
-    public void Leer(){
+    public void LeerCuentas(){
         Scanner s = null;
 
         try{
             s = new Scanner(file);
             while(s.hasNextLine()){
-                String cuentas = s.nextLine();
-                if(!cuentas.isEmpty())
+                String correo = s.nextLine();
+                if(!correo.isEmpty())
                 {
-                    if(cuentas.contains("@upv.edu.mx")){
-                        this.Cuentas.add(cuentas);
-                    }
-                    else if(!cuentas.contains("@upv.edu.mx") && !cuentas.equals("----------------------------------------")){
-                        String desencriptado = EncryptAccounts.desencriptar(cuentas);
-                        this.Cuentas.add(desencriptado);
+                    if(correo.contains("@upv.edu.mx")){
+                        listaCuentas.add(new Cuenta(correo, Keys.desencriptar(s.nextLine()))); //<correo, contraseña>
                     }
                 }
             }
@@ -106,13 +98,28 @@ public class LeerCuentas {
             System.out.println("No se encontró el archivo de cuentas");
             e.printStackTrace();
         } finally {
-            try {
-                if (s != null){
-                    s.close();
-                }
-            } catch (Exception e) {
-                System.out.println("Problemas para cerrar el archivo");
-            }
+            s.close();
+        }
+    }
+
+    /**
+     * Almacena las cuentas en el archivo cuentas.txt
+     */
+    public void Escribir_Cuentas(Cuenta cuenta) {
+        try {
+            FileWriter salida = new FileWriter("src/main/resources/cuentas.txt", true);
+
+            salida.write("----------------------------------------");
+            salida.write(System.lineSeparator());
+            salida.write(cuenta.getEmail());
+            salida.write(System.lineSeparator());
+            salida.write(Keys.encriptar(cuenta.getContrasenia()));//Alamcena la contraseña encriptada
+            salida.write(System.lineSeparator());
+
+            salida.close();
+        } catch (IOException e) {
+            System.out.println("\nAlgo salió mal. Vuelva a intentarlo");
+            e.printStackTrace();
         }
     }
 }

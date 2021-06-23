@@ -9,7 +9,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.apache.poi.ss.formula.functions.TextFunction;
 
 import java.io.File;
 import java.net.URL;
@@ -44,13 +43,12 @@ public class Ventana_PrincipalController {
      */
     @FXML
     protected void ClickEnviar(ActionEvent e) {
-        String Destinatario = TfDestinatarios.getText();
-        String Asunto = TfAsunto.getText();
-        String Cuerpo = TaMensaje.getText();
-        EmailUtil.sendEmail(UseJavaMail.getSession(), Destinatario ,Asunto, Cuerpo);
+        String destinatario = TfDestinatarios.getText();
+        String asunto = TfAsunto.getText();
+        String cuerpo = TaMensaje.getText();
 
-        System.out.println(Asunto);
-        System.out.println(Cuerpo+"\n");
+        Mensaje mensaje = new Mensaje(destinatario, asunto, cuerpo);
+        UseJavaMail.sendEmail(UseJavaMail.getSession(), mensaje);
     }
 
     /**

@@ -16,13 +16,13 @@ import java.util.ResourceBundle;
  * Controller of the first window to show: A simple login window
  */
 public class AutenticacionController implements Initializable {
-    LeerCuentas lcuentas = new LeerCuentas();
+    AccountsUtilities lcuentas = new AccountsUtilities();
 
     @FXML private PasswordField TfPass;
 
     @FXML private Label lbMensaje;
     @FXML private Label lbAdvertencia;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 
     /**
      * Compruba si existe el archivo que almacena la clave de autenticacion,
@@ -38,8 +38,8 @@ public class AutenticacionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(lcuentas.Existe()){
-            lbMensaje.setText("Introduzca la contraseña para desbloquearlo");
-            lbAdvertencia.setText("Esta intentando acceder al deposito de contraseñas, pero está bloqueado");
+            lbMensaje.setText("Introduzca la contraseña de autenticación");
+            lbAdvertencia.setText("Mensaje en chiquito (Cambiar despuess)");
         }
         else{
             lbMensaje.setText("Crea una contraseña de autenticación(16 caracteres)");
@@ -47,7 +47,7 @@ public class AutenticacionController implements Initializable {
             lcuentas.GenerarArchivo();
         }
     }
-<<<<<<< HEAD
+//<<<<<<< HEAD
 
     /**
      * cierra el programa
@@ -65,7 +65,7 @@ public class AutenticacionController implements Initializable {
         stage.getOnCloseRequest().handle(null);
         stage.close();
     }
-<<<<<<< HEAD
+//<<<<<<< HEAD
 
 
     /**
@@ -82,30 +82,25 @@ public class AutenticacionController implements Initializable {
     @FXML
     protected void AuthClicked(ActionEvent e){
         String pass = TfPass.getText();
-        GenerarLlave LlavePriv = new GenerarLlave();
 
-        System.out.println("CLICK");
-
-        if(LlavePriv.Existe() == true){
-            if(LlavePriv.CompararLlave(pass) == true){
+        if(Keys.Existe() == true){
+            if(Keys.comparar(pass) == true){
                 System.out.println("LLAVE CORRECTA");
-                EncryptAccounts.setClave_encriptacion(pass);
-                EncryptAccounts.setLlave();
+                Keys.definirLlave(pass);
 
                 goToLogin();
 
                 Node source = (Node) e.getSource();
                 Stage stage = (Stage) source.getScene().getWindow();
                 stage.close();
-            } else if(LlavePriv.CompararLlave(pass) == false){
+            } else if(Keys.comparar(pass) == false){
                 System.out.print("LLAVE INCORRECTA");
             }
         }
         else{
             System.out.println("LLAVE GENERADA");
-            LlavePriv.EncriptarLlave(pass);
-            EncryptAccounts.setClave_encriptacion(pass);
-            EncryptAccounts.setLlave();
+            Keys.almacenarLlave(pass);
+            Keys.definirLlave(pass);
             goToLogin();
         }
     }
