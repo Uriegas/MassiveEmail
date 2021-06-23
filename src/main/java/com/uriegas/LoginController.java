@@ -43,7 +43,7 @@ public class LoginController implements Initializable {
         cuentas.Leer();
         
         for(int i = 0; i < cuentas.getNumCuentas(); i++) {
-            if(cuentas.getCuentas().get(i).contains("@upv.edu.mx")) {
+            if(cuentas.getCuentas().get(i).endsWith("@upv.edu.mx")) {
                 LvCuentas.getItems().add(cuentas.getCuentas().get(i));
             }
         }
@@ -63,7 +63,7 @@ public class LoginController implements Initializable {
         String email = TfUsuario.getText();
         String pass = TfContra.getText();
 
-        if(!email.contains("@upv.edu.mx")){
+        if(!email.endsWith("@upv.edu.mx")){
             lError.setText("Esta cuenta no pertenece a la poderosisima UPV");
         }
         else {
