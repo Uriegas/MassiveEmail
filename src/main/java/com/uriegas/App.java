@@ -29,15 +29,17 @@ public class App extends Application {
 
             /**
              * Alert: Exit Confirmation Window, when user tries to exit the app a pop-up alert window appears
+             * TODO: Header of the window is in english
+             * TODO: Cancel button is i english
              */
             primaryStage.setOnCloseRequest(event -> {
                 Alert closeConfirmation = new Alert(
                     Alert.AlertType.CONFIRMATION,
-                    "Are you sure you want to exit?"
+                    "¿Está seguro que desea salir?"
                 );
                 Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
-                exitButton.setText("Exit");
-                closeConfirmation.setHeaderText("Confirm Exit");
+                exitButton.setText("Salir");
+                closeConfirmation.setHeaderText("Confirmar Salida");
                 closeConfirmation.initModality(Modality.APPLICATION_MODAL);
                 closeConfirmation.initOwner(primaryStage);
 

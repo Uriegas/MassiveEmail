@@ -39,11 +39,15 @@ public class AutenticacionController implements Initializable {
     }
     /**
      * Cancel button = exit current window (stage)
+     * Actually makes a request to exit (pops the alert exit window)
      * @param e
      */
     @FXML
     protected void CancelClicked(ActionEvent e){
-        Platform.exit();
+        Node source = (Node)e.getSource();
+        Stage stage = (Stage)source.getScene().getWindow();
+        stage.getOnCloseRequest().handle(null);
+        stage.close();
     }
     /**
      * authentication button, once clicked the program validates if the password is correct
