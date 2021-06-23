@@ -6,13 +6,14 @@ import java.util.Scanner;
 
 public class GenerarLlave {
 
-    private File file = new File("src/main/resources/llave.key");
+    private File file = new File("src/main/resources/Private_Keys.key");
 
     public boolean Existe(){
         if(this.file.exists()) {
             return true;
+        }else {
+            return false;
         }
-        return false;
     }
 
     public void EncriptarLlave(String pass){
@@ -41,7 +42,7 @@ public class GenerarLlave {
         String llave = null;
         String desencriptada = null;
 
-        File file = new File("src/main/resources/llave.key");
+        File file = new File("src/main/resources/Private_Keys.key");
         try {
             Scanner s = new Scanner(file);
             llave = s.nextLine();

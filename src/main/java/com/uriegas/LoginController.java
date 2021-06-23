@@ -53,10 +53,9 @@ public class LoginController implements Initializable {
     @FXML
     protected void SelectCuenta(){
         TfUsuario.setText(LvCuentas.getSelectionModel().getSelectedItem());
-        System.out.println(LvCuentas.getSelectionModel().getSelectedItem());
         int x = LvCuentas.getSelectionModel().getSelectedIndex();
         TfContra.setText(cuentas.getCuentas().get(x+1));
-        System.out.println(cuentas.getCuentas().get(x+1));
+
     }
 
     @FXML
@@ -68,16 +67,21 @@ public class LoginController implements Initializable {
             lError.setText("Esta cuenta no pertenece a la poderosisima UPV");
         }
         else {
-            String encriptado = EncryptAccounts.encriptar(pass);
-            if(cuentas.CompararCuentas(email)){
+
+            //INICIA SESIÓN CON LOS DATOS INGRESADOS
+            UseJavaMail mail = new UseJavaMail();
+            mail.setFromEmail(email);
+            mail.setPassword(pass);
+            mail.Login();
+
+
+            String encriptado = EncryptAccounts.encriptar(pass); //Encripta la contraseña para almacenarla en el archivo
+
+            if(cuentas.CompararCuentas(email)){ //Si la cuenta ya existe no la almacena
             }
             else {
                 save.Escribir_Cuentas(email, encriptado);
             }
-
-        /*Login login = new Login();
-        login.setFromEmail(email);
-        login.setPassword(pass);*/
 
         goToVentanaPrincipal();
         Node source = (Node) e.getSource();

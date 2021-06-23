@@ -58,11 +58,10 @@ public class AutenticacionController implements Initializable {
                 Stage stage = (Stage) source.getScene().getWindow();
                 stage.close();
             } else if(LlavePriv.CompararLlave(pass) == false){
-                System.out.print("Contraseña incorrecta");
+                System.out.print("LLAVE INCORRECTA");
             }
         }
-
-        if (LlavePriv.Existe() == false){ //if(LlavePriv.Existe() == false){
+        else{
             System.out.println("LLAVE GENERADA");
             LlavePriv.EncriptarLlave(pass);
             EncryptAccounts.setClave_encriptacion(pass);
