@@ -12,7 +12,9 @@ import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+/**
+ * Controller of the first window to show: A simple login window
+ */
 public class AutenticacionController implements Initializable {
     LeerCuentas lcuentas = new LeerCuentas();
 
@@ -20,6 +22,7 @@ public class AutenticacionController implements Initializable {
 
     @FXML private Label lbMensaje;
     @FXML private Label lbAdvertencia;
+<<<<<<< HEAD
 
     /**
      * Compruba si existe el archivo que almacena la clave de autenticacion,
@@ -27,6 +30,10 @@ public class AutenticacionController implements Initializable {
      * Si existe cambia el contenido del label para solicitar introducir la clave
      * @param url
      * @param resourceBundle
+=======
+    /**
+     * Initializer method for the controller 
+>>>>>>> 649e3bcf6051bdf38f15450668197baebfe868f7
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -40,15 +47,25 @@ public class AutenticacionController implements Initializable {
             lcuentas.GenerarArchivo();
         }
     }
+<<<<<<< HEAD
 
     /**
      * cierra el programa
+=======
+    /**
+     * Cancel button = exit current window (stage)
+     * Actually makes a request to exit (pops the alert exit window)
+>>>>>>> 649e3bcf6051bdf38f15450668197baebfe868f7
      * @param e
      */
     @FXML
     protected void CancelClicked(ActionEvent e){
-        Platform.exit();
+        Node source = (Node)e.getSource();
+        Stage stage = (Stage)source.getScene().getWindow();
+        stage.getOnCloseRequest().handle(null);
+        stage.close();
     }
+<<<<<<< HEAD
 
 
     /**
@@ -56,6 +73,10 @@ public class AutenticacionController implements Initializable {
      * y la utiliza como clave de autenticacion
      *
      * Si el archivo existe, compara la cadena introducida con la clave de autenticacion almacenada
+=======
+    /**
+     * authentication button, once clicked the program validates if the password is correct
+>>>>>>> 649e3bcf6051bdf38f15450668197baebfe868f7
      * @param e
      */
     @FXML
