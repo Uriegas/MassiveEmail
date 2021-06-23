@@ -4,6 +4,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class GuardarCuentas {
+
+    /**
+     * Almacena las cuentas en el archivo cuentas.txt
+     * @param email recibe la direccion de correo electronico
+     * @param pass recibe la contraseña encriptada
+     */
     public void Escribir_Cuentas(String email, String pass) {
         try {
             FileWriter salida = new FileWriter("src/main/resources/cuentas.txt", true);

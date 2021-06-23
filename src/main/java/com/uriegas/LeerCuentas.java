@@ -8,6 +8,10 @@ public class LeerCuentas {
     private ArrayList<String> Cuentas = new ArrayList<>();
     private File file = new File("src/main/resources/cuentas.txt");
 
+    /**
+     * Comprueba si existe el archivo que almacena las cuentas
+     * @return true cuando existe el archvio o false cuando no
+     */
     public boolean Existe(){
         if(this.file.exists()) {
             return true;
@@ -15,6 +19,9 @@ public class LeerCuentas {
         return false;
     }
 
+    /**
+     * Crea el archivo que almacenara las cuentas
+     */
     public void GenerarArchivo(){
         try {
             FileWriter salida = new FileWriter("src/main/resources/cuentas.txt", true);
@@ -22,6 +29,12 @@ public class LeerCuentas {
         }catch(Exception e){e.printStackTrace();}
     }
 
+    /**
+     * Compara la cuenta recibida con las cuentas almacenadas en el archivo cuentas.txt
+     * En caso de que dicha cuenta no exista la almacena en el archivo
+     * @param cuentaNueva recibe la dirección de correo introducida en la vista Login
+     * @return retorna true cuando la cuenta existe en el archivo, false cuando no
+     */
     public boolean CompararCuentas(String cuentaNueva){
         Scanner s = null;
 
@@ -50,14 +63,26 @@ public class LeerCuentas {
         return false;
     }
 
+    /**
+     *
+     * @return retorna la cantidad de cuentas guardadas en el archivo
+     */
     public int getNumCuentas(){
         return this.Cuentas.size();
     }
 
+    /**
+     *
+     * @return retorna el ArrayList con las cuentas guardadas en el archivo
+     */
     public ArrayList<String> getCuentas(){
         return this.Cuentas;
     }
 
+    /**
+     * lee las cuentas almacenadas en el archivo y las almacena en un ArrayList
+     * Tambien manda a desencriptar las contraseñas y las almacen en el ArrayList
+     */
     public void Leer(){
         Scanner s = null;
 

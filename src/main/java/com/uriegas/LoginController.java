@@ -38,6 +38,11 @@ public class LoginController implements Initializable {
     @FXML
     private ListView<String> LvCuentas;
 
+    /**
+     * Al ejecutar la vista lee las cuentas almacenadas en el archivo cuentas.txt
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cuentas.Leer();
@@ -50,6 +55,9 @@ public class LoginController implements Initializable {
     }
 
 
+    /**
+     * Obtiene los datos de la cuenta seleccionada en el ListView
+     */
     @FXML
     protected void SelectCuenta(){
         TfUsuario.setText(LvCuentas.getSelectionModel().getSelectedItem());
@@ -58,6 +66,18 @@ public class LoginController implements Initializable {
 
     }
 
+    /**
+     * Se encarga de extraer los datos introducidos, crear la sesion por medio de UseJavaMail,
+     * Encriptar la contraseña extraida haciendo uso de EncryptAccounts y almacenar las cuentas
+     * en un archivo mediante la clase GuardarCuentas
+     * @param e recibe un ActionEvent cuando el usuario da clic en el boton Iniciar Sesión
+     * @throws UnsupportedEncodingException
+     * @throws NoSuchPaddingException
+     * @throws IllegalBlockSizeException
+     * @throws NoSuchAlgorithmException
+     * @throws BadPaddingException
+     * @throws InvalidKeyException
+     */
     @FXML
     protected void submitClicked(ActionEvent e) throws UnsupportedEncodingException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         String email = TfUsuario.getText();
@@ -90,6 +110,9 @@ public class LoginController implements Initializable {
         }
     }
 
+    /**
+     * Carga la vista Ventana_Principal
+     */
     private void goToVentanaPrincipal() {
         try {
             FXMLLoader loader = new FXMLLoader();

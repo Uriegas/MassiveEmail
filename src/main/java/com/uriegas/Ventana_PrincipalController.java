@@ -25,6 +25,10 @@ public class Ventana_PrincipalController {
     @FXML
     private TextArea TaMensaje;
 
+    /**
+     * abre la vista Login nuevamente
+     * @param e
+     */
     @FXML
     protected void ClickCambiarCuenta(ActionEvent e){
         CambiarVista("CambiarCuenta");
@@ -33,6 +37,11 @@ public class Ventana_PrincipalController {
         stage.close();
     }
 
+    /**
+     * Extrae el destinatario, asunto y cuerpo del mensaje introducidos por el usuario
+     * y posteriormente los envia al metodo senEmail de la clase EmailUtil
+     * @param e recibe un ActionEvent cuando el usuario da click en el boton enviar
+     */
     @FXML
     protected void ClickEnviar(ActionEvent e) {
         String Destinatario = TfDestinatarios.getText();
@@ -44,12 +53,20 @@ public class Ventana_PrincipalController {
         System.out.println(Cuerpo+"\n");
     }
 
+    /**
+     * Abre la vista Envio_Rutinas
+     * @param e
+     */
     @FXML
     protected void ClickRutina(ActionEvent e) {
         CambiarVista("Rutinas");
     }
 
 
+    /**
+     * Abre el selector de archivos
+     * @param e
+     */
     @FXML
     protected void ClickAdjuntar(ActionEvent e)
     {
@@ -69,6 +86,10 @@ public class Ventana_PrincipalController {
     }
 
 
+    /**
+     * Cambia la vista por la vista solicitada
+     * @param origen recibe el nombre de la vista a la cual cambiar
+     */
     private void CambiarVista(String origen) {
         try {
             FXMLLoader loader = new FXMLLoader();

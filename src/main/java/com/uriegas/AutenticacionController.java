@@ -21,6 +21,13 @@ public class AutenticacionController implements Initializable {
     @FXML private Label lbMensaje;
     @FXML private Label lbAdvertencia;
 
+    /**
+     * Compruba si existe el archivo que almacena la clave de autenticacion,
+     * Si no existe cambia el contenido del label para solicitar crear clave
+     * Si existe cambia el contenido del label para solicitar introducir la clave
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(lcuentas.Existe()){
@@ -34,11 +41,23 @@ public class AutenticacionController implements Initializable {
         }
     }
 
+    /**
+     * cierra el programa
+     * @param e
+     */
     @FXML
     protected void CancelClicked(ActionEvent e){
         Platform.exit();
     }
 
+
+    /**
+     * Si la el archivo de autenticacion no existe toma la cadena introducida, la almacena en el archivo Private_key.key
+     * y la utiliza como clave de autenticacion
+     *
+     * Si el archivo existe, compara la cadena introducida con la clave de autenticacion almacenada
+     * @param e
+     */
     @FXML
     protected void AuthClicked(ActionEvent e){
         String pass = TfPass.getText();
@@ -70,6 +89,9 @@ public class AutenticacionController implements Initializable {
         }
     }
 
+    /**
+     * Abre la vista Login
+     */
     private void goToLogin() {
         try {
             FXMLLoader loader = new FXMLLoader();

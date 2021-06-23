@@ -19,7 +19,9 @@ public class EmailUtil {
 	public static void sendEmail(Session session, String toEmail, String subject, String body){
 		try
 	    {
+
 	      MimeMessage msg = new MimeMessage(session);
+			System.out.println(msg.getSender());
 	      //set message headers
 	      msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
 	      msg.addHeader("format", "flowed");
