@@ -1,9 +1,12 @@
 package com.uriegas;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
+
 import java.net.URL;
+import java.util.Optional;
+import javafx.application.*;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.stage.*;
 
 public class App extends Application {
 
@@ -23,6 +26,25 @@ public class App extends Application {
             primaryStage.setTitle("Massive Email");
             primaryStage.setScene(scene);
             primaryStage.show();
+
+            /**
+             * Alert: Exit Confirmation Window, when user tries to exit the app a pop-up alert window appears
+             */
+            primaryStage.setOnCloseRequest(event -> {
+                Alert closeConfirmation = new Alert(
+                    Alert.AlertType.CONFIRMATION,
+                    "Are you sure you want to exit?"
+                );
+                Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
+                exitButton.setText("Exit");
+                closeConfirmation.setHeaderText("Confirm Exit");
+                closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+                closeConfirmation.initOwner(primaryStage);
+
+                Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
+                if (!ButtonType.OK.equals(closeResponse.get()))
+                    event.consume();
+            });
         }
         catch (Exception e) {
             e.printStackTrace();

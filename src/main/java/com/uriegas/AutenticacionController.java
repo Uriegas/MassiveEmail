@@ -12,7 +12,9 @@ import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+/**
+ * Controller of the first window to show: A simple login window
+ */
 public class AutenticacionController implements Initializable {
     LeerCuentas lcuentas = new LeerCuentas();
 
@@ -20,7 +22,9 @@ public class AutenticacionController implements Initializable {
 
     @FXML private Label lbMensaje;
     @FXML private Label lbAdvertencia;
-
+    /**
+     * Initializer method for the controller 
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(lcuentas.Existe()){
@@ -33,12 +37,18 @@ public class AutenticacionController implements Initializable {
             lcuentas.GenerarArchivo();
         }
     }
-
+    /**
+     * Cancel button = exit current window (stage)
+     * @param e
+     */
     @FXML
     protected void CancelClicked(ActionEvent e){
         Platform.exit();
     }
-
+    /**
+     * authentication button, once clicked the program validates if the password is correct
+     * @param e
+     */
     @FXML
     protected void AuthClicked(ActionEvent e){
         String pass = TfPass.getText();
