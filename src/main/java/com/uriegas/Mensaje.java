@@ -1,18 +1,21 @@
 package com.uriegas;
 
+import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Mensaje {
     private String destinatario;
     private String asunto;
     private String cuerpo;
-    private ArrayList<String> adjuntos;
+    private ArrayList<File> adjuntos = new ArrayList<>();
 
-    public Mensaje(String toEmail, String subject, String body/*, ArrayList<String> archivos*/){
+    //public Mensaje(String toEmail, String subject, String body, File archivo){
+    public Mensaje(String toEmail, String subject, String body, ArrayList<File> archivo){
         setDestinatario(toEmail);
         setAsunto(subject);
         setCuerpo(body);
-        /*setAdjuntos(archivos);*/
+        setAdjuntos(archivo);
 
     }
 
@@ -25,10 +28,12 @@ public class Mensaje {
     public void setCuerpo(String cuerpo){
         this.cuerpo = cuerpo;
     }
-    public void setAdjuntos(ArrayList<String> adjuntos){this.adjuntos = adjuntos;}
+    public void setAdjuntos(ArrayList<File> archivo){
+        adjuntos.addAll(archivo);
+    }
 
     public String getDestinatario(){ return this.destinatario;}
     public String getAsunto(){return this.asunto;}
     public String getCuerpo(){return this.cuerpo;}
-    public ArrayList<String> getAdjuntos(){return this.adjuntos;}
+    public ArrayList<File> getAdjuntos(){return this.adjuntos;}
 }

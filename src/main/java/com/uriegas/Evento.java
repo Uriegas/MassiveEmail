@@ -1,12 +1,15 @@
 package com.uriegas;
 
+import java.io.File;
+import java.util.ArrayList;
+
 public class Evento extends Mensaje{
     private String fecha;
     private String hora;
     private String rutina;
 
-    public Evento(String toEmail, String subject, String body) {
-        super(toEmail, subject, body);
+    public Evento(String toEmail, String subject, String body, ArrayList<File> Archivo) {
+        super(toEmail, subject, body, Archivo);
     }
 
     public void setFecha(String fecha){

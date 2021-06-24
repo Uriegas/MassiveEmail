@@ -2,7 +2,9 @@ package com.uriegas;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 /**
  * JavaFX App
@@ -31,7 +33,6 @@ class UseJavaMail{
 
 		session = Session.getDefaultInstance(props, auth);
 		System.out.println("Session created");
-		//EmailUtil.sendEmail(session, toEmail,"SSLEmail Testing Subject", "SSLEmail Testing Body");
 	}
 
 	/**
@@ -43,8 +44,11 @@ class UseJavaMail{
 		try
 		{
 
-			MimeMessage msg = new MimeMessage(session);
+			//MimeMessage msg = new MimeMessage(session);
+			Message msg = new MimeMessage(session);
+
 			//set message headers
+			msg.addHeader("X-Priority", "1");
 			msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
 			msg.addHeader("format", "flowed");
 			msg.addHeader("Content-Transfer-Encoding", "8bit");
@@ -53,13 +57,34 @@ class UseJavaMail{
 
 			msg.setReplyTo(InternetAddress.parse("no_reply@example.com", false));
 
-			msg.setSubject(mensaje.getAsunto(), "UTF-8");
+			//msg.setSubject(mensaje.getAsunto(), "UTF-8");
+			msg.setSubject(mensaje.getAsunto());
 
-			msg.setText(mensaje.getCuerpo(), "UTF-8");
+			//msg.setText(mensaje.getCuerpo(), "UTF-8");
 
 			msg.setSentDate(new Date());
 
 			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mensaje.getDestinatario(), false));
+
+	//------------------------------------------------------------------
+			//AQUI EMPIEZA LO CHIDO
+			Multipart mp = new MimeMultipart(); //Multipart permite crear un correo por partes
+
+			//Inserto el cuerpo del mensaje
+			BodyPart cuerpo = new MimeBodyPart();	//Creo una parte para el meter el cuerpo del mensaje
+			cuerpo.setText(mensaje.getCuerpo()); //Asigno el texto a la instancia creada
+			mp.addBodyPart(cuerpo);	//inserto la parte creada (cuerpo del mensaje)
+
+			//Adjunto los archivos
+			for(int i = 0; i < mensaje.getAdjuntos().size(); i++) {
+				MimeBodyPart adjuntar = new MimeBodyPart(); //Creo otra parte para añadir los archivos adjuntos
+				adjuntar.attachFile(mensaje.getAdjuntos().get(i));	//Aigno la ruta del archivo
+				mp.addBodyPart(adjuntar);	//Inserto la parte creada(Archivo adjunto)
+			}
+
+			msg.setContent(mp); //Se rellena el mensaje con las partes creadas
+	//------------------------------------------------------------------
+
 			System.out.println("Message is ready");
 			Transport.send(msg);
 
