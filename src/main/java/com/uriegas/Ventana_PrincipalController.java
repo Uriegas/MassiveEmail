@@ -12,8 +12,12 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class Ventana_PrincipalController {
+
+    //private String ruta = null;
+    private ArrayList<File> adjuntos = new ArrayList<>();
 
     @FXML
     private TextField TfDestinatarios;
@@ -47,7 +51,7 @@ public class Ventana_PrincipalController {
         String asunto = TfAsunto.getText();
         String cuerpo = TaMensaje.getText();
 
-        Mensaje mensaje = new Mensaje(destinatario, asunto, cuerpo);
+        Mensaje mensaje = new Mensaje(destinatario, asunto, cuerpo, adjuntos);
         UseJavaMail.sendEmail(UseJavaMail.getSession(), mensaje);
     }
 
@@ -68,7 +72,6 @@ public class Ventana_PrincipalController {
     @FXML
     protected void ClickAdjuntar(ActionEvent e)
     {
-        String ruta = null;
         FileChooser fc = new FileChooser();
         fc.setTitle("Selecciona el archivo deseado");
         fc.setInitialDirectory(new File("/home/"));
@@ -76,8 +79,7 @@ public class Ventana_PrincipalController {
         File selectedFile = fc.showOpenDialog(null);
 
         if(selectedFile != null){
-            ruta = selectedFile.getAbsolutePath();
-            System.out.println("ruta: "+ruta);
+            adjuntos.add(new File(selectedFile.getAbsolutePath()));
         }else{
             System.out.println("No se encontro el archivo");
         }
