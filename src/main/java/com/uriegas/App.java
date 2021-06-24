@@ -1,8 +1,9 @@
 package com.uriegas;
 
 import java.net.URL;
-import java.util.Optional;
+import java.util.*;
 import javafx.application.*;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -22,7 +23,21 @@ public class App extends Application {
             URL path = new URL("file:src/main/resources/Autenticacion.fxml");
             loader.setLocation(path);
             Scene scene = loader.load();
+            
+            //Css data binding, only works for one window
+            //Everytime the user changes something in the theme object the view is updated
+            Configuration theme = new Configuration();
+            scene.getRoot().styleProperty().bind(theme.cssProperty());
+            //Static css, works in all the windows
+            //scene.getStylesheets().add("/src/main/resources/styles.css");
 
+            //Attempt to create a data binding for all the windows
+            // scene.getStylesheets().addListener(new ListChangeListener<Configuration>(){
+            //     public void onChanged(ListChangeListener.Change<? extends Configuration> val){
+            //         val.getList().get(0).cssProperty();
+            //     }
+            // });
+            primaryStage.setResizable(false);
             primaryStage.setTitle("Massive Email");
             primaryStage.setScene(scene);
             primaryStage.show();
