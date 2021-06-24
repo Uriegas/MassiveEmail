@@ -42,6 +42,7 @@ public class App extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
 
+
             /**
              * Alert: Exit Confirmation Window, when user tries to exit the app a pop-up alert window appears
              * TODO: Header of the window is in english

@@ -7,35 +7,53 @@ import org.junit.*;
  * Prueba la correcta encriptación y desencriptación de la llave maestra
  */
 public class KeysTest{
+
+	/**
+	 * Test de encriptado de contraseña de cuenta
+	 * Compara si la llave encriptada fue encriptada correctamente
+	 */
+    @Test
+    public void testEncriptadoPasswordCuenta(){
+		Keys.definirLlave("PabloNailedANail"); //Se establece la clave de encriptado
+		String cadenaEncriptar = "Pepe";
+		String encriptado = Keys.encriptar(cadenaEncriptar);//Pepe
+		assertNotEquals(cadenaEncriptar, encriptado);
+	}
+
+	/**
+	 * Test de desencriptado de contraseña de cuenta
+	 * Comprueba si la llave desencriptada es igual a la llave guardada
+	 */
+    @Test
+    public void testDesencriptadoPasswordCuenta(){
+		Keys.definirLlave("PabloNailedANail"); //Se establece la clave de desencriptado
+		String cadenaEncriptada = "0ULUEuDYsWjeZkvF/KcdUg==";
+		String desencriptada = Keys.desencriptar(cadenaEncriptada);//Comparar passowrd con lo ya guardardo
+		assertEquals(desencriptada, "Pepe");
+	}
+
+
+
 	/**
 	 * Test de encriptado de llave maestra
 	 * Compara si la llave encriptada fue encriptada correctamente
 	 */
-    @Test
-    public void testEncriptado(){
-		String password = "Pepe";//Pepe
-		Keys.definircontra(password);
-		String descriptado = Keys.desencriptar();//Pepe
-		assertEquals(password, descriptado);
+	@Test
+	public void testCorrectMasterKey(){
+		String llaveMaestra = "PabloNailedANail";
+		Keys.almacenarLlave(llaveMaestra); //Se establece la clave de encriptado
+		Boolean EsCorrecta = Keys.comparar(llaveMaestra);
+		assertTrue(EsCorrecta);//Debe regresar verdadero
 	}
-	/**
-	 * Test de desencriptado de llave maestra
-	 * Comprueba si la llave desencriptada es igual a la llave guardada
-	 */
-    @Test
-    public void testDesencriptado(){
-		String password = "Pepe";//Pepe
-		Boolean funciona = Keys.comparar(password);//Comparar passowrd con lo ya guardardo
-		assertTrue(funciona);
-	}
+
+
 	/**
 	 * Test: comprueba que el método Keys.comparar devuelve falso si la llave indicada es incorrecta
 	 */
     @Test
-    public void testIncorrectPassword(){
-		//Aqui puedes añadir un test para comprobar que el método Keys.comparar te devuelve falso si la llave indicada es incorrecta
+    public void testIncorrectMasterKey(){
 		String incorrretPassowrd = "Toñito";
-		Boolean nodebefuncionar = Keys.comparar(incorrretPassowrd)
-		assertFalse(nodebefuncionar);//Debe regresar falso
+		Boolean EsIncorrecta = Keys.comparar(incorrretPassowrd);
+		assertFalse(EsIncorrecta);//Debe regresar falso
 	}
 }
