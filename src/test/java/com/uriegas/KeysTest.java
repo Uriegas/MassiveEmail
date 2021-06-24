@@ -17,6 +17,7 @@ public class KeysTest{
 		Keys.definirLlave("PabloNailedANail"); //Se establece la clave de encriptado
 		String cadenaEncriptar = "Pepe";
 		String encriptado = Keys.encriptar(cadenaEncriptar);//Pepe
+		System.out.println(encriptado);
 		assertNotEquals(cadenaEncriptar, encriptado);
 	}
 
@@ -29,6 +30,7 @@ public class KeysTest{
 		Keys.definirLlave("PabloNailedANail"); //Se establece la clave de desencriptado
 		String cadenaEncriptada = "0ULUEuDYsWjeZkvF/KcdUg==";
 		String desencriptada = Keys.desencriptar(cadenaEncriptada);//Comparar passowrd con lo ya guardardo
+		System.out.println(desencriptada);
 		assertEquals(desencriptada, "Pepe");
 	}
 
@@ -43,6 +45,7 @@ public class KeysTest{
 		String llaveMaestra = "PabloNailedANail";
 		Keys.almacenarLlave(llaveMaestra); //Se establece la clave de encriptado
 		Boolean EsCorrecta = Keys.comparar(llaveMaestra);
+		System.out.println(EsCorrecta);
 		assertTrue(EsCorrecta);//Debe regresar verdadero
 	}
 
@@ -54,6 +57,7 @@ public class KeysTest{
     public void testIncorrectMasterKey(){
 		String incorrretPassowrd = "Toñito";
 		Boolean EsIncorrecta = Keys.comparar(incorrretPassowrd);
+		System.out.println(EsIncorrecta);
 		assertFalse(EsIncorrecta);//Debe regresar falso
 	}
 }

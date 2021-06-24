@@ -35,7 +35,7 @@ public class Keys {
             e.printStackTrace();
         }
         try {
-            FileWriter salida = new FileWriter("src/main/resources/Private_Keys.key", true); //Se escribe la clave encriptada en el archivo
+            FileWriter salida = new FileWriter("src/main/resources/Private_Keys.key", false); //Se escribe la clave encriptada en el archivo
             salida.write(llave);
             salida.close();
         }catch(Exception e){e.printStackTrace();}

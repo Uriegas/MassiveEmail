@@ -59,7 +59,6 @@
     <orderEntry type="library" name="Maven: org.apache.maven.shared:maven-invoker:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.shared:maven-common-artifact-filters:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.shared:maven-artifact-transfer:0.10.1" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.doxia:doxia-sink-api:1.7" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.doxia:doxia-logging-api:1.7" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.doxia:doxia-site-renderer:1.9.2" level="project" />
@@ -105,5 +104,18 @@
     <orderEntry type="library" name="Maven: org.mnode.ical4j:ical4j:4.0.0-alpha2" level="project" />
     <orderEntry type="library" name="Maven: org.threeten:threeten-extra:1.5.0" level="project" />
     <orderEntry type="library" name="Maven: org.controlsfx:controlsfx:11.1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:barcodes:7.1.9" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:font-asian:7.1.9" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:forms:7.1.9" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:hyph:7.1.9" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:io:7.1.9" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:kernel:7.1.9" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:layout:7.1.9" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:pdfa:7.1.9" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:sign:7.1.9" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:styled-xml-parser:7.1.9" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:svg:7.1.9" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:html2pdf:2.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.13" level="project" />
   </component>
 </module>
