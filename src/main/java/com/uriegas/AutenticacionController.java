@@ -1,17 +1,12 @@
 package com.uriegas;
 
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.fxml.Initializable;
-import javafx.stage.Stage;
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.stage.*;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 /**
  * Controller of the first window to show: A simple login window
  */
@@ -22,7 +17,6 @@ public class AutenticacionController implements Initializable {
 
     @FXML private Label lbMensaje;
     @FXML private Label lbAdvertencia;
-<<<<<<< HEAD
 
     /**
      * Compruba si existe el archivo que almacena la clave de autenticacion,
@@ -30,10 +24,6 @@ public class AutenticacionController implements Initializable {
      * Si existe cambia el contenido del label para solicitar introducir la clave
      * @param url
      * @param resourceBundle
-=======
-    /**
-     * Initializer method for the controller 
->>>>>>> 649e3bcf6051bdf38f15450668197baebfe868f7
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,15 +37,9 @@ public class AutenticacionController implements Initializable {
             lcuentas.GenerarArchivo();
         }
     }
-<<<<<<< HEAD
-
-    /**
-     * cierra el programa
-=======
     /**
      * Cancel button = exit current window (stage)
      * Actually makes a request to exit (pops the alert exit window)
->>>>>>> 649e3bcf6051bdf38f15450668197baebfe868f7
      * @param e
      */
     @FXML
@@ -65,18 +49,12 @@ public class AutenticacionController implements Initializable {
         stage.getOnCloseRequest().handle(null);
         stage.close();
     }
-<<<<<<< HEAD
-
 
     /**
      * Si la el archivo de autenticacion no existe toma la cadena introducida, la almacena en el archivo Private_key.key
      * y la utiliza como clave de autenticacion
      *
      * Si el archivo existe, compara la cadena introducida con la clave de autenticacion almacenada
-=======
-    /**
-     * authentication button, once clicked the program validates if the password is correct
->>>>>>> 649e3bcf6051bdf38f15450668197baebfe868f7
      * @param e
      */
     @FXML
@@ -85,7 +63,6 @@ public class AutenticacionController implements Initializable {
         GenerarLlave LlavePriv = new GenerarLlave();
 
         System.out.println("CLICK");
-
         if(LlavePriv.Existe() == true){
             if(LlavePriv.CompararLlave(pass) == true){
                 System.out.println("LLAVE CORRECTA");
@@ -119,6 +96,10 @@ public class AutenticacionController implements Initializable {
             URL path = new URL("file:src/main/resources/Login.fxml");
             loader.setLocation(path);
             Scene scene = loader.load();
+            //Aqui estoy haciendo trampa, hice la clase configuration global
+            //Para poder usarla en todos los lugares donde se cree una nueva ventana (scene)
+            //Ya que no pude crear el data binding para todos los nodos desde el metodo start en App.java
+            scene.getRoot().styleProperty().bind(Configuration.cssProperty());
 
             Stage primaryStage = new Stage();
             primaryStage.setTitle("Inicia Sesión");
