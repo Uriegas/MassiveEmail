@@ -1,7 +1,6 @@
 package com.uriegas;
 
 import java.io.File;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Mensaje {

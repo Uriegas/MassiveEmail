@@ -5,18 +5,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 
 public class Ventana_PrincipalController extends Window {
 
-    //private String ruta = null;
     private ArrayList<File> adjuntos = new ArrayList<>();
     @FXML
     private TextField TfDestinatarios;
@@ -24,7 +21,8 @@ public class Ventana_PrincipalController extends Window {
     private TextField TfAsunto;
     @FXML
     private TextArea TaMensaje;
-
+    @FXML
+    private ListView<String> lvAdjuntos;
     /**
      * Inserta las cuentas almacenadas en el archivo cuentas.txt
      */
@@ -82,7 +80,14 @@ public class Ventana_PrincipalController extends Window {
         File selectedFile = fc.showOpenDialog(null);
 
         if(selectedFile != null){
-            adjuntos.add(new File(selectedFile.getAbsolutePath()));
+
+            if(selectedFile.getAbsolutePath().endsWith(".html")){   //Si es .html ....
+                selectedFile = HTMLutilites.convertir(selectedFile);    // ... llama al metodo convertir
+            }
+
+            //lvAdjuntos.setFixedCellSize(60.0);
+            lvAdjuntos.getItems().add(selectedFile.getName()); //Agrega el nombre del archivo al ListView
+            adjuntos.add(new File(selectedFile.getAbsolutePath())); //Agrega el archivo al Array de archivos a enviar
         }else{
             System.out.println("No se encontro el archivo");
         }

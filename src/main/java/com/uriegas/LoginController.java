@@ -82,7 +82,7 @@ public class LoginController extends Window {
 
             //INICIA SESIÓN CON LOS DATOS INGRESADOS
             UseJavaMail mail = new UseJavaMail();
-            mail.Login(sesion);
+            UseJavaMail.Login(sesion);
 
             String encriptado = null; //Encripta la contraseña para almacenarla en el archivo
             try {
