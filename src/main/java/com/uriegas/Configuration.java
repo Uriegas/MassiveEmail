@@ -13,11 +13,11 @@ import javafx.scene.paint.*;
  * Copied from: https://stackoverflow.com/questions/42541171/javafx-css-dynamic-styling#42541771
  */
 public class Configuration {
-    private final ObjectProperty<Color> base = new SimpleObjectProperty<>(Color.web("#D43C3C"));
-    private final ObjectProperty<Color> accent = new SimpleObjectProperty<>(Color.web("#0096c9"));
-    private final ObjectProperty<Color> defaultButton = new SimpleObjectProperty<>(Color.web("#abd8ed"));
-    private final ObjectProperty<Color> focusColor = new SimpleObjectProperty<>(Color.web("#039ed3"));
-    private final ObjectProperty<Color> faintFocusColor = new SimpleObjectProperty<>(Color.web("039ed322"));
+    private static ObjectProperty<Color> base = new SimpleObjectProperty<>(Color.web("#00aae4"));
+    private static ObjectProperty<Color> accent = new SimpleObjectProperty<>(Color.web("#0096c9"));
+    private static ObjectProperty<Color> defaultButton = new SimpleObjectProperty<>(Color.web("#abd8ed"));
+    private static ObjectProperty<Color> focusColor = new SimpleObjectProperty<>(Color.web("#039ed3"));
+    private static ObjectProperty<Color> faintFocusColor = new SimpleObjectProperty<>(Color.web("039ed322"));
 
     public ObjectProperty<Color> baseProperty() {
         return base ;

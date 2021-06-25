@@ -42,7 +42,7 @@ public class KeysTest{
 	public void testCorrectMasterKey(){
 		String llaveMaestra = "PabloNailedANail";
 		Keys.almacenarLlave(llaveMaestra); //Se establece la clave de encriptado
-		Boolean EsCorrecta = Keys.comparar(llaveMaestra);
+		Boolean EsCorrecta = Keys.comparar(llaveMaestra);//Esta parte falla, la llave desencriptada es null
 		assertTrue(EsCorrecta);//Debe regresar verdadero
 	}
 

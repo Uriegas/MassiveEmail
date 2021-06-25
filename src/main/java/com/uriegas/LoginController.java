@@ -1,41 +1,27 @@
 package com.uriegas;
 
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
+import javafx.event.*;
+import javafx.fxml.*;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import javafx.util.Callback;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class LoginController implements Initializable {
+public class LoginController extends Window {
 
     AccountsUtilities utilidades = new AccountsUtilities();
-
     @FXML
     private TextField TfUsuario;
-
     @FXML
     private Label lError;
-
     @FXML
     private PasswordField TfContra;
-
     @FXML
     private ListView<Cuenta> LvCuentas;
 
     /**
      * Inserta las cuentas almacenadas en el archivo cuentas.txt
-     * @param url
-     * @param resourceBundle
      */
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize() {
 
         utilidades.LeerCuentas();
 
@@ -108,31 +94,8 @@ public class LoginController implements Initializable {
             else {
                 utilidades.Escribir_Cuentas(sesion);
             }
-
-        goToVentanaPrincipal();
-        Node source = (Node) e.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
+        switchScene(e, "/Ventana_Principal.fxml");
         }
     }
 
-    /**
-     * Carga la vista Ventana_Principal
-     */
-    private void goToVentanaPrincipal() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            URL path = new URL("file:src/main/resources/Ventana_Principal.fxml");
-            loader.setLocation(path);
-            Scene scene = loader.load();
-
-            Stage primaryStage = new Stage();
-            primaryStage.setTitle("Escribe mensaje");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
 }

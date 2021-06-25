@@ -14,19 +14,22 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class Ventana_PrincipalController {
+public class Ventana_PrincipalController extends Window {
 
     //private String ruta = null;
     private ArrayList<File> adjuntos = new ArrayList<>();
-
     @FXML
     private TextField TfDestinatarios;
-
     @FXML
     private TextField TfAsunto;
-
     @FXML
     private TextArea TaMensaje;
+
+    /**
+     * Inserta las cuentas almacenadas en el archivo cuentas.txt
+     */
+    public void initialize() {
+    }
 
     /**
      * abre la vista Login nuevamente
