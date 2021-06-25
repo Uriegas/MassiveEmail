@@ -21,6 +21,7 @@ class HTMLutilites {
         alert.setTitle("Opciones de envio HTML");
         alert.setHeaderText("Se detecto un archivo HTML");
         alert.setContentText("¿Qué desea hacer con el?");
+        alert.getDialogPane().styleProperty().bind(Configuration.cssProperty());//Add dynamic css
 
         ButtonType btnEnviarHtml = new ButtonType("Enviar .html");
         ButtonType btnConvertir = new ButtonType("Convertir a .pdf");
