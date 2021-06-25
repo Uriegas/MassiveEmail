@@ -1,13 +1,11 @@
 package com.uriegas;
 
-
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.util.Callback;
 
 public class LoginController extends Window {
-
     AccountsUtilities utilidades = new AccountsUtilities();
     @FXML
     private TextField TfUsuario;
