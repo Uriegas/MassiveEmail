@@ -53,17 +53,6 @@
         <artifactId>javax.mail</artifactId>
         <version>1.6.2</version>
     </dependency>
-    <!-- Dependencias JavaFX -->
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-controls</artifactId>
-      <version>11</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-fxml</artifactId>
-      <version>11</version>
-    </dependency>
     <!-- CalendarFX
      https://mvnrepository.com/artifact/com.calendarfx/view -->
     <dependency>
