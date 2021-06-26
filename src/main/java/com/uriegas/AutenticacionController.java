@@ -102,6 +102,9 @@ public class AutenticacionController implements Initializable {
             Keys.almacenarLlave(pass);
             Keys.definirLlave(pass);
             goToLogin();
+            Node source = (Node) e.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
         }
     }
 

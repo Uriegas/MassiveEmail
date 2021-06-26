@@ -1,26 +1,30 @@
 package com.uriegas;
 
-import java.io.File;
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
-public class Evento extends Mensaje{
-    private String fecha;
-    private String hora;
-    private String rutina;
+public class Evento implements Serializable {
+    private LocalDateTime fecha;
+    /*private String rutina;*/
+    private Cuenta cuenta;
+    private Mensaje mensaje;
 
-    public Evento(String toEmail, String subject, String body, ArrayList<File> Archivo) {
-        super(toEmail, subject, body, Archivo);
+    public Evento(LocalDateTime f/*, String rutina*/, Cuenta c, Mensaje msj) {
+        setFecha(f);
+        /*setRutina(rutina);*/
+        setCuenta(c);
+        setMensaje(msj);
     }
 
-    public void setFecha(String fecha){
+    public void setFecha(LocalDateTime fecha){
         this.fecha = fecha;
     }
-    public void setHora(String hora){
-        this.hora = hora;
-     }
-    public void setRutina(String rutina){this.rutina = rutina;}
+    /*public void setRutina(String rutina){this.rutina = rutina;}*/
+    public void setCuenta(Cuenta cuenta){this.cuenta = cuenta;}
+    public void setMensaje(Mensaje msj){this.mensaje = msj;}
 
-    public String getFecha(){return this.fecha;}
-    public String getHora(){return this.hora;}
-    public String getRutina(){return this.rutina;}
+    public LocalDateTime getFecha(){return this.fecha;}
+    /*public String getRutina(){return this.rutina;}*/
+    public Cuenta getCuenta() {return cuenta;}
+    public Mensaje getMensaje() {return mensaje;}
 }

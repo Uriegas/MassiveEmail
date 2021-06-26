@@ -4,17 +4,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class Ventana_PrincipalController {
+public class CorreoController {
 
     private ArrayList<File> adjuntos = new ArrayList<>();
 
@@ -53,7 +53,7 @@ public class Ventana_PrincipalController {
         String cuerpo = TaMensaje.getText();
 
         Mensaje mensaje = new Mensaje(destinatario, asunto, cuerpo, adjuntos);
-        UseJavaMail.sendEmail(UseJavaMail.getSession(), mensaje);
+        UseJavaMail.sendEmail(mensaje);
     }
 
     /**
@@ -62,7 +62,31 @@ public class Ventana_PrincipalController {
      */
     @FXML
     protected void ClickRutina(ActionEvent e) {
-        CambiarVista("Rutinas");
+        if(TfDestinatarios.getText().isEmpty()){    //Si el destinatario esta vacio
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error sin destinatario");
+            alert.setHeaderText(null);
+            alert.setContentText("Asegurese de agregar por al menos un destinatario");
+
+            alert.showAndWait();
+        } else {
+
+            String destinatario = TfDestinatarios.getText();
+            String asunto = TfAsunto.getText();
+            String cuerpo = TaMensaje.getText();
+
+            Mensaje mensaje = new Mensaje(destinatario, asunto, cuerpo, adjuntos);
+
+            //-----------Guarda mensaje
+            try{
+                ObjectOutputStream escribiendo_eventos = new ObjectOutputStream(new FileOutputStream("src/main/resources/MensajeTemp.tmp"));
+                escribiendo_eventos.writeObject(mensaje);
+                escribiendo_eventos.close();
+            }catch(Exception ex){ex.printStackTrace();}
+            //--------------------------------------
+
+            CambiarVista("Rutinas");
+        }
     }
 
 

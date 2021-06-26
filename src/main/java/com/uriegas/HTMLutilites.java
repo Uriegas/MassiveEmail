@@ -1,5 +1,6 @@
 package com.uriegas;
 
+import com.itextpdf.html2pdf.ConverterProperties;
 import com.itextpdf.html2pdf.HtmlConverter;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -17,6 +18,7 @@ class HTMLutilites {
      */
     public static File convertir(File archivo){
 
+        //CREO LA VENTANA MODAL
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Opciones de envio HTML");
         alert.setHeaderText("Se detecto un archivo HTML");
@@ -26,18 +28,29 @@ class HTMLutilites {
         ButtonType btnConvertir = new ButtonType("Convertir a .pdf");
 
         alert.getButtonTypes().setAll(btnEnviarHtml, btnConvertir);
-
         Optional<ButtonType> result = alert.showAndWait();
+
+        //Si dio clic en enviar como html, devuelve el archivo html recibido
         if (result.get() == btnEnviarHtml){
             return archivo;
 
+        //Si dio clic en convertir, renderiza el html y lo guarda en el pdf, devuelve el archivo pdf de salida
         } else if (result.get() == btnConvertir) {
             try {
+                String CarpetaTrabajo = archivo.getPath(); //Establezco la carpeta de trabajo
+
+                ConverterProperties converterProperties = new ConverterProperties(); //Para incluir css
+                converterProperties.setBaseUri(CarpetaTrabajo);
+
                 HtmlConverter.convertToPdf(new FileInputStream(archivo.getAbsolutePath()),
-                        new FileOutputStream("src/main/resources/Salida.pdf"));
+                        new FileOutputStream("src/main/resources/Salida.pdf"), converterProperties);
+
                 archivo = new File("src/main/resources/Salida.pdf");
-            }catch(Exception ex){ex.printStackTrace();}
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
         }
+
         return archivo;
     }
 }
