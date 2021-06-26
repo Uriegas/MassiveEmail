@@ -1,6 +1,8 @@
 package com.uriegas;
 
-public class Cuenta {
+import java.io.Serializable;
+
+public class Cuenta implements Serializable {
     private String email;
     private String contrasenia;
 

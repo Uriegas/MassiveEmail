@@ -37,15 +37,13 @@ class UseJavaMail{
 
 	/**
 	 * Utility method to send simple HTML email
-	 * @param session
 	 * @param mensaje
 	 */
-	public static void sendEmail(Session session, Mensaje mensaje){
+	public static void sendEmail(/*Session session,*/ Mensaje mensaje){
 		try
 		{
 
-			//MimeMessage msg = new MimeMessage(session);
-			Message msg = new MimeMessage(session);
+			Message msg = new MimeMessage(getSession());
 
 			//set message headers
 			msg.addHeader("X-Priority", "1");
@@ -57,10 +55,7 @@ class UseJavaMail{
 
 			msg.setReplyTo(InternetAddress.parse("no_reply@example.com", false));
 
-			//msg.setSubject(mensaje.getAsunto(), "UTF-8");
 			msg.setSubject(mensaje.getAsunto());
-
-			//msg.setText(mensaje.getCuerpo(), "UTF-8");
 
 			msg.setSentDate(new Date());
 

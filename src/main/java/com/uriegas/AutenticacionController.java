@@ -80,7 +80,34 @@ public class AutenticacionController extends Window {
             System.out.println("LLAVE GENERADA");
             Keys.almacenarLlave(pass);
             Keys.definirLlave(pass);
+<<<<<<< HEAD
+            goToLogin();
+            Node source = (Node) e.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
+        }
+    }
+
+    /**
+     * Abre la vista Login
+     */
+    private void goToLogin() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            URL path = new URL("file:src/main/resources/Login.fxml");
+            loader.setLocation(path);
+            Scene scene = loader.load();
+
+            Stage primaryStage = new Stage();
+            primaryStage.setTitle("Inicia Sesión");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+=======
             switchScene(e, "/Login.fxml");
+>>>>>>> 95b2768bf64cf89cdee094c3450b5b21f1e34b43
         }
     }
 }

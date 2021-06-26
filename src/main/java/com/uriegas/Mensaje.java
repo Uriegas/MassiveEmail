@@ -1,15 +1,18 @@
 package com.uriegas;
 
 import java.io.File;
+<<<<<<< HEAD
+import java.io.Serializable;
+=======
+>>>>>>> 95b2768bf64cf89cdee094c3450b5b21f1e34b43
 import java.util.ArrayList;
 
-public class Mensaje {
+public class Mensaje implements Serializable {
     private String destinatario;
     private String asunto;
     private String cuerpo;
     private ArrayList<File> adjuntos = new ArrayList<>();
 
-    //public Mensaje(String toEmail, String subject, String body, File archivo){
     public Mensaje(String toEmail, String subject, String body, ArrayList<File> archivo){
         setDestinatario(toEmail);
         setAsunto(subject);

@@ -84,6 +84,16 @@
       <artifactId>html2pdf</artifactId>
       <version>2.1.6</version>
     </dependency>
+<<<<<<< HEAD
+      <dependency>
+          <groupId>org.jetbrains</groupId>
+          <artifactId>annotations</artifactId>
+          <version>RELEASE</version>
+          <scope>compile</scope>
+      </dependency>
+
+=======
+>>>>>>> 95b2768bf64cf89cdee094c3450b5b21f1e34b43
   </dependencies>
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
