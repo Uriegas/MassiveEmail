@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.*;
 import javafx.application.*;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -54,23 +56,27 @@ public class App extends Application {
             });
             /**
              * When the first scene is opened then show this dialog so the user inputs the master key
+             * TODO: Authentication and close doesn't work.
+             * TODO: In this coide instead of a TextInputDialog we can implement a Scene on top of this one
              */
-            primaryStage.setOnShown(event -> {
-                // AccountsUtilities cuentas = new AccountsUtilities();
-                TextInputDialog requestMasterPaswd = new TextInputDialog();
-                requestMasterPaswd.setHeaderText("Contraseña Maestra");
-                requestMasterPaswd.getDialogPane().styleProperty().bind(Configuration.cssProperty());//Add dynamic css
-                requestMasterPaswd.initModality(Modality.WINDOW_MODAL);
-                requestMasterPaswd.initOwner(primaryStage);
-                Optional<String> key = requestMasterPaswd.showAndWait();
-                Button ok = (Button)requestMasterPaswd.getDialogPane().lookupButton(ButtonType.OK);
-                ok.addEventFilter(ActionEvent.ACTION, event2 ->{
-                    if(!Keys.comparar(key.get()))
-                        event2.consume();
-                });
-                requestMasterPaswd.setOnCloseRequest(event2 -> {
-                    Platform.exit();
-                });
+            primaryStage.setOnShown(new EventHandler<WindowEvent>(){
+                @Override
+                public void handle(WindowEvent e) {
+                    Stage dialog = new Stage(); // new stage
+                    dialog.initModality(Modality.APPLICATION_MODAL);
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(this.getClass().getResource("/Autenticacion.fxml"));
+                    try{
+                        Scene scene = loader.load();
+                        scene.getRoot().styleProperty().bind(Configuration.cssProperty());//Dynamic Css
+                        dialog.setScene(scene);
+                    }catch(IOException ex){ex.printStackTrace();}
+                    // Defines a modal window that blocks events from being
+                    // delivered to any other application window.
+                    dialog.initOwner(primaryStage);
+                    dialog.setOnCloseRequest(event ->{Platform.exit();});
+                    dialog.show();
+                }
             });
             primaryStage.show();
     }
