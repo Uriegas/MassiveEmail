@@ -1,10 +1,7 @@
 package com.uriegas;
 
 import java.io.File;
-<<<<<<< HEAD
 import java.io.Serializable;
-=======
->>>>>>> 95b2768bf64cf89cdee094c3450b5b21f1e34b43
 import java.util.ArrayList;
 
 public class Mensaje implements Serializable {

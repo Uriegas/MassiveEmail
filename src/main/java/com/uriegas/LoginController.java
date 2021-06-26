@@ -5,16 +5,8 @@ import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.*;
 import javafx.util.Callback;
-<<<<<<< HEAD
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class LoginController implements Initializable {
-=======
-import javafx.stage.*;
->>>>>>> 95b2768bf64cf89cdee094c3450b5b21f1e34b43
 
 public class LoginController extends Window {
     AccountsUtilities utilidades = new AccountsUtilities();

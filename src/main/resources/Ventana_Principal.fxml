@@ -11,11 +11,7 @@
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<<<<<<< HEAD
 <Scene xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.uriegas.CorreoController">
-=======
-<Scene xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uriegas.VentanaPrincipalController">
->>>>>>> 95b2768bf64cf89cdee094c3450b5b21f1e34b43
     <AnchorPane prefHeight="480.0" prefWidth="607.0">
       <children>
          <TextField fx:id="TfDestinatarios" layoutX="109.0" layoutY="55.0" prefHeight="23.0" prefWidth="401.0" promptText="Destinatarios" />

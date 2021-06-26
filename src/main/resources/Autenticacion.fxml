@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<Scene xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.uriegas.AutenticacionController">
+<Scene fx:id="auth" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uriegas.AutenticacionController">
     <AnchorPane prefHeight="149.0" prefWidth="462.0">
       <children>
          <Label fx:id="lbAdvertencia" layoutX="14.0" layoutY="55.0" text="Label" />

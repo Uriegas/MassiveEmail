@@ -1,5 +1,6 @@
 package com.uriegas;
 
+import javafx.application.Platform;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;
@@ -17,6 +18,7 @@ public class AutenticacionController extends Window {
 
     @FXML private Label lbMensaje;
     @FXML private Label lbAdvertencia;
+    @FXML private Scene auth;
     /**
      * Compruba si existe el archivo que almacena la clave de autenticacion,
      * Si no existe cambia el contenido del label para solicitar crear clave
@@ -37,8 +39,11 @@ public class AutenticacionController extends Window {
          */
         TfPass.setOnKeyPressed(event->{
             if(event.getCode() == KeyCode.ENTER)
-                if(Keys.comparar(TfPass.getText()))
-                    switchScene(event, "/Login.fxml");
+                if(Keys.comparar(TfPass.getText())){
+                    Node source = (Node)event.getSource();
+                    Stage stage = (Stage)source.getScene().getWindow();
+                    stage.close();
+                }
         });
     }
     /**
@@ -70,7 +75,9 @@ public class AutenticacionController extends Window {
                 System.out.println("LLAVE CORRECTA");
                 Keys.definirLlave(pass);
                 
-                switchScene(e, "/Login.fxml");
+                Node source = (Node)e.getSource();
+                Stage stage = (Stage)source.getScene().getWindow();
+                stage.close();
 
             } else if(Keys.comparar(pass) == false){
                 System.out.print("LLAVE INCORRECTA");
@@ -80,34 +87,9 @@ public class AutenticacionController extends Window {
             System.out.println("LLAVE GENERADA");
             Keys.almacenarLlave(pass);
             Keys.definirLlave(pass);
-<<<<<<< HEAD
-            goToLogin();
-            Node source = (Node) e.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
+            Node source = (Node)e.getSource();
+            Stage stage = (Stage)source.getScene().getWindow();
             stage.close();
-        }
-    }
-
-    /**
-     * Abre la vista Login
-     */
-    private void goToLogin() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            URL path = new URL("file:src/main/resources/Login.fxml");
-            loader.setLocation(path);
-            Scene scene = loader.load();
-
-            Stage primaryStage = new Stage();
-            primaryStage.setTitle("Inicia Sesión");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-=======
-            switchScene(e, "/Login.fxml");
->>>>>>> 95b2768bf64cf89cdee094c3450b5b21f1e34b43
         }
     }
 }

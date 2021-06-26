@@ -43,7 +43,7 @@ public class VentanaPrincipalController extends Window {
         String cuerpo = TaMensaje.getText();
 
         Mensaje mensaje = new Mensaje(destinatario, asunto, cuerpo, adjuntos);
-        UseJavaMail.sendEmail(UseJavaMail.getSession(), mensaje);
+        UseJavaMail.sendEmail(mensaje);
     }
     /**
      * Abre la vista Envio_Rutinas
