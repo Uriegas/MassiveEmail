@@ -1,45 +1,39 @@
 package com.uriegas;
 
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
+import javafx.event.*;
+import javafx.fxml.*;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
+import javafx.scene.*;
 import javafx.util.Callback;
+<<<<<<< HEAD
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
+=======
+import javafx.stage.*;
+>>>>>>> 95b2768bf64cf89cdee094c3450b5b21f1e34b43
 
+public class LoginController extends Window {
     AccountsUtilities utilidades = new AccountsUtilities();
-
     @FXML
     private TextField TfUsuario;
-
     @FXML
     private Label lError;
-
     @FXML
     private PasswordField TfContra;
-
     @FXML
     private ListView<Cuenta> LvCuentas;
+    @FXML
+    private Scene login;
 
     /**
      * Inserta las cuentas almacenadas en el archivo cuentas.txt
-     * @param url
-     * @param resourceBundle
      */
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        utilidades.LeerCuentas();
+    public void initialize() {
+        //utilidades.LeerCuentas();
 
         //Con el ciclo agrego las instancias de tipo Cuenta en el ListView
         for(int i = 0; i < utilidades.getNumCuentas(); i++) {
@@ -106,7 +100,7 @@ public class LoginController implements Initializable {
 
             //INICIA SESIÓN CON LOS DATOS INGRESADOS
             UseJavaMail mail = new UseJavaMail();
-            mail.Login(sesion);
+            UseJavaMail.Login(sesion);
 
             String encriptado = null; //Encripta la contraseña para almacenarla en el archivo
             try {
@@ -118,31 +112,8 @@ public class LoginController implements Initializable {
             else {
                 utilidades.Escribir_Cuentas(sesion);
             }
-
-        goToVentanaPrincipal();
-        Node source = (Node) e.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
+        switchScene(e, "/Ventana_Principal.fxml");
         }
     }
 
-    /**
-     * Carga la vista Ventana_Principal
-     */
-    private void goToVentanaPrincipal() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            URL path = new URL("file:src/main/resources/Ventana_Principal.fxml");
-            loader.setLocation(path);
-            Scene scene = loader.load();
-
-            Stage primaryStage = new Stage();
-            primaryStage.setTitle("Escribe mensaje");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
 }

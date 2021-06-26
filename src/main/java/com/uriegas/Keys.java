@@ -105,6 +105,7 @@ public class Keys {
             Scanner s = new Scanner(file);
             llave = s.nextLine();
             desencriptada = desencriptar(llave);
+            s.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
