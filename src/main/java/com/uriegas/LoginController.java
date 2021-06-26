@@ -3,7 +3,9 @@ package com.uriegas;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
+import javafx.scene.*;
 import javafx.util.Callback;
+import javafx.stage.*;
 
 public class LoginController extends Window {
     AccountsUtilities utilidades = new AccountsUtilities();
@@ -15,13 +17,14 @@ public class LoginController extends Window {
     private PasswordField TfContra;
     @FXML
     private ListView<Cuenta> LvCuentas;
+    @FXML
+    private Scene login;
 
     /**
      * Inserta las cuentas almacenadas en el archivo cuentas.txt
      */
     public void initialize() {
-
-        utilidades.LeerCuentas();
+        //utilidades.LeerCuentas();
 
         //Con el ciclo agrego las instancias de tipo Cuenta en el ListView
         for(int i = 0; i < utilidades.getNumCuentas(); i++) {
