@@ -23,5 +23,15 @@ public abstract class Window {
             scene.getRoot().styleProperty().bind(Configuration.cssProperty());//Add dynamic css
             switchscene.setScene(scene);
         }catch(IOException ex){ex.printStackTrace();}
+        //Another approach
+        // try {
+        //     Parent root = FXMLLoader.load(getClass().getResource(FXML));
+        //     Stage stage = new Stage();
+        //     stage.setScene(new Scene(root));
+        //     stage.initModality(Modality.APPLICATION_MODAL);
+        //     stage.show();
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
     }
 }
