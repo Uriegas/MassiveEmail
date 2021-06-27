@@ -25,7 +25,7 @@ public class AutenticacionController extends Window {
      * Si existe cambia el contenido del label para solicitar introducir la clave
      */
     public void initialize() {
-        if(lcuentas.Existe()){
+        if(lcuentas.existe()){
             lbMensaje.setText("Introduzca la contraseña maestra");
             lbAdvertencia.setText("Necesaria para acceder a la aplicación");
         }

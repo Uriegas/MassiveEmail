@@ -56,7 +56,6 @@ public class LoginController extends Window {
         });
     }
 
-
     /**
      * Obtiene los datos de la cuenta seleccionada en el ListView
      */

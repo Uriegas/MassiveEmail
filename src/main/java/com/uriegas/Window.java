@@ -9,6 +9,7 @@ import java.io.*;
  * Abstract Window class, needed because of switching scenes and implementing global CSS properties
  */
 public abstract class Window {
+    private MailModel model;
     /**
      * Switch the current scene (window) to the specified FXML file
 	 * @param FXML file
@@ -33,5 +34,12 @@ public abstract class Window {
         // } catch (IOException e) {
         //     e.printStackTrace();
         // }
+    }
+    public void initModel(MailModel m){
+        if(this.model != null)
+            throw new IllegalStateException("Model only can be instantiated once");
+        else{
+            this.model = m;
+        }
     }
 }

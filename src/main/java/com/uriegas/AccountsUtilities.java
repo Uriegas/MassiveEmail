@@ -14,7 +14,7 @@ public class AccountsUtilities {
      * Comprueba si existe el archivo que almacena las cuentas
      * @return true cuando existe el archvio o false cuando no
      */
-    public boolean Existe(){
+    public boolean existe(){
         if(this.file.exists()) {
             return true;
         }

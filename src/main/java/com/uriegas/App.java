@@ -11,7 +11,8 @@ import javafx.stage.*;
 
 public class App extends Application {
 
-    Configuration theme;//Dynamic CSS
+    private Configuration theme;//Dynamic CSS
+    private MailModel model;
     public static void main(String[] args) {
         launch(args);
     }
@@ -19,8 +20,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         theme = new Configuration();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(this.getClass().getResource("/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/Login.fxml"));
             Scene scene = loader.load();
             //Css data binding
             //Everytime the user changes in the Configuration class in binded into the scene
@@ -76,6 +76,8 @@ public class App extends Application {
                     dialog.show();
                 }
             });
+            Window loaderController = loader.getController();
+            loaderController.initModel(model);
             primaryStage.show();
     }
 }
