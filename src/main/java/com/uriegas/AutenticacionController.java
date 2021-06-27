@@ -26,12 +26,12 @@ public class AutenticacionController extends Window {
      */
     public void initialize() {
         if(lcuentas.Existe()){
-            lbMensaje.setText("Introduzca la contraseña de autenticación");
-            lbAdvertencia.setText("Mensaje en chiquito (Cambiar despuess)");
+            lbMensaje.setText("Introduzca la contraseña maestra");
+            lbAdvertencia.setText("Necesaria para acceder a la aplicación");
         }
         else{
-            lbMensaje.setText("Crea una contraseña de autenticación(16 caracteres)");
-            lbAdvertencia.setText("Esta asegura la integridad de las cuentas utilizadas dentro de este programa");
+            lbMensaje.setText("Cree una contraseña maestra");
+            lbAdvertencia.setText("Esta asegura la seguridad de la aplicación");
             lcuentas.GenerarArchivo();
         }
         /**

@@ -17,19 +17,31 @@ public class VentanaPrincipalController extends Window {
     private TextArea TaMensaje;
     @FXML
     private ListView<String> lvAdjuntos;
+    @FXML
+    private Button btnConfig;
+    @FXML
+    private Button btnCambiarCuenta;
     /**
      * Inserta las cuentas almacenadas en el archivo cuentas.txt
      */
     public void initialize() {
         adjuntos = new ArrayList<File>();
-    }
-    /**
-     * abre la vista Login nuevamente
-     * @param e
-     */
-    @FXML
-    protected void ClickCambiarCuenta(ActionEvent e){
-        switchScene(e, "/Login.fxml");
+        btnCambiarCuenta.setOnAction(e ->{
+            switchScene(e, "/Login.fxml");
+        });
+        btnConfig.setOnMouseClicked(e ->{
+                Alert closeConfirmation = new Alert(
+                    Alert.AlertType.CONFIRMATION,
+                    "¿Está seguro que desea salir?"
+                );
+                //Try multiple color configurations
+                // Configuration conf = new Configuration();
+                // conf.setBase( conf.getBase().saturate() );
+                closeConfirmation.getDialogPane().styleProperty().bind(Configuration.cssProperty());//Add dynamic css
+                closeConfirmation.setHeaderText("Confirmación de Salida");
+                closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+                closeConfirmation.showAndWait();
+        });
     }
     /**
      * Extrae el destinatario, asunto y cuerpo del mensaje introducidos por el usuario
@@ -76,5 +88,9 @@ public class VentanaPrincipalController extends Window {
         }else{
             System.out.println("No se encontro el archivo");
         }
+    }
+    @FXML
+    protected void ClickAddXLSX(ActionEvent e){
+        System.out.println("Clicked XLSX");
     }
 }

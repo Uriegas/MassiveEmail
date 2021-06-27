@@ -25,7 +25,8 @@ public class LoginController extends Window {
      * Inserta las cuentas almacenadas en el archivo cuentas.txt
      */
     public void initialize() {
-        //utilidades.LeerCuentas();
+        
+        utilidades.LeerCuentas();
 
         //Con el ciclo agrego las instancias de tipo Cuenta en el ListView
         for(int i = 0; i < utilidades.getNumCuentas(); i++) {
