@@ -28,4 +28,15 @@ public class MailModel {
 	public ObservableList<Account> getAccountList(){
 		return accounts;
 	}
+	/**
+	 * Find if the given account is the saved accounts
+	 * @param account
+	 * @return true if inside accounts, false otherwise 
+	 */
+	public boolean isInAccounts(Account account){
+		for(Account a : accounts )
+			if(a.equals(account))
+				return true;
+		return false;
+	}
 }

@@ -35,7 +35,7 @@ public class App extends Application {
         // theme = new Configuration();
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/Login.fxml"));
         Scene scene = loader.load();
-        LoginController login = loader.getController();
+        Window login = loader.getController();
         login.initModel(model);
         //Css data binding
         //Everytime the user changes in the Configuration class in binded into the scene

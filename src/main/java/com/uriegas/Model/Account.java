@@ -44,4 +44,14 @@ public class Account implements Serializable {
     public void requestLogin() throws AuthenticationFailedException, MessagingException {
         UseJavaMail.Login(this);
     }
+    /**
+     * Compare current account with another one
+     * @param other
+     * @return boolean
+     */
+    public boolean equals(Account other){
+        if(this.getEmail().equals(other.getEmail()) && this.getContrasenia().equals(other.getContrasenia()) )
+            return true;
+        return false;
+    }
 }

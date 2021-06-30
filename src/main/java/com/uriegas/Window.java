@@ -17,13 +17,15 @@ public abstract class Window {
 	 * @param FXML file
      * @param e
      */
-    public void switchScene(Event e, String FXML){
+    public void switchScene(Event e, MailModel m, String FXML){
         Stage switchscene = (Stage) ((Node)e.getSource()).getScene().getWindow();
         try{
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(this.getClass().getResource(FXML));
             Scene scene = loader.load();
-            scene.getRoot().styleProperty().bind(Configuration.cssProperty());//Add dynamic css
+            Window w = loader.getController();
+            w.initModel(m);
+            // scene.getRoot().styleProperty().bind(Configuration.cssProperty());//Add dynamic css
             switchscene.setScene(scene);
         }catch(IOException ex){ex.printStackTrace();}
         //Another approach

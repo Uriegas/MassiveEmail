@@ -61,7 +61,7 @@ public class LoginController extends Window {
          */
         TfContra.addEventHandler(KeyEvent.KEY_PRESSED, e->{
             if(e.getCode() == KeyCode.ENTER)
-                saveAccount();
+                saveAccount(e);
         });
     }
     /**
@@ -81,20 +81,22 @@ public class LoginController extends Window {
      */
     @FXML
     protected void submitClicked(ActionEvent e) {
-        saveAccount();
+        saveAccount(e);
     }
     /**
      * Save the entered account to the account list in the model
      * TODO: Alert or Info window when session isn't possible due to GMAIL security policies (Activate insecure apps)
      * TODO: Change stage to {@link VentanaPrincipalController} when session is succesful
      */
-    private void saveAccount(){
+    private void saveAccount(Event e){
         if( !TfUsuario.getText().isEmpty() && !TfContra.getText().isEmpty() && TfUsuario.getText().contains("@") ){
             Account account = new Account(TfUsuario.getText(), TfContra.getText());
             try{//Validate the account session
                 account.requestLogin();
-                model.getAccountList().add(account);
+                if(!this.model.isInAccounts(account))//If the current account is not in the saved list, then save it
+                    model.getAccountList().add(account);
                 System.out.println("Saving account...");
+                switchScene(e, this.model, "/Login.fxml");//Switch to main window
             }catch(Exception ex){lError.setText("No se pudo iniciar sesión: Active apps inseguras"); ex.printStackTrace();}//Could be bad passwd or not third party enabled
             
         }else{
