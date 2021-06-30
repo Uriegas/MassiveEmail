@@ -21,5 +21,11 @@ public class MailModel {
 	 */
 	ObservableList<Mail> mails = FXCollections.observableArrayList(mail ->
 		new Observable[]{mail.destinatarioProperty(), mail.cuerpoProperty(), mail.asuntoProperty(), mail.adjuntosProperty()});
-	
+	/**
+	 * Returns the account list
+	 * @return {@link ObservableList}<{@link Account}>
+	 */
+	public ObservableList<Account> getAccountList(){
+		return accounts;
+	}
 }

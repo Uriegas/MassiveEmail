@@ -11,7 +11,7 @@ import com.uriegas.Model.MailModel;
  * Abstract Window class, needed because of switching scenes and implementing global CSS properties
  */
 public abstract class Window {
-    private MailModel model;
+    protected MailModel model;
     /**
      * Switch the current scene (window) to the specified FXML file
 	 * @param FXML file
