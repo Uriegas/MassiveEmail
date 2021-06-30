@@ -1,4 +1,4 @@
-package com.uriegas;
+package com.uriegas.Model;
 
 import java.io.*;
 import com.itextpdf.io.IOException;
@@ -33,12 +33,12 @@ public class Account implements Serializable {
     public String getEmail(){ return this.email.get();}
     public String getContrasenia(){return this.contrasenia.get();}
 
-    private void writeObject(ObjectOutputStream s) throws IOException{
+    private void writeObject(ObjectOutputStream s) throws Exception {
         s.defaultWriteObject();
         s.writeUTF(getEmail());
         s.writeUTF(getContrasenia());
     }
-    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream s) throws Exception{
         emailProperty().set(s.readUTF());
         contraseniaProperty().set(s.readUTF());
     }

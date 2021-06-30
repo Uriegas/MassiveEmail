@@ -5,6 +5,8 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.stage.*;
 import java.io.*;
+
+import com.uriegas.Model.MailModel;
 /**
  * Abstract Window class, needed because of switching scenes and implementing global CSS properties
  */

@@ -1,4 +1,4 @@
-package com.uriegas;
+package com.uriegas.Model;
 
 import javafx.beans.*;
 import javafx.beans.property.*;

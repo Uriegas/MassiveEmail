@@ -7,9 +7,12 @@ import javafx.scene.*;
 import javafx.util.Callback;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-
+/**
+ * Controller of the Login View
+ * TODO 1: Enter a name and a password, when clicked login display it to the menu
+ */
 public class LoginController extends Window {
-    AccountsUtilities utilidades = new AccountsUtilities();
+    // AccountsUtilities utilidades = new AccountsUtilities();
     @FXML
     private TextField TfUsuario;
     @FXML
@@ -18,42 +21,41 @@ public class LoginController extends Window {
     private PasswordField TfContra;
     @FXML
     private ListView<Cuenta> LvCuentas;
-    @FXML
-    private Scene login;
+    // @FXML
+    // private Scene login;
 
     /**
      * Inserta las cuentas almacenadas en el archivo cuentas.txt
      */
     public void initialize() {
-        
-        utilidades.LeerCuentas();
+        // utilidades.LeerCuentas();
 
-        //Con el ciclo agrego las instancias de tipo Cuenta en el ListView
-        for(int i = 0; i < utilidades.getNumCuentas(); i++) {
-            if(utilidades.getCuentas().get(i).getEmail().endsWith("@upv.edu.mx")) {
-                LvCuentas.getItems().add(utilidades.getCuentas().get(i));
-            }
-        }
+        // //Con el ciclo agrego las instancias de tipo Cuenta en el ListView
+        // for(int i = 0; i < utilidades.getNumCuentas(); i++) {
+        //     if(utilidades.getCuentas().get(i).getEmail().endsWith("@upv.edu.mx")) {
+        //         LvCuentas.getItems().add(utilidades.getCuentas().get(i));
+        //     }
+        // }
 
-        /*Con esto modifico el contenido que se muestra en el ListView
-        ya que mostraba la direccion en memoria de la instancia y no su contenido*/
-        LvCuentas.setCellFactory(new Callback<ListView<Cuenta>, ListCell<Cuenta>>() {
-            @Override
-            public ListCell<Cuenta> call(ListView<Cuenta> param) {
-                ListCell<Cuenta> cell = new ListCell<Cuenta>() {
-                    @Override
-                    protected void updateItem(Cuenta item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if(item != null) {
-                            setText(item.getEmail());
-                        } else {
-                            setText(null);
-                        }
-                    }
-                };
-                return cell;
-            }
-        });
+        // /*Con esto modifico el contenido que se muestra en el ListView
+        // ya que mostraba la direccion en memoria de la instancia y no su contenido*/
+        // LvCuentas.setCellFactory(new Callback<ListView<Cuenta>, ListCell<Cuenta>>() {
+        //     @Override
+        //     public ListCell<Cuenta> call(ListView<Cuenta> param) {
+        //         ListCell<Cuenta> cell = new ListCell<Cuenta>() {
+        //             @Override
+        //             protected void updateItem(Cuenta item, boolean empty) {
+        //                 super.updateItem(item, empty);
+        //                 if(item != null) {
+        //                     setText(item.getEmail());
+        //                 } else {
+        //                     setText(null);
+        //                 }
+        //             }
+        //         };
+        //         return cell;
+        //     }
+        // });
     }
 
     /**
@@ -61,8 +63,8 @@ public class LoginController extends Window {
      */
     @FXML
     protected void SelectCuenta(){
-        TfUsuario.setText(LvCuentas.getSelectionModel().getSelectedItem().getEmail());
-        TfContra.setText(LvCuentas.getSelectionModel().getSelectedItem().getContrasenia());
+        // TfUsuario.setText(LvCuentas.getSelectionModel().getSelectedItem().getEmail());
+        // TfContra.setText(LvCuentas.getSelectionModel().getSelectedItem().getContrasenia());
     }
 
     /**
@@ -73,39 +75,38 @@ public class LoginController extends Window {
      */
     @FXML
     protected void submitClicked(ActionEvent e) {
-        String email = TfUsuario.getText();
-        String pass = TfContra.getText();
+        // String email = TfUsuario.getText();
+        // String pass = TfContra.getText();
 
-        if(!email.endsWith("@upv.edu.mx")){
-            lError.setText("Esta cuenta no pertenece a la poderosisima UPV");
-        }
-        else {
-            Cuenta sesion = new Cuenta(email, pass);
+        // if(!email.endsWith("@upv.edu.mx")){
+        //     lError.setText("Esta cuenta no pertenece a la poderosisima UPV");
+        // }
+        // else {
+        //     Cuenta sesion = new Cuenta(email, pass);
 
-            //-------Guarda la instancia cuenta en un archivo
-            try{
-                ObjectOutputStream escribiendo_eventos = new ObjectOutputStream(new FileOutputStream("src/main/resources/CuentaTemp.tmp"));
-                escribiendo_eventos.writeObject(sesion);
-                escribiendo_eventos.close();
-            }catch(Exception ex){ex.printStackTrace();}
-            //----------------------------------------------
+        //     //-------Guarda la instancia cuenta en un archivo
+        //     try{
+        //         ObjectOutputStream escribiendo_eventos = new ObjectOutputStream(new FileOutputStream("src/main/resources/CuentaTemp.tmp"));
+        //         escribiendo_eventos.writeObject(sesion);
+        //         escribiendo_eventos.close();
+        //     }catch(Exception ex){ex.printStackTrace();}
+        //     //----------------------------------------------
 
-            //INICIA SESIÓN CON LOS DATOS INGRESADOS
-            UseJavaMail mail = new UseJavaMail();
-            UseJavaMail.Login(sesion);
+        //     //INICIA SESIÓN CON LOS DATOS INGRESADOS
+        //     UseJavaMail mail = new UseJavaMail();
+        //     UseJavaMail.Login(sesion);
 
-            String encriptado = null; //Encripta la contraseña para almacenarla en el archivo
-            try {
-                encriptado = Keys.encriptar(pass);
-            } catch (Exception exception) {exception.printStackTrace(); }
+        //     String encriptado = null; //Encripta la contraseña para almacenarla en el archivo
+        //     try {
+        //         encriptado = Keys.encriptar(pass);
+        //     } catch (Exception exception) {exception.printStackTrace(); }
 
-            if(utilidades.CompararCuentas(email)){ //Si la cuenta ya existe no la almacena
-            }
-            else {
-                utilidades.Escribir_Cuentas(sesion);
-            }
-        switchScene(e, "/Ventana_Principal.fxml");
-        }
+        //     if(utilidades.CompararCuentas(email)){ //Si la cuenta ya existe no la almacena
+        //     }
+        //     else {
+        //         utilidades.Escribir_Cuentas(sesion);
+        //     }
+        // switchScene(e, "/Ventana_Principal.fxml");
+        // }
     }
-
 }

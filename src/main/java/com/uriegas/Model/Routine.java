@@ -1,9 +1,12 @@
-package com.uriegas;
+package com.uriegas.Model;
 
 import java.io.Serializable;
 import java.text.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import com.uriegas.Cuenta;
+import com.uriegas.Mensaje;
 
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
