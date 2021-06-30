@@ -7,7 +7,8 @@ import javafx.scene.input.*;
 import com.uriegas.Model.*;
 /**
  * Controller of the Login View
- * TODO 1: Enter a name and a password, when clicked login display it to the menu
+ * TODO: Add master password window when this Controller is started
+ * TODO: Test data binding between windows adding a new view that request user and password and save them, then return to the main window and check if it is saved
  */
 public class LoginController extends Window {
     @FXML
@@ -84,6 +85,8 @@ public class LoginController extends Window {
     }
     /**
      * Save the entered account to the account list in the model
+     * TODO: Alert or Info window when session isn't possible due to GMAIL security policies (Activate insecure apps)
+     * TODO: Change stage to {@link VentanaPrincipalController} when session is succesful
      */
     private void saveAccount(){
         if( !TfUsuario.getText().isEmpty() && !TfContra.getText().isEmpty() && TfUsuario.getText().contains("@") ){

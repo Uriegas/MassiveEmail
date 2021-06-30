@@ -5,13 +5,17 @@ import javafx.stage.*;
 import java.io.*;
 import java.util.*;
 
-import com.uriegas.Model.UseJavaMail;
+import com.uriegas.Model.*;
 
 import javafx.fxml.*;
 import javafx.scene.control.*;
-
+/**
+ * Controller of the Ventana Principal view
+ * TODO: Add updates of main branch
+ * TODO: Add model to this class
+ */
 public class VentanaPrincipalController extends Window {
-    private ArrayList<File> adjuntos;
+    private ArrayList<String> adjuntos;
     @FXML
     private TextField TfDestinatarios;
     @FXML
@@ -28,11 +32,11 @@ public class VentanaPrincipalController extends Window {
      * Inserta las cuentas almacenadas en el archivo cuentas.txt
      */
     public void initialize() {
-        adjuntos = new ArrayList<File>();
-        btnCambiarCuenta.setOnAction(e ->{
+        adjuntos = new ArrayList<String>();
+        btnCambiarCuenta.setOnAction(e ->{//Return to login window
             switchScene(e, "/Login.fxml");
         });
-        btnConfig.setOnMouseClicked(e ->{
+        btnConfig.setOnMouseClicked(e ->{//Open configuration window
                 Alert closeConfirmation = new Alert(
                     Alert.AlertType.CONFIRMATION,
                     "¿Está seguro que desea salir?"
@@ -57,7 +61,7 @@ public class VentanaPrincipalController extends Window {
         String asunto = TfAsunto.getText();
         String cuerpo = TaMensaje.getText();
 
-        Mensaje mensaje = new Mensaje(destinatario, asunto, cuerpo, adjuntos);
+        Mail mensaje = new Mail(destinatario, asunto, cuerpo, adjuntos);
         UseJavaMail.sendEmail(mensaje);
     }
     /**

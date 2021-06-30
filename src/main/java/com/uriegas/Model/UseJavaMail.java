@@ -14,6 +14,7 @@ class UseJavaMail{
 	public static Session getSession(){return session;}
 	/**
 	 * Establish a connection ({@link Session}) to the SMTP server
+	 * TODO: Add OAUTH2 authentication: https://stackoverflow.com/q/34307661/13991148
 	 * @param cuenta {@link Account}
 	 * @throws AuthenticationFailedException
 	 * @throws MessagingException
