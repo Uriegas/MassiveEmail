@@ -87,8 +87,13 @@ public class LoginController extends Window {
      */
     private void saveAccount(){
         if( !TfUsuario.getText().isEmpty() && !TfContra.getText().isEmpty() && TfUsuario.getText().contains("@") ){
-            System.out.println("Saving account...");
-            model.getAccountList().add(new Account(TfUsuario.getText(), TfContra.getText()));
+            Account account = new Account(TfUsuario.getText(), TfContra.getText());
+            try{//Validate the account session
+                account.requestLogin();
+                model.getAccountList().add(account);
+                System.out.println("Saving account...");
+            }catch(Exception ex){lError.setText("No se pudo iniciar sesión: Active apps inseguras"); ex.printStackTrace();}//Could be bad passwd or not third party enabled
+            
         }else{
             System.out.println("Could not save this account");
             lError.setText("Cuenta y/o contraseña no validas");

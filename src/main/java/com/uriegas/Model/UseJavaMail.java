@@ -1,11 +1,10 @@
-package com.uriegas;
+package com.uriegas.Model;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-
 /**
  * JavaFX App
  */
@@ -13,8 +12,13 @@ class UseJavaMail{
 	private static Session session;
 
 	public static Session getSession(){return session;}
-
-	public static void Login(Cuenta cuenta) {
+	/**
+	 * Establish a connection ({@link Session}) to the SMTP server
+	 * @param cuenta {@link Account}
+	 * @throws AuthenticationFailedException
+	 * @throws MessagingException
+	 */
+	public static void Login(Account cuenta) throws AuthenticationFailedException, MessagingException {
 		System.out.println("SSLEmail Start");
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
@@ -23,15 +27,18 @@ class UseJavaMail{
 				"javax.net.ssl.SSLSocketFactory"); //SSL Factory Class
 		props.put("mail.smtp.auth", "true"); //Enabling SMTP Authentication
 		props.put("mail.smtp.port", "465"); //SMTP Port
-
 		Authenticator auth = new Authenticator() {
 			//override the getPasswordAuthentication method
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(cuenta.getEmail(), cuenta.getContrasenia());
 			}
 		};
-
 		session = Session.getDefaultInstance(props, auth);
+		//-->Validate session
+		Transport transport = session.getTransport("smtp");
+		transport.connect("smtp.gmail.com", 465, cuenta.getEmail(), cuenta.getContrasenia());
+		transport.close();
+		//<--Validate session
 		System.out.println("Session created");
 	}
 
@@ -39,7 +46,7 @@ class UseJavaMail{
 	 * Utility method to send simple HTML email
 	 * @param mensaje
 	 */
-	public static void sendEmail(/*Session session,*/ Mensaje mensaje){
+	public static void sendEmail(/*Session session,*/ Mail mensaje){
 		try
 		{
 
@@ -88,5 +95,5 @@ class UseJavaMail{
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	} 
 }

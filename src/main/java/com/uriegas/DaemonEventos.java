@@ -5,6 +5,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import com.uriegas.Model.UseJavaMail;
+
 public class DaemonEventos extends Thread{
 
     private static ArrayList<Evento> listaEventos;

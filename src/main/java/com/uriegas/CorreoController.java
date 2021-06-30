@@ -14,6 +14,8 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 
+import com.uriegas.Model.UseJavaMail;
+
 public class CorreoController {
 
     private ArrayList<File> adjuntos = new ArrayList<>();

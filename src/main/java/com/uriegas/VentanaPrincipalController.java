@@ -4,6 +4,9 @@ import javafx.event.*;
 import javafx.stage.*;
 import java.io.*;
 import java.util.*;
+
+import com.uriegas.Model.UseJavaMail;
+
 import javafx.fxml.*;
 import javafx.scene.control.*;
 

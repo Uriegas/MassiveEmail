@@ -1,8 +1,7 @@
 package com.uriegas.Model;
 
 import java.io.*;
-import com.itextpdf.io.IOException;
-
+import javax.mail.*;
 import javafx.beans.property.*;
 /**
  * Account class implememting data binding
@@ -38,8 +37,11 @@ public class Account implements Serializable {
         s.writeUTF(getEmail());
         s.writeUTF(getContrasenia());
     }
-    private void readObject(ObjectInputStream s) throws Exception{
+    private void readObject(ObjectInputStream s) throws Exception {
         emailProperty().set(s.readUTF());
         contraseniaProperty().set(s.readUTF());
+    }
+    public void requestLogin() throws AuthenticationFailedException, MessagingException {
+        UseJavaMail.Login(this);
     }
 }
