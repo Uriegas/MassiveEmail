@@ -3,6 +3,7 @@ package com.uriegas;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
+import javafx.scene.input.*;
 import javafx.scene.*;
 import javafx.util.Callback;
 import java.io.FileOutputStream;
@@ -56,6 +57,20 @@ public class LoginController extends Window {
         //         return cell;
         //     }
         // });
+        /**
+         * Change to the Password textfield when pressed enter
+         */
+        TfUsuario.addEventHandler(KeyEvent.KEY_PRESSED, e->{
+            if(e.getCode() == KeyCode.ENTER)
+                TfContra.requestFocus();
+        });
+        /**
+         * Save current email and password in model when pressed enter
+         */
+        TfContra.addEventHandler(KeyEvent.KEY_PRESSED, e->{
+            if(e.getCode() == KeyCode.ENTER)
+                saveAccount();
+        });
     }
 
     /**
@@ -75,6 +90,7 @@ public class LoginController extends Window {
      */
     @FXML
     protected void submitClicked(ActionEvent e) {
+        saveAccount();
         // String email = TfUsuario.getText();
         // String pass = TfContra.getText();
 
@@ -108,5 +124,8 @@ public class LoginController extends Window {
         //     }
         // switchScene(e, "/Ventana_Principal.fxml");
         // }
+    }
+    private void saveAccount(){
+        System.out.println("Saving account...");
     }
 }
