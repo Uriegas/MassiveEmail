@@ -13,7 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<Scene xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uriegas.CorreoController">
+<Scene xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uriegas.VentanaPrincipalController">
     <AnchorPane prefHeight="480.0" prefWidth="607.0">
       <children>
          <TextField fx:id="TfDestinatarios" layoutX="109.0" layoutY="55.0" prefHeight="23.0" prefWidth="401.0" promptText="Destinatarios" />

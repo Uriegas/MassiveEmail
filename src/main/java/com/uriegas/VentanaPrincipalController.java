@@ -3,7 +3,6 @@ package com.uriegas;
 import javafx.event.*;
 import javafx.stage.*;
 import java.io.*;
-import java.util.*;
 
 import com.uriegas.Model.*;
 
@@ -12,10 +11,8 @@ import javafx.scene.control.*;
 /**
  * Controller of the Ventana Principal view
  * TODO: Add updates of main branch
- * TODO: Add model to this class
  */
 public class VentanaPrincipalController extends Window {
-    private ArrayList<String> adjuntos;
     @FXML
     private TextField TfDestinatarios;
     @FXML
@@ -29,12 +26,28 @@ public class VentanaPrincipalController extends Window {
     @FXML
     private Button btnCambiarCuenta;
     /**
-     * Inserta las cuentas almacenadas en el archivo cuentas.txt
+     * Initialize model
+     */
+    @Override
+    public void initModel(MailModel m){
+        super.initModel(m);
+        lvAdjuntos.setItems(this.model.adjuntosProperty());
+        lvAdjuntos.setCellFactory(lv -> new ListCell<String>(){
+            @Override public void updateItem(String s, boolean empty){
+                super.updateItem(s, empty);
+                if(empty)
+                    setText(null);
+                else
+                    setText(s.substring(s.lastIndexOf("/") +1, s.length()));
+            }
+        });
+    }
+    /**
+     * Init method
      */
     public void initialize() {
-        adjuntos = new ArrayList<String>();
         btnCambiarCuenta.setOnAction(e ->{//Return to login window
-            switchScene(e, "/Login.fxml");
+            switchScene(e, this.model, "/Login.fxml");
         });
         btnConfig.setOnMouseClicked(e ->{//Open configuration window
                 Alert closeConfirmation = new Alert(
@@ -61,8 +74,8 @@ public class VentanaPrincipalController extends Window {
         String asunto = TfAsunto.getText();
         String cuerpo = TaMensaje.getText();
 
-        Mail mensaje = new Mail(destinatario, asunto, cuerpo, adjuntos);
-        UseJavaMail.sendEmail(mensaje);
+        Mail mensaje = new Mail(destinatario, asunto, cuerpo, this.model.getAdjuntos());
+        mensaje.send();
     }
     /**
      * Abre la vista Envio_Rutinas
@@ -70,7 +83,7 @@ public class VentanaPrincipalController extends Window {
      */
     @FXML
     protected void ClickRutina(ActionEvent e) {
-        switchScene(e, "/Envios_rutinas.fxml");
+        switchScene(e, this.model, "/Envios_rutinas.fxml");
     }
     /**
      * Abre el selector de archivos
@@ -84,14 +97,13 @@ public class VentanaPrincipalController extends Window {
         File selectedFile = fc.showOpenDialog(null);
 
         if(selectedFile != null){
-
-            if(selectedFile.getAbsolutePath().endsWith(".html")){   //Si es .html ....
+            if(selectedFile.getAbsolutePath().endsWith(".html"))   //Si es .html ....
                 selectedFile = HTMLutilites.convertir(selectedFile);    // ... llama al metodo convertir
-            }
 
             //lvAdjuntos.setFixedCellSize(60.0);
-            lvAdjuntos.getItems().add(selectedFile.getName()); //Agrega el nombre del archivo al ListView
-            adjuntos.add(new File(selectedFile.getAbsolutePath())); //Agrega el archivo al Array de archivos a enviar
+            // lvAdjuntos.getItems().add(selectedFile.getName()); //Agrega el nombre del archivo al ListView
+            // adjuntos.add(new File(selectedFile.getAbsolutePath())); //Agrega el archivo al Array de archivos a enviar
+            this.model.adjuntosProperty().add(selectedFile.getAbsolutePath());//Save current file to adjuntos
         }else{
             System.out.println("No se encontro el archivo");
         }

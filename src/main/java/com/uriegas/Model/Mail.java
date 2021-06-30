@@ -40,4 +40,10 @@ public class Mail implements Serializable {
         this.cuerpoProperty().set(body);
         this.adjuntosProperty().setAll(archivo);
     }
+    /**
+     * Send this email
+     */
+    public void send(){
+        UseJavaMail.sendEmail(this);
+    }
 }

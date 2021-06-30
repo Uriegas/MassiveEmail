@@ -24,11 +24,7 @@ public class LoginController extends Window {
      */
     @Override
     public void initModel(MailModel m){
-        if(this.model != null)//Instantiate the model
-            throw new IllegalStateException("Model only can be instantiated once");
-        else{
-            this.model = m;
-        }
+        super.initModel(m);
         LvCuentas.setItems(model.getAccountList());//Link the list view to the account list
         /**
          * Render the cells in the list view. In this case each cell displays only the email of an account
@@ -85,8 +81,8 @@ public class LoginController extends Window {
     }
     /**
      * Save the entered account to the account list in the model
-     * TODO: Alert or Info window when session isn't possible due to GMAIL security policies (Activate insecure apps)
-     * TODO: Change stage to {@link VentanaPrincipalController} when session is succesful
+     * TODO: Exception handling for: InvalidEmail, NoInternetConnection, ActivateInsecureApps
+     * Change stage to {@link VentanaPrincipalController} when session is succesful
      */
     private void saveAccount(Event e){
         if( !TfUsuario.getText().isEmpty() && !TfContra.getText().isEmpty() && TfUsuario.getText().contains("@") ){
@@ -96,7 +92,7 @@ public class LoginController extends Window {
                 if(!this.model.isInAccounts(account))//If the current account is not in the saved list, then save it
                     model.getAccountList().add(account);
                 System.out.println("Saving account...");
-                switchScene(e, this.model, "/Login.fxml");//Switch to main window
+                switchScene(e, this.model, "/Ventana_Principal.fxml");//Switch to main window
             }catch(Exception ex){lError.setText("No se pudo iniciar sesión: Active apps inseguras"); ex.printStackTrace();}//Could be bad passwd or not third party enabled
             
         }else{

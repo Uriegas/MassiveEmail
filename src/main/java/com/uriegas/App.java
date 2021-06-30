@@ -6,7 +6,6 @@ import java.util.*;
 import com.uriegas.Model.MailModel;
 
 import javafx.application.*;
-import javafx.event.EventHandler;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
