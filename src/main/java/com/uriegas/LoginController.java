@@ -68,8 +68,8 @@ public class LoginController extends Window {
      */
     @FXML
     protected void SelectCuenta(){
-        // TfUsuario.setText(LvCuentas.getSelectionModel().getSelectedItem().getEmail());
-        // TfContra.setText(LvCuentas.getSelectionModel().getSelectedItem().getContrasenia());
+        TfUsuario.setText(LvCuentas.getSelectionModel().getSelectedItem().getEmail());
+        TfContra.setText(LvCuentas.getSelectionModel().getSelectedItem().getContrasenia());
     }
 
     /**
