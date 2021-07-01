@@ -6,6 +6,7 @@ import java.util.*;
 import com.uriegas.Model.MailModel;
 
 import javafx.application.*;
+import javafx.event.EventHandler;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -71,25 +72,27 @@ public class App extends Application {
          * TODO: Authentication and close doesn't work.
          * TODO: In this coide instead of a TextInputDialog we can implement a Scene on top of this one
          */
-    //     primaryStage.setOnShown(new EventHandler<WindowEvent>(){
-    //         @Override
-    //         public void handle(WindowEvent e) {
-    //             Stage dialog = new Stage(); // new stage
-    //             dialog.initModality(Modality.APPLICATION_MODAL);
-    //             FXMLLoader loader = new FXMLLoader();
-    //             loader.setLocation(this.getClass().getResource("/Autenticacion.fxml"));
-    //             try{
-    //                 Scene scene = loader.load();
-    //                 scene.getRoot().styleProperty().bind(Configuration.cssProperty());//Dynamic Css
-    //                 dialog.setScene(scene);
-    //             }catch(IOException ex){ex.printStackTrace();}
-    //             // Defines a modal window that blocks events from being
-    //             // delivered to any other application window.
-    //             dialog.initOwner(primaryStage);
-    //             dialog.setOnCloseRequest(event ->{Platform.exit();});
-    //             dialog.show();
-    //         }
-    //     });
+        primaryStage.setOnShown(new EventHandler<WindowEvent>(){
+            @Override
+            public void handle(WindowEvent e) {
+                Stage dialog = new Stage(); // new stage
+                dialog.initModality(Modality.APPLICATION_MODAL);
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(this.getClass().getResource("/Autenticacion.fxml"));
+                try{
+                    Scene scene = loader.load();
+                    Window x = loader.getController();
+                    x.initModel(model);
+                    // scene.getRoot().styleProperty().bind(Configuration.cssProperty());//Dynamic Css
+                    dialog.setScene(scene);
+                }catch(IOException ex){ex.printStackTrace();}
+                // Defines a modal window that blocks events from being
+                // delivered to any other application window.
+                dialog.initOwner(primaryStage);
+                dialog.setOnCloseRequest(event ->{Platform.exit();});
+                dialog.show();
+            }
+        });
     //     Window loaderController = loader.getController();
     //     loaderController.initModel(model);
         primaryStage.show();

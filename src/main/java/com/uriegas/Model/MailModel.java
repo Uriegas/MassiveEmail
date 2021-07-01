@@ -59,4 +59,27 @@ public class MailModel {
 			adjuntos.add(a);
 		return adjuntos;
 	}
+	public StringProperty masterPasswordProperty(){
+		return this.masterPassword;
+	}
+	public String getMasterPassword(){
+		return this.masterPassword.get();
+	}
+	public void setMasterPassword(String value){
+		this.masterPassword.set(value);
+	}
+	/**
+	 * Validate that the parameter is the password of the system
+	 * @param s
+	 * @return true for successful and false for fail
+	 */
+	public boolean validateMasterPasswd(String s){
+		if( this.getMasterPassword() == null || this.getMasterPassword().isEmpty() ){//There is no master passwd so set it
+			setMasterPassword(s);
+			return true;
+		}
+		if( this.getMasterPassword().equals(s) )
+			return true;
+		return false;
+	}
 }
