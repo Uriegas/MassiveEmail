@@ -8,7 +8,9 @@ import javafx.beans.*;
 import javafx.beans.property.*;
 import javafx.collections.*;
 /**
- * Data model for the mail app
+ * Data model for the mail app, the serialization is implementated overloading the write and read methods
+ * the attributes are labeled as transient to not mess up with java serialization
+ * TODO: Master Password and accounts encryption
  */
 public class MailModel implements Serializable {
 	/**
@@ -104,8 +106,12 @@ public class MailModel implements Serializable {
     private void readObject(ObjectInputStream s) throws Exception {
         s.defaultReadObject();
 		masterPassword = new SimpleStringProperty(s.readUTF());
-		// getAccountList().setAll((ObservableList<Account>)s.readObject());
 		List<Account> list = (List<Account>)s.readObject();
 		accounts = FXCollections.observableList(list);
+		//-->Initialize not serialized objects(if not initialized they are null)
+		mails = FXCollections.observableArrayList(mail ->
+		new Observable[]{mail.destinatarioProperty(), mail.cuerpoProperty(), mail.asuntoProperty(), mail.adjuntosProperty()});
+		currentAdjuntos = FXCollections.observableArrayList();
+		//<--Initialize not serialized objects(if not initialized they are null)
     }
 }

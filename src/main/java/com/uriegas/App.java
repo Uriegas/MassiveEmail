@@ -36,7 +36,6 @@ public class App extends Application {
         File file = new File(this.getClass().getResource("/MailModel.ser").getPath());
         try(ObjectInputStream out = new ObjectInputStream(new FileInputStream(file))){
             model = (MailModel)out.readObject();
-            // model.readObject(out);
             System.out.printf("Deserialized data from /MailModel.ser");
         } catch (Exception i) {
             i.printStackTrace();
@@ -111,7 +110,6 @@ public class App extends Application {
         File file = new File(this.getClass().getResource("/MailModel.ser").getPath());
         try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file))){
             out.writeObject(model);
-            // model.writeObject(out);
             System.out.println("Serialized data is in /MailModel.ser");
         } catch (Exception i) {
             i.printStackTrace();
