@@ -1,4 +1,4 @@
-package com.uriegas;
+package com.uriegas.Model;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

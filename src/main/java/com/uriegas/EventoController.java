@@ -1,6 +1,8 @@
 package com.uriegas;
 
 import com.calendarfx.view.YearMonthView;
+import com.uriegas.Model.*;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,8 +23,8 @@ import java.util.ResourceBundle;
 public class EventoController implements Initializable {
 
     ArrayList<Evento> eventos = new ArrayList<>();
-    Cuenta cuenta;
-    Mensaje mensaje;
+    Account cuenta;
+    Mail mensaje;
 
     @FXML
     private YearMonthView Calendario;
@@ -83,17 +85,17 @@ public class EventoController implements Initializable {
         //Obtenemos la cuenta y el mensaje almacenados
         try{
             ObjectInputStream recuperando_cuenta = new ObjectInputStream(new FileInputStream("src/main/resources/CuentaTemp.tmp"));
-            cuenta = (Cuenta)recuperando_cuenta.readObject();
+            cuenta = (Account)recuperando_cuenta.readObject();
             recuperando_cuenta.close();
             ObjectInputStream recuperando_msj = new ObjectInputStream(new FileInputStream("src/main/resources/MensajeTemp.tmp"));
-            mensaje = (Mensaje)recuperando_msj.readObject();
+            mensaje = (Mail)recuperando_msj.readObject();
             recuperando_msj.close();
         }catch(Exception ex) {
             ex.printStackTrace();
         }
 
         eventos.add(new Evento(fechaEnvio, cuenta, mensaje)); //Se agrega el evento al ArrayList
-        EventosSerializer.serealizarEventos(eventos);   //Se serealiza el ArrayList
+        // EventosSerializer.serealizarEventos(eventos);   //Se serealiza el ArrayList
         LvEventosPen.getItems().add(mensaje.getAsunto()+"\tFecha: "+fechaEnvio); //Se escribe el evento en el ListView
 
         DaemonEventos.LeerEventos(); //Cargamos el ArrayList en la clase del demonio
