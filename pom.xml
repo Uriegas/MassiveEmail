@@ -36,6 +36,30 @@
       <artifactId>javafx-fxml</artifactId>
       <version>11</version>
     </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>11</version>
+      <classifier>linux</classifier>
+    </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-fxml</artifactId>
+      <version>11</version>
+      <classifier>linux</classifier>
+    </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>11</version>
+      <classifier>win</classifier>
+    </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-fxml</artifactId>
+      <version>11</version>
+      <classifier>win</classifier>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
     <dependency>
         <groupId>org.apache.maven.plugins</groupId>
@@ -90,6 +114,12 @@
         <version>RELEASE</version>
         <scope>compile</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/io.datafx/flow -->
+    <dependency>
+        <groupId>io.datafx</groupId>
+        <artifactId>flow</artifactId>
+        <version>8.0</version>
+    </dependency>
   </dependencies>
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
@@ -108,7 +138,7 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
           <configuration>
-            <release>13</release>
+            <release>10</release>
           </configuration>
         </plugin>
         <plugin>
@@ -130,7 +160,7 @@
             <archive>
               <manifest>
                 <addClasspath>true</addClasspath>
-                <classpathPrefix>lib/</classpathPrefix>
+                <!--<classpathPrefix>lib/</classpathPrefix>-->
                 <mainClass>com.uriegas.App</mainClass>
               </manifest>
             </archive>
@@ -161,7 +191,64 @@
               <mainClass>App</mainClass>
           </configuration>
         </plugin>
+        <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.1.0</version>
+            <configuration>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+                <archive>
+                    <manifest>
+                        <addClasspath>true</addClasspath>
+                        <mainClass>com.uriegas.App</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                    <phase>package</phase> <!-- bind to the packaging phase -->
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+          <groupId>com.github.akman</groupId>
+          <artifactId>jpackage-maven-plugin</artifactId>
+          <version>0.1.2</version>
+        </plugin>
       </plugins>
     </pluginManagement>
+    <!-- To use the plugin goals in your POM or parent POM -->
+    <plugins>
+      <plugin>
+        <groupId>com.github.akman</groupId>
+        <artifactId>jpackage-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+            <execution>
+                <phase>package</phase>
+                <goals>
+                    <goal>shade</goal>
+                </goals>
+                <configuration>
+                    <transformers>
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <mainClass>com.uriegas.AppLauncher</mainClass>
+                        </transformer>
+                    </transformers>
+                </configuration>
+            </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 </project>
