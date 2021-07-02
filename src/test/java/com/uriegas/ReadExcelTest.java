@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.*;
 import java.util.*;
+
+import com.uriegas.Model.Utilities;
+
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -29,7 +32,7 @@ public class ReadExcelTest {
         expected = e;
     }
     /**
-     * Parameters to add to the constructor @see{@link com.uriegas.Utilities#readExcel(ArrayList)}
+     * Parameters to add to the constructor @see{@link com.uriegas.Model.Utilities#readExcel(ArrayList)}
      * @return Collection of tables
      */
     @Parameterized.Parameters

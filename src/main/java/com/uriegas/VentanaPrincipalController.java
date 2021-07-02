@@ -106,8 +106,35 @@ public class VentanaPrincipalController extends Window {
             System.out.println("No se encontro el archivo");
         }
     }
+    /**
+     * Load the Excel file into a table view and save file path to future use in displaying recent used files
+     * @param e
+     */
     @FXML
     protected void ClickAddXLSX(ActionEvent e){
         System.out.println("Clicked XLSX");
+        FileChooser filechooser = new FileChooser();
+        filechooser.setTitle("Seleccion un archivo XLSX");
+        File selectedFile = filechooser.showOpenDialog(null);
+        
+        try{
+            this.model.setExcelTable( Utilities.readExcel(selectedFile.getAbsolutePath()) );//Save table
+            System.out.println("Excel loaded succesfully");
+            // Stage dialog = new Stage(); // new stage
+            // dialog.initModality(Modality.APPLICATION_MODAL);
+
+            // BorderPane pane = new BorderPane(Utilities.readExcelToList(App.excel));//Pane to save the table
+            // Scene scene = new Scene(pane,500,500);
+            // scene.getRoot().styleProperty().bind(Configuration.cssProperty());//Dynamic Css
+            // dialog.setScene(scene);
+            // dialog.show();
+            this.model.setLastViewedExcels(selectedFile.getAbsolutePath());
+        }catch(IOException ex){//If not an excel or a problem occurs
+            Alert error = new Alert(
+                Alert.AlertType.ERROR,
+                "El archivo seleccionado no pudo ser abierto"
+            );
+            error.show();
+        }
     }
 }

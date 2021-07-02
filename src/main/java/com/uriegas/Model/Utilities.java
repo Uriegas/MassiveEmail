@@ -1,10 +1,13 @@
-package com.uriegas;
+package com.uriegas.Model;
 
 import java.io.*;
 import java.util.*;
-
 import org.apache.poi.xssf.usermodel.*;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.*;
+import javafx.scene.control.*;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
 
 /**
  * Util functions to interact with the system
@@ -60,6 +63,37 @@ public class Utilities {
         }
     }
     /**
+     * Read the same excel file but creates a TableView to display it using javafx
+     * @param row
+     * @return TableView<ObservableList<String>>
+     */
+    public static TableView<ObservableList<String>> readExcelToList(ArrayList<List<String>> excelData){
+        // ArrayList<List<String>> excelData = readExcel(path);//Excel table in array format
+        ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();//Excel table in javafx arraylist's
+        List<String> headers = excelData.get(0);//Headers of the table
+
+        for(int i = 1; i < excelData.size(); i++)
+        {
+            data.add(FXCollections.observableArrayList(excelData.get(i)));
+        }
+
+        TableView<ObservableList<String>> tableView = new TableView<ObservableList<String>>();
+        tableView.setItems(data);
+
+        //Create the table columns, set the cell value factory and add the column to the tableview.
+        for (int i = 0; i < excelData.get(0).size(); i++) {
+            final int curCol = i;
+            final TableColumn<ObservableList<String>, String> column = new TableColumn<>(
+                    headers.get(curCol)
+            );
+            column.setCellValueFactory(
+                    param -> new ReadOnlyObjectWrapper<>(param.getValue().get(curCol))
+            );
+            tableView.getColumns().add(column);
+        }
+        return tableView;
+    } 
+    /**
      * Evaluate if a row is empty.
      * Source from: https://roytuts.com/how-to-detect-and-delete-empty-or-blank-rows-from-excel-file-using-apache-poi-in-java/
      * @param row
@@ -109,5 +143,18 @@ public class Utilities {
         for(List<String> row : table)//Instantiate all vars in txt
             instantiatedtxts.add(instantiateRow(txt, row, var_names));
         return instantiatedtxts;
+    }
+    /**
+     * Search the column where the emails are located
+     * @param excel table
+     * @return index to the column where the emails are
+     */
+    public static int findMailColumn(ArrayList<List<String>> excel){
+        int col = -1;
+        for( int i = 0; i < excel.get(0).size(); i++ )//Search in each column
+            if(excel.get(0).get(i).contains("@")){
+                col = i; break;
+            }
+        return col;
     }
 }

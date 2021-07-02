@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import java.io.*;
 import java.util.*;
 
+import com.uriegas.Model.Utilities;
+
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -36,7 +38,7 @@ public class ReplaceTagsTest {
         this.expected = exp;
     }
     /**
-     * Parameters to add to the constructor @see{@link com.uriegas.Utilities#readExcel(ArrayList)}
+     * Parameters to add to the constructor @see{@link com.uriegas.Model.Utilities#readExcel(ArrayList)}
      * @return Collection of tables and expected txts
      */
     @Parameterized.Parameters

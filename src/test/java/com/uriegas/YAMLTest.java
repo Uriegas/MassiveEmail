@@ -32,7 +32,7 @@ public class YAMLTest {
         expected = e;
     }
     /**
-     * Parameters to add to the constructor @see{@link com.uriegas.Utilities#readExcel(ArrayList)}
+     * Parameters to add to the constructor @see{@link com.uriegas.Model.Utilities#readExcel(ArrayList)}
      * @return Collection of tables
      */
     @Parameterized.Parameters
