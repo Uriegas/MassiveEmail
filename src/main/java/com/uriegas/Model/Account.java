@@ -5,6 +5,7 @@ import javax.mail.*;
 import javafx.beans.property.*;
 /**
  * Account class implememting data binding
+ * TODO: Implement the keys here as code in writter, reader and constructor
  */
 public class Account implements Serializable {
     private transient StringProperty email = new SimpleStringProperty();

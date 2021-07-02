@@ -1,11 +1,9 @@
-package com.uriegas;
+package com.uriegas.Model;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
-
-import com.uriegas.Model.UseJavaMail;
 
 public class DaemonEventos extends Thread{
 
@@ -24,8 +22,9 @@ public class DaemonEventos extends Thread{
      * Cuando se cumple la condicion crea la sesion, envia el mensaje, remueve el
      * evento del ArrayList y lo serealiza sobreescribiendo el contenido del archivo
      */
-    public void run(){
+    public void run() {
         while(true) {
+            try{
             for(int i = 0; i < listaEventos.size(); i++) {
                 if (listaEventos.get(i).getFecha().isEqual(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES))) {
                     UseJavaMail.Login(listaEventos.get(i).getCuenta()); //Se crea la sesion...
@@ -40,6 +39,7 @@ public class DaemonEventos extends Thread{
                     System.out.println("Fechas distintas");
                 }
             }
+            }catch(Exception ex){ex.printStackTrace();}
             try {
                 TimeUnit.SECONDS.sleep(30);// Espera 30 segundos para volver a comparar
             } catch (InterruptedException e) {

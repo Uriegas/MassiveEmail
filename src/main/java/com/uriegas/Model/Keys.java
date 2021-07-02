@@ -3,9 +3,7 @@ package com.uriegas.Model;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
-import java.security.Key;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.security.*;
 import java.util.*;
 /**
  * Handles 2 methods to encrypt and decrypt a string
