@@ -1,6 +1,6 @@
 package com.uriegas;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 import com.uriegas.Model.MailModel;
@@ -32,11 +32,22 @@ public class App extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws IOException {
+        //-->Load data model from file
+        File file = new File(this.getClass().getResource("/MailModel.ser").getPath());
+        try(ObjectInputStream out = new ObjectInputStream(new FileInputStream(file))){
+            model = (MailModel)out.readObject();
+            // model.readObject(out);
+            System.out.printf("Deserialized data from /MailModel.ser");
+        } catch (Exception i) {
+            i.printStackTrace();
+        }
+        //<--Load data model from file
+
         // theme = new Configuration();
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/Login.fxml"));
         Scene scene = loader.load();
         Window login = loader.getController();
-        login.initModel(model);
+        login.initModel(model);//Initialize the data model into the controller
         //Css data binding
         //Everytime the user changes in the Configuration class in binded into the scene
         // scene.getRoot().styleProperty().bind(Configuration.cssProperty());//Dynamic Css
@@ -93,8 +104,17 @@ public class App extends Application {
                 dialog.show();
             }
         });
-    //     Window loaderController = loader.getController();
-    //     loaderController.initModel(model);
         primaryStage.show();
+    }
+    @Override
+    public void stop(){
+        File file = new File(this.getClass().getResource("/MailModel.ser").getPath());
+        try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file))){
+            out.writeObject(model);
+            // model.writeObject(out);
+            System.out.println("Serialized data is in /MailModel.ser");
+        } catch (Exception i) {
+            i.printStackTrace();
+        }
     }
 }

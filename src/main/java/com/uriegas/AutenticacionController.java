@@ -1,7 +1,6 @@
 package com.uriegas;
 
 import com.uriegas.Model.MailModel;
-
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;

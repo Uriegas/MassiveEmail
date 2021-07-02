@@ -1,11 +1,9 @@
 package com.uriegas;
 
+import com.uriegas.Model.*;
 import javafx.event.*;
 import javafx.stage.*;
 import java.io.*;
-
-import com.uriegas.Model.*;
-
 import javafx.fxml.*;
 import javafx.scene.control.*;
 /**

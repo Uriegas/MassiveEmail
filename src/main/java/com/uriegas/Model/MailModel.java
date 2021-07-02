@@ -1,6 +1,8 @@
 package com.uriegas.Model;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.beans.*;
 import javafx.beans.property.*;
@@ -8,22 +10,22 @@ import javafx.collections.*;
 /**
  * Data model for the mail app
  */
-public class MailModel {
+public class MailModel implements Serializable {
 	/**
 	 * Master password for the app
 	 */
-	StringProperty masterPassword = new SimpleStringProperty();
+	private transient StringProperty masterPassword = new SimpleStringProperty();
 	/**
 	 * Array of accounts
 	 */
-	ObservableList<Account> accounts = FXCollections.observableArrayList(account ->
+	private transient ObservableList<Account> accounts = FXCollections.observableArrayList(account ->
 		new Observable[]{account.emailProperty(), account.contraseniaProperty()});
 	/**
-	 * Array of mails
+	 * Array of mails, not serialized
 	 */
-	ObservableList<Mail> mails = FXCollections.observableArrayList(mail ->
+	private transient ObservableList<Mail> mails = FXCollections.observableArrayList(mail ->
 		new Observable[]{mail.destinatarioProperty(), mail.cuerpoProperty(), mail.asuntoProperty(), mail.adjuntosProperty()});
-	ObservableList<String> currentAdjuntos = FXCollections.observableArrayList();
+	private transient ObservableList<String> currentAdjuntos = FXCollections.observableArrayList();
 	/**
 	 * Returns the account list
 	 * @return {@link ObservableList}<{@link Account}>
@@ -82,4 +84,28 @@ public class MailModel {
 			return true;
 		return false;
 	}
+	/**
+	 * Serialize this object, expect for the mails
+	 * TODO: In following versions we can add an option to save messages and dues serialize them
+	 * @param s
+	 * @throws Exception
+	 */
+    private void writeObject(ObjectOutputStream s) throws Exception {
+        // s.defaultWriteObject();
+		s.writeUTF(getMasterPassword());
+		s.writeObject(new ArrayList<Account>(accounts));
+    }
+	/**
+	 * Serialize this object, expect for the mails
+	 * TODO: In following versions we can add an option to save messages and dues serialize them
+	 * @param s
+	 * @throws Exceptio
+	 */
+    private void readObject(ObjectInputStream s) throws Exception {
+        s.defaultReadObject();
+		masterPassword = new SimpleStringProperty(s.readUTF());
+		// getAccountList().setAll((ObservableList<Account>)s.readObject());
+		List<Account> list = (List<Account>)s.readObject();
+		accounts = FXCollections.observableList(list);
+    }
 }

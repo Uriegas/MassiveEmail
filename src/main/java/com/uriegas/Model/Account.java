@@ -32,14 +32,15 @@ public class Account implements Serializable {
     public String getEmail(){ return this.email.get();}
     public String getContrasenia(){return this.contrasenia.get();}
 
-    private void writeObject(ObjectOutputStream s) throws Exception {
+    private void writeObject(ObjectOutputStream s) throws IOException, ClassNotFoundException {
         s.defaultWriteObject();
         s.writeUTF(getEmail());
         s.writeUTF(getContrasenia());
     }
-    private void readObject(ObjectInputStream s) throws Exception {
-        emailProperty().set(s.readUTF());
-        contraseniaProperty().set(s.readUTF());
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+        s.defaultReadObject();
+        email = new SimpleStringProperty(s.readUTF());
+        contrasenia = new SimpleStringProperty(s.readUTF());
     }
     public void requestLogin() throws AuthenticationFailedException, MessagingException {
         UseJavaMail.Login(this);

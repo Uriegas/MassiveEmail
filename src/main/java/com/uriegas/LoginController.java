@@ -41,6 +41,7 @@ public class LoginController extends Window {
     }
     /**
      * Inserta las cuentas almacenadas en el archivo cuentas.txt
+     * TODO: When a user is pressed twice then try to login instead of putting text
      */
     public void initialize() {
         /**
