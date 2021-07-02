@@ -14,13 +14,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <Scene xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uriegas.VentanaPrincipalController">
-    <AnchorPane prefHeight="480.0" prefWidth="607.0">
+    <AnchorPane prefHeight="480.0" prefWidth="710.0">
       <children>
          <TextField fx:id="TfDestinatarios" layoutX="109.0" layoutY="55.0" prefHeight="23.0" prefWidth="401.0" promptText="Destinatarios" />
          <Label layoutX="72.0" layoutY="59.0" text="Para" />
          <Label layoutX="59.0" layoutY="99.0" text="Asunto" />
          <TextField fx:id="TfAsunto" layoutX="109.0" layoutY="95.0" prefHeight="23.0" prefWidth="401.0" promptText="Aunto" />
-         <Button fx:id="BtnAgregarXLSX" layoutX="518.0" layoutY="55.0" minWidth="31.0" mnemonicParsing="false" onAction="#ClickAddXLSX" prefHeight="24.0" prefWidth="27.0" text="+" />
+         <Button fx:id="BtnAgregarXLSX" layoutX="518.0" layoutY="55.0" minWidth="31.0" mnemonicParsing="false" onAction="#ClickAddXLSX" prefHeight="24.0" prefWidth="27.0" style="-fx-background-color: false;">             			<graphic>
+               <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@Add_UserFinal.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+</Button>
          <TextArea fx:id="TaMensaje" layoutX="109.0" layoutY="126.0" prefHeight="233.0" prefWidth="403.0" promptText="Escribe tu mensaje" wrapText="true" />
          <SplitMenuButton fx:id="SmbEnviar" layoutX="109.0" layoutY="421.0" mnemonicParsing="false" onAction="#ClickEnviar" text="Enviar">
            <items>
@@ -49,5 +56,8 @@
                </ImageView>
             </graphic>
          </Button>
+         <Button fx:id="btnVerTabla" layoutX="438.0" layoutY="55.0" mnemonicParsing="false" style="-fx-background-color: false;" text="Ver tabla" textFill="#686767" />
+         <ListView layoutX="525.0" layoutY="103.0" prefHeight="200.0" prefWidth="176.0" />
+         <Label layoutX="526.0" layoutY="88.0" text="Archivos recientes" />
       </children></AnchorPane>
 </Scene>
