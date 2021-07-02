@@ -1,6 +1,10 @@
 # POO-Unidad-2-Actividad-2
 ## Actividad 4: Herramienta para envío de correos masivos UPV
 
+### TODO
+Añadir una botón en ventana principal que abra un pop-up para mostrar el excel cargado  
+Añadir una lista donde se muestren los archivos excel cargados anteriormente
+
 ### Objetivo de la Práctica
 
 El alumno deberá demostrar solura en los siguientes temas de la Programación Orientada a Objetos.

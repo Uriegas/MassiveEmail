@@ -69,7 +69,6 @@ public class LoginController extends Window {
         TfUsuario.setText(LvCuentas.getSelectionModel().getSelectedItem().getEmail());
         TfContra.setText(LvCuentas.getSelectionModel().getSelectedItem().getContrasenia());
     }
-
     /**
      * Se encarga de extraer los datos introducidos, crear la sesion por medio de UseJavaMail,
      * Encriptar la contraseña extraida haciendo uso de EncryptAccounts y almacenar las cuentas
