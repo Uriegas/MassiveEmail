@@ -57,7 +57,7 @@
             </graphic>
          </Button>
          <Button fx:id="btnVerTabla" layoutX="438.0" layoutY="55.0" mnemonicParsing="false" style="-fx-background-color: false;" text="Ver tabla" textFill="#686767" />
-         <ListView layoutX="525.0" layoutY="103.0" prefHeight="200.0" prefWidth="176.0" />
+         <ListView fx:id="lastViewedExcels" layoutX="525.0" layoutY="103.0" prefHeight="200.0" prefWidth="176.0" />
          <Label layoutX="526.0" layoutY="88.0" text="Archivos recientes" />
       </children></AnchorPane>
 </Scene>

@@ -6,6 +6,8 @@ import javafx.stage.*;
 import java.io.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
 /**
  * Controller of the Ventana Principal view
  * TODO: Add updates of main branch
@@ -23,6 +25,8 @@ public class VentanaPrincipalController extends Window {
     private Button btnConfig;
     @FXML
     private Button btnCambiarCuenta;
+    @FXML
+    private ListView<String> lastViewedExcels;
     /**
      * Initialize model
      */
@@ -37,6 +41,16 @@ public class VentanaPrincipalController extends Window {
                     setText(null);
                 else
                     setText(s.substring(s.lastIndexOf("/") +1, s.length()));
+            }
+        });
+        lastViewedExcels.setItems(this.model.lastViewedExcelsProperty());
+        lastViewedExcels.setCellFactory(lv -> new ListCell<String>(){
+            @Override public void updateItem(String item, boolean empty){
+                super.updateItem(item, empty);
+                if(empty)
+                    setText(null);
+                else
+                    setText(item.substring(item.lastIndexOf("/") +1, item.length()));
             }
         });
     }
@@ -59,6 +73,18 @@ public class VentanaPrincipalController extends Window {
                 closeConfirmation.setHeaderText("Confirmación de Salida");
                 closeConfirmation.initModality(Modality.APPLICATION_MODAL);
                 closeConfirmation.showAndWait();
+        });
+        lastViewedExcels.setOnMouseClicked(event->{
+            if( event.getButton().equals(MouseButton.PRIMARY) ){
+                if( event.getClickCount() == 2 ){
+                    try {
+                        this.model.setExcelTable( Utilities.readExcel( lastViewedExcels.getSelectionModel().getSelectedItem() ) );
+                    } catch (IOException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                }
+            }
         });
     }
     /**
@@ -115,24 +141,17 @@ public class VentanaPrincipalController extends Window {
         System.out.println("Clicked XLSX");
         FileChooser filechooser = new FileChooser();
         filechooser.setTitle("Seleccion un archivo XLSX");
+        filechooser.setInitialDirectory( new File(System.getProperty("user.dir")) );
         File selectedFile = filechooser.showOpenDialog(null);
         
-        try{
+        try{//TODO: Verify that the program can only load one excel file (show warning)
             this.model.setExcelTable( Utilities.readExcel(selectedFile.getAbsolutePath()) );//Save table
             System.out.println("Excel loaded succesfully");
-            // Stage dialog = new Stage(); // new stage
-            // dialog.initModality(Modality.APPLICATION_MODAL);
-
-            // BorderPane pane = new BorderPane(Utilities.readExcelToList(App.excel));//Pane to save the table
-            // Scene scene = new Scene(pane,500,500);
-            // scene.getRoot().styleProperty().bind(Configuration.cssProperty());//Dynamic Css
-            // dialog.setScene(scene);
-            // dialog.show();
-            this.model.setLastViewedExcels(selectedFile.getAbsolutePath());
+            this.model.setLastViewedExcels(selectedFile.getAbsolutePath());//Add this file to last viewed list
         }catch(IOException ex){//If not an excel or a problem occurs
             Alert error = new Alert(
                 Alert.AlertType.ERROR,
-                "El archivo seleccionado no pudo ser abierto"
+                "El archivo seleccionado no puede ser abierto"
             );
             error.show();
         }

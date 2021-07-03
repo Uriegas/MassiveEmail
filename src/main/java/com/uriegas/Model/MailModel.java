@@ -139,7 +139,9 @@ public class MailModel implements Serializable {
 		return tmp;
 	}
 	public void setLastViewedExcels(String value){
-		this.lastViewedExcels.add(value);
+		for( String s : this.lastViewedExcels )
+			if(!s.equals(value))
+				this.lastViewedExcels.add(value);
 	}
 	public void setLastViewedExcels(ArrayList<String> values){
 		this.lastViewedExcels.addAll(values);
