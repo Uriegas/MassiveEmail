@@ -53,6 +53,7 @@ public class App extends Application {
         Window login = loader.getController();
         login.initModel(model);//Initialize the data model into the controller
         //Css data binding
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());//Add css
         //Everytime the user changes in the Configuration class in binded into the scene
         // scene.getRoot().styleProperty().bind(Configuration.cssProperty());//Dynamic Css
         primaryStage.setTitle("Massive Email");
@@ -96,6 +97,7 @@ public class App extends Application {
                 loader.setLocation(this.getClass().getResource("/Autenticacion.fxml"));
                 try{
                     Scene scene = loader.load();
+                    scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());//Add css
                     Window x = loader.getController();
                     x.initModel(model);
                     // scene.getRoot().styleProperty().bind(Configuration.cssProperty());//Dynamic Css

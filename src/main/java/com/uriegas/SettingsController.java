@@ -7,8 +7,6 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.io.File;
 import java.util.ArrayList;
 /**
  * Settings window
@@ -28,7 +26,6 @@ public class SettingsController extends Window{
     protected void ClickCancelar(ActionEvent e){//Funciona pero saca de la app
         Node source = (Node)e.getSource();
         Stage stage = (Stage)source.getScene().getWindow();
-        stage.getOnCloseRequest().handle(null);
         stage.close();
     }
 

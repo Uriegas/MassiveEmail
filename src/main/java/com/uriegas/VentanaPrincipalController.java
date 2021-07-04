@@ -63,19 +63,6 @@ public class VentanaPrincipalController extends Window {
         btnCambiarCuenta.setOnAction(e ->{//Return to login window
             switchScene(e, this.model, "/Login.fxml");
         });
-        btnConfig.setOnMouseClicked(e ->{//Open configuration window
-                Alert closeConfirmation = new Alert(
-                    Alert.AlertType.CONFIRMATION,
-                    "¿Está seguro que desea salir?"
-                );
-                //Try multiple color configurations
-                // Configuration conf = new Configuration();
-                // conf.setBase( conf.getBase().saturate() );
-                // closeConfirmation.getDialogPane().styleProperty().bind(Configuration.cssProperty());//Add dynamic css
-                closeConfirmation.setHeaderText("Confirmación de Salida");
-                closeConfirmation.initModality(Modality.APPLICATION_MODAL);
-                closeConfirmation.showAndWait();
-        });
         lastViewedExcels.setOnMouseClicked(event->{
             if( event.getButton().equals(MouseButton.PRIMARY) ){
                 if( event.getClickCount() == 2 ){
