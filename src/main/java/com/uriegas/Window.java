@@ -25,7 +25,6 @@ public abstract class Window {
             Scene scene = loader.load();
             Window w = loader.getController();
             w.initModel(m);
-            // scene.getRoot().styleProperty().bind(Configuration.cssProperty());//Add dynamic css
             switchscene.setScene(scene);
         }catch(IOException ex){ex.printStackTrace();}
         //Another approach

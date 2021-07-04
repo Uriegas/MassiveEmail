@@ -5,8 +5,6 @@ import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 
-import javax.mail.MessagingException;
-
 import com.uriegas.Model.*;
 /**
  * Controller of the Login View

@@ -10,8 +10,6 @@ import javafx.scene.control.*;
 /**
  * Data model for the mail app, the serialization is implementated overloading the write and read methods
  * the attributes are labeled as transient to not mess up with java serialization
- * TODO: Master Password and accounts encryption
- * TODO: correct methods conventions for mails attribute
  */
 public class MailModel implements Serializable {
 	/**
@@ -59,6 +57,12 @@ public class MailModel implements Serializable {
 			if(a.equals(account))
 				return true;
 		return false;
+	}
+	public void addMail(Mail m){
+		this.mails.add(m);
+	}
+	public void addMails(ArrayList<Mail> mails){
+		this.mails.addAll(mails);
 	}
 	//<--accounts methods
 
@@ -139,9 +143,12 @@ public class MailModel implements Serializable {
 		return tmp;
 	}
 	public void setLastViewedExcels(String value){
-		for( String s : this.lastViewedExcels )
-			if(!s.equals(value))
-				this.lastViewedExcels.add(value);
+		if(this.lastViewedExcels.isEmpty())
+			this.lastViewedExcels.add(value);
+		else
+			for( String s : this.lastViewedExcels )
+				if(!s.equals(value))
+					this.lastViewedExcels.add(value);
 	}
 	public void setLastViewedExcels(ArrayList<String> values){
 		this.lastViewedExcels.addAll(values);
@@ -178,6 +185,7 @@ public class MailModel implements Serializable {
 	/**
 	 * Serialize this object, expect for the mails
 	 * TODO: In following versions we can add an option to save messages and dues serialize them
+	 * TODO implement accounts encryption
 	 * @param s
 	 * @throws Exceptio
 	 */

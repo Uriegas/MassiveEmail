@@ -6,7 +6,6 @@ import javafx.stage.*;
 import java.io.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 /**
  * Controller of the Ventana Principal view
@@ -69,7 +68,7 @@ public class VentanaPrincipalController extends Window {
                 //Try multiple color configurations
                 // Configuration conf = new Configuration();
                 // conf.setBase( conf.getBase().saturate() );
-                closeConfirmation.getDialogPane().styleProperty().bind(Configuration.cssProperty());//Add dynamic css
+                // closeConfirmation.getDialogPane().styleProperty().bind(Configuration.cssProperty());//Add dynamic css
                 closeConfirmation.setHeaderText("Confirmación de Salida");
                 closeConfirmation.initModality(Modality.APPLICATION_MODAL);
                 closeConfirmation.showAndWait();
@@ -123,10 +122,6 @@ public class VentanaPrincipalController extends Window {
         if(selectedFile != null){
             if(selectedFile.getAbsolutePath().endsWith(".html"))   //Si es .html ....
                 selectedFile = HTMLutilites.convertir(selectedFile);    // ... llama al metodo convertir
-
-            //lvAdjuntos.setFixedCellSize(60.0);
-            // lvAdjuntos.getItems().add(selectedFile.getName()); //Agrega el nombre del archivo al ListView
-            // adjuntos.add(new File(selectedFile.getAbsolutePath())); //Agrega el archivo al Array de archivos a enviar
             this.model.adjuntosProperty().add(selectedFile.getAbsolutePath());//Save current file to adjuntos
         }else{
             System.out.println("No se encontro el archivo");

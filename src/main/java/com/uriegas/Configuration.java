@@ -11,6 +11,7 @@ import javafx.scene.paint.*;
  * Binding class, this class stores all the data about the css styling of the app,
  * the values of this class could be changed and the will reflect in the view of the app
  * Copied from: https://stackoverflow.com/questions/42541171/javafx-css-dynamic-styling#42541771
+ * @deprecated
  */
 public class Configuration {
     private static ObjectProperty<Color> base = new SimpleObjectProperty<>(Color.web("#00aae4"));

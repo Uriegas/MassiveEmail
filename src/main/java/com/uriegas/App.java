@@ -1,6 +1,7 @@
 package com.uriegas;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 
 import com.uriegas.Model.MailModel;
@@ -19,7 +20,6 @@ public class App extends Application {
      * One instance of the model
      */
     private MailModel model = new MailModel();
-    // private Configuration theme;//Dynamic CSS
     /**
      * Dummy main
      * @param args
@@ -32,8 +32,13 @@ public class App extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws IOException {
+        //-->Create hidden folder
+        try{
+            Files.createDirectory(new File(System.getProperty("user.home") + "/.MassiveMail").toPath());
+        }catch(Exception ex){System.out.println("Hidden directory exists");}
+        //<--Create hidden folder
         //-->Load data model from file
-        File file = new File(this.getClass().getResource("/MailModel.ser").getPath());
+        File file = new File(System.getProperty("user.home") + "/.MassiveMail/MailModel.ser");
         try(ObjectInputStream out = new ObjectInputStream(new FileInputStream(file))){
             model = (MailModel)out.readObject();
             System.out.printf("Deserialized data from /MailModel.ser");
@@ -107,7 +112,7 @@ public class App extends Application {
     }
     @Override
     public void stop(){
-        File file = new File(this.getClass().getResource("/MailModel.ser").getPath());
+        File file = new File(System.getProperty("user.home") + "/.MassiveMail/MailModel.ser");
         try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file))){
             out.writeObject(model);
             System.out.println("Serialized data is in /MailModel.ser");
