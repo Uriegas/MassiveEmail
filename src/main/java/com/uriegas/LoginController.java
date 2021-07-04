@@ -4,6 +4,9 @@ import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
+
+import javax.mail.MessagingException;
+
 import com.uriegas.Model.*;
 /**
  * Controller of the Login View
@@ -60,12 +63,22 @@ public class LoginController extends Window {
             if(e.getCode() == KeyCode.ENTER)
                 saveAccount(e);
         });
+        LvCuentas.setOnMouseClicked(event->{
+            if( event.getButton().equals(MouseButton.PRIMARY) ){
+                if( event.getClickCount() == 2 ){
+                    saveAccount(event);
+                }else if( event.getClickCount() == 1 ){
+                    TfUsuario.setText(LvCuentas.getSelectionModel().getSelectedItem().getEmail());
+                    TfContra.setText(LvCuentas.getSelectionModel().getSelectedItem().getContrasenia());
+                }
+            }
+        });
     }
     /**
-     * Obtiene los datos de la cuenta seleccionada en el ListView
+     * Cuando se da un click añade los datos a los textfields, con dos clicks inicia sesión
      */
     @FXML
-    protected void SelectCuenta(){
+    protected void SelectCuenta(ActionEvent e){
         TfUsuario.setText(LvCuentas.getSelectionModel().getSelectedItem().getEmail());
         TfContra.setText(LvCuentas.getSelectionModel().getSelectedItem().getContrasenia());
     }
