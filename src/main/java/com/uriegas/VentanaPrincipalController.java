@@ -4,7 +4,10 @@ import com.uriegas.Model.*;
 import javafx.event.*;
 import javafx.stage.*;
 import java.io.*;
+import java.net.URL;
+
 import javafx.fxml.*;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 /**
  * Controller of the Ventana Principal view
@@ -81,7 +84,21 @@ public class VentanaPrincipalController extends Window {
      */
     @FXML
     protected void ClickRutina(ActionEvent e) {
-        switchScene(e, this.model, "/Envios_rutinas.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            String RutaFXML = getClass().getResource("/Envios_rutinas.fxml").toExternalForm();
+            //loader.setLocation(new URL("file:src/main/resources/Envios_rutinas.fxml"));
+            loader.setLocation(new URL(RutaFXML));
+            Scene scene = loader.load();
+            Stage primaryStage = new Stage();
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        //switchScene(e, this.model, "/Envios_rutinas.fxml");
     }
     /**
      * Abre el selector de archivos
@@ -136,5 +153,23 @@ public class VentanaPrincipalController extends Window {
             );
             error.show();
         }
+    }
+
+    @FXML
+    protected void ClickSettings(ActionEvent e){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            String RutaFXML = getClass().getResource("/Settings.fxml").toExternalForm();
+            loader.setLocation(new URL(RutaFXML));
+            Scene scene = loader.load();
+             Stage primaryStage = new Stage();
+             primaryStage.setScene(scene);
+             primaryStage.show();
+         }
+         catch (Exception ex) {
+             ex.printStackTrace();
+         }
+        
+        //switchScene(e, this.model, "/Settings.fxml");
     }
 }

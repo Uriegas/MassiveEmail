@@ -7,11 +7,13 @@ import javafx.stage.*;
 import java.io.*;
 
 import com.uriegas.Model.MailModel;
+import com.uriegas.Model.RoutineModel;
 /**
  * Abstract Window class, needed because of switching scenes and implementing global CSS properties
  */
 public abstract class Window {
     protected MailModel model;
+    protected RoutineModel modelR;
     /**
      * Switch the current scene (window) to the specified FXML file
 	 * @param FXML file
@@ -46,4 +48,12 @@ public abstract class Window {
             this.model = m;
         }
     }
+
+    // public void initModel(RoutineModel r){
+    //     if(this.modelR != null)
+    //         throw new IllegalStateException("Model only can be instantiated once");
+    //     else{
+    //         this.modelR = r;
+    //     }
+    // }
 }
