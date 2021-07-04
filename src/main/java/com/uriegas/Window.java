@@ -40,12 +40,35 @@ public abstract class Window {
         //     e.printStackTrace();
         // }
     }
+    /**
+     * Abstract method for initializing the model
+     * @param m
+     */
     public void initModel(MailModel m){
         if(this.model != null)
             throw new IllegalStateException("Model only can be instantiated once");
         else{
             this.model = m;
         }
+    }
+    
+    public void createPopUp(Event e, String FXML){
+        Stage dialog = new Stage(); // new stage
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(this.getClass().getResource(FXML));
+        try{
+            Scene scene = loader.load();
+            Window x = loader.getController();
+            x.initModel(model);
+            // scene.getRoot().styleProperty().bind(Configuration.cssProperty());//Dynamic Css
+            dialog.setScene(scene);
+        }catch(IOException ex){ex.printStackTrace();}
+        // Defines a modal window that blocks events from being
+        // delivered to any other application window.
+        dialog.initOwner(null);
+        // dialog.setOnCloseRequest(event ->{event.consume();});
+        dialog.show();
     }
 
     // public void initModel(RoutineModel r){

@@ -171,19 +171,7 @@ public class VentanaPrincipalController extends Window {
 
     @FXML
     protected void ClickSettings(ActionEvent e){
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            String RutaFXML = getClass().getResource("/Settings.fxml").toExternalForm();
-            loader.setLocation(new URL(RutaFXML));
-            Scene scene = loader.load();
-             Stage primaryStage = new Stage();
-             primaryStage.setScene(scene);
-             primaryStage.show();
-         }
-         catch (Exception ex) {
-             ex.printStackTrace();
-         }
-        
-        //switchScene(e, this.model, "/Settings.fxml");
+        // switchScene(e, this.model, "/Settings.fxml");
+        createPopUp(e, "/Settings.fxml");
     }
 }

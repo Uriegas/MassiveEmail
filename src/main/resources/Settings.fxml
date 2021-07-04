@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Scene xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<Scene xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uriegas.SettingsController">
     <AnchorPane prefHeight="358.0" prefWidth="363.0" style="-fx-background-color: #7D45AC;">
       <children>
          <PasswordField fx:id="CurrentPassword" layoutX="146.0" layoutY="79.0" prefHeight="23.0" prefWidth="196.0" style="-fx-background-color: white;" />
