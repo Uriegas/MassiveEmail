@@ -7,13 +7,11 @@ import javafx.stage.*;
 import java.io.*;
 
 import com.uriegas.Model.MailModel;
-import com.uriegas.Model.RoutineModel;
 /**
  * Abstract Window class, needed because of switching scenes and implementing global CSS properties
  */
 public abstract class Window {
     protected MailModel model;
-    protected RoutineModel modelR;
     /**
      * Switch the current scene (window) to the specified FXML file
 	 * @param FXML file
@@ -25,7 +23,7 @@ public abstract class Window {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(this.getClass().getResource(FXML));
             Scene scene = loader.load();
-            scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());//Add css
+            // scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());//Add css
             Window w = loader.getController();
             w.initModel(m);
             switchscene.setScene(scene);
@@ -64,7 +62,7 @@ public abstract class Window {
         loader.setLocation(this.getClass().getResource(FXML));
         try{
             Scene scene = loader.load();
-            scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());//Add css
+            // scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());//Add css
             Window x = loader.getController();
             x.initModel(model);
             dialog.setScene(scene);
@@ -72,7 +70,11 @@ public abstract class Window {
         // Defines a modal window that blocks events from being
         // delivered to any other application window.
         dialog.initOwner(((Node)e.getTarget()).getScene().getWindow());
-        // dialog.setOnCloseRequest(event ->{ ((Stage)e.getTarget()).close(); });
+        // dialog.setOnCloseRequest(event ->{
+        //     Node source = (Node)event.getSource();
+        //     Stage stage = (Stage)source.getScene().getWindow();
+        //     stage.close();
+        // });
         dialog.show();
     }
 

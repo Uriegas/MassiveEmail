@@ -12,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 /**
  * Controller of the Ventana Principal view
- * TODO: Add updates of main branch
  */
 public class VentanaPrincipalController extends Window {
     @FXML
