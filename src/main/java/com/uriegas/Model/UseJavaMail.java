@@ -8,7 +8,7 @@ import javax.mail.internet.MimeMultipart;
 /**
  * JavaFX App
  */
-class UseJavaMail{
+public class UseJavaMail{
 	private static Session session;
 
 	public static Session getSession(){return session;}
@@ -92,7 +92,7 @@ class UseJavaMail{
 			System.out.println("Message is ready");
 			Transport.send(msg);
 
-			System.out.println("EMail Sent Successfully!!");
+			System.out.println("Email sent successfully!!");
 		}
 		catch (Exception e) {
 			e.printStackTrace();

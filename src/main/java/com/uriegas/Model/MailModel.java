@@ -58,13 +58,25 @@ public class MailModel implements Serializable {
 				return true;
 		return false;
 	}
+	//<--accounts methods
+
+	//-->mails methods
+	public ObservableList<Mail> mailsProperty(){
+		return this.mails;
+	}
+	public ArrayList<Mail> getMails(){
+		ArrayList<Mail> tmp = new ArrayList<Mail>();
+		for( Mail m : mails )
+			tmp.add(m);
+		return tmp;
+	}
 	public void addMail(Mail m){
 		this.mails.add(m);
 	}
 	public void addMails(ArrayList<Mail> mails){
 		this.mails.addAll(mails);
 	}
-	//<--accounts methods
+	//<--mails methods
 
 	//-->adjuntos methods
 	public ObservableList<String> adjuntosProperty(){

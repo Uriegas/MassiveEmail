@@ -77,17 +77,31 @@ public class VentanaPrincipalController extends Window {
     }
     /**
      * Extrae el destinatario, asunto y cuerpo del mensaje introducidos por el usuario
-     * y posteriormente los envia al metodo senEmail de la clase EmailUtil
+     * y posteriormente los envia al metodo senEmail de la clase EmailUtil.
+     * When clicked 2 things happen: the mail is rendered as many rows there are,
+     * then this messages are send
      * @param e recibe un ActionEvent cuando el usuario da click en el boton enviar
      */
     @FXML
     protected void ClickEnviar(ActionEvent e) {
+        this.model.mailsProperty().clear();//Empty the mails before processing new ones
+        this.model.adjuntosProperty().clear();//Empty adjuntos before processing new ones
+        //-->Send one mail
         String destinatario = TfDestinatarios.getText();
         String asunto = TfAsunto.getText();
         String cuerpo = TaMensaje.getText();
-
         Mail mensaje = new Mail(destinatario, asunto, cuerpo, this.model.getAdjuntos());
         mensaje.send();
+        //<--Send one mail
+
+        //-->Render mails
+        this.model.addMail(new Mail(dest1, asunto, cuerpo, vars1, this.model.getAdjuntos())  );
+        //<--Render mails
+        
+        //-->Send many mails
+        for( Mail m : this.model.mailsProperty() )
+            m.send();
+        //<--Send many mails
     }
     /**
      * Abre la vista Envio_Rutinas
@@ -154,7 +168,10 @@ public class VentanaPrincipalController extends Window {
             error.show();
         }
     }
-
+    /**
+     * Change view to settings
+     * @param e
+     */
     @FXML
     protected void ClickSettings(ActionEvent e){
         // switchScene(e, this.model, "/Settings.fxml");
