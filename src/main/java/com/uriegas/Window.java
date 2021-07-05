@@ -23,7 +23,7 @@ public abstract class Window {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(this.getClass().getResource(FXML));
             Scene scene = loader.load();
-            // scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());//Add css
+            scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());//Add css
             Window w = loader.getController();
             w.initModel(m);
             switchscene.setScene(scene);
@@ -62,7 +62,7 @@ public abstract class Window {
         loader.setLocation(this.getClass().getResource(FXML));
         try{
             Scene scene = loader.load();
-            // scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());//Add css
+            scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());//Add css
             Window x = loader.getController();
             x.initModel(model);
             dialog.setScene(scene);

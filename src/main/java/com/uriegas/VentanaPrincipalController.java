@@ -95,6 +95,7 @@ public class VentanaPrincipalController extends Window {
         //<--Send one mail
 
         //-->Render mails
+        //Obtener destinatarios y variables para cada destinatario
         this.model.addMail(new Mail(dest1, asunto, cuerpo, vars1, this.model.getAdjuntos())  );
         //<--Render mails
         
