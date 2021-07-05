@@ -62,7 +62,7 @@ public class UseJavaMail{
 
 			msg.setFrom(new InternetAddress(session.getProperty("mail.from"), session.getProperty("mail.from.alias")));
 
-			msg.setReplyTo(InternetAddress.parse("no_reply@example.com", false));
+			msg.setReplyTo(msg.getReplyTo());
 
 			msg.setSubject(mensaje.getAsunto());
 
