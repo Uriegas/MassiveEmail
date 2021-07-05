@@ -5,6 +5,7 @@ import javafx.event.*;
 import javafx.stage.*;
 import java.io.*;
 import java.net.URL;
+import java.util.*;
 
 import javafx.fxml.*;
 import javafx.scene.Scene;
@@ -87,16 +88,18 @@ public class VentanaPrincipalController extends Window {
         this.model.mailsProperty().clear();//Empty the mails before processing new ones
         this.model.adjuntosProperty().clear();//Empty adjuntos before processing new ones
         //-->Send one mail
-        String destinatario = TfDestinatarios.getText();
-        String asunto = TfAsunto.getText();
-        String cuerpo = TaMensaje.getText();
-        Mail mensaje = new Mail(destinatario, asunto, cuerpo, this.model.getAdjuntos());
-        mensaje.send();
+        // String destinatario = TfDestinatarios.getText();
+        // String asunto = TfAsunto.getText();
+        // String cuerpo = TaMensaje.getText();
+        // Mail mensaje = new Mail(destinatario, asunto, cuerpo, this.model.getAdjuntos());
+        // mensaje.send();
         //<--Send one mail
 
         //-->Render mails
-        //Obtener destinatarios y variables para cada destinatario
-        this.model.addMail(new Mail(dest1, asunto, cuerpo, vars1, this.model.getAdjuntos())  );
+        ArrayList<String> dest = this.model.excelTableProperty().getReceivers();//Array of strings
+        ArrayList<HashMap<String, String>> vars = this.model.excelTableProperty().getVars();//Array of hashmaps
+        for( int i = 0; i < vars.size() && i < dest.size(); i++ )
+            this.model.addMail( new Mail(dest.get(i), TfAsunto.getText(), TaMensaje.getText(), vars.get(i), this.model.getAdjuntos()) );
         //<--Render mails
         
         //-->Send many mails

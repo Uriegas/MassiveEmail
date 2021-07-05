@@ -33,7 +33,7 @@ public class MailModel implements Serializable {
 	/**
 	 * Current table view
 	 */
-	private transient TableView<ObservableList<String>> excelTable = new TableView<ObservableList<String>>();
+	private transient ExcelTable excelTable = new ExcelTable();
 	/**
 	 * Last 5 opened excel files
 	 */
@@ -109,7 +109,7 @@ public class MailModel implements Serializable {
 	//<--masterPassword methods 
 
 	//-->excelTable methods 
-	public TableView<ObservableList<String>> excelTableProperty(){
+	public ExcelTable excelTableProperty(){
 		return this.excelTable;
 	}
 	// public String getExcelTable(){
@@ -141,6 +141,7 @@ public class MailModel implements Serializable {
             );
             this.excelTable.getColumns().add(column);
         }
+		this.excelTable.setHeaders((ArrayList<String>)headers);
 	}
 	//<--excelTable methods 
 
@@ -199,7 +200,7 @@ public class MailModel implements Serializable {
 	 * TODO: In following versions we can add an option to save messages and dues serialize them
 	 * TODO implement accounts encryption
 	 * @param s
-	 * @throws Exceptio
+	 * @throws Exception
 	 */
     private void readObject(ObjectInputStream s) throws Exception {
         s.defaultReadObject();
@@ -210,7 +211,8 @@ public class MailModel implements Serializable {
 		mails = FXCollections.observableArrayList(mail ->
 		new Observable[]{mail.destinatarioProperty(), mail.cuerpoProperty(), mail.asuntoProperty(), mail.adjuntosProperty()});
 		currentAdjuntos = FXCollections.observableArrayList();
-		excelTable = new TableView<ObservableList<String>>();
+		// excelTable = new TableView<ObservableList<String>>();
+		excelTable = new ExcelTable();
 		//<--Initialize not serialized objects(if not initialized they are null)
     }
 }
