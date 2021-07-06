@@ -85,8 +85,6 @@ public class VentanaPrincipalController extends Window {
      */
     @FXML
     protected void ClickEnviar(ActionEvent e) {
-        this.model.mailsProperty().clear();//Empty the mails before processing new ones
-        this.model.adjuntosProperty().clear();//Empty adjuntos before processing new ones
         //-->Send one mail
         // String destinatario = TfDestinatarios.getText();
         // String asunto = TfAsunto.getText();
@@ -106,7 +104,11 @@ public class VentanaPrincipalController extends Window {
         for( Mail m : this.model.mailsProperty() )
             m.send();
         //<--Send many mails
+
+        this.model.mailsProperty().clear();//Empty the mails before processing new ones
+        this.model.adjuntosProperty().clear();//Empty adjuntos before processing new ones
     }
+
     /**
      * Abre la vista Envio_Rutinas
      * @param e
@@ -115,7 +117,6 @@ public class VentanaPrincipalController extends Window {
     protected void ClickRutina(ActionEvent e) {
 
         this.model.mailsProperty().clear();//Empty the mails before processing new ones
-        // this.model.adjuntosProperty().clear();//Empty adjuntos before processing new ones
 
         //-->Render mails
         ArrayList<String> dest = this.model.excelTableProperty().getReceivers();//Array of strings
@@ -147,6 +148,7 @@ public class VentanaPrincipalController extends Window {
             ex.printStackTrace();
         }
         
+        this.model.adjuntosProperty().clear();//Empty adjuntos before processing new ones
         //switchScene(e, this.model, "/Envios_rutinas.fxml");
     }
     /**
