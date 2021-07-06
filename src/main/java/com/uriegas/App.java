@@ -136,9 +136,9 @@ public class App extends Application {
             ProcessBuilder proceso = new ProcessBuilder();
 
             //proceso.command("java", "-jar", System.getProperty("user.home") + "/.MassiveMail/EventsProcess.jar"); // <-- DESCOMENTAR CUANDO SE VAYA A GENERAR EL JAR
-            System.out.println("Se ejecuta proceso");
             proceso.command("java", "-jar", "EventsProcess.jar"); // <-- COMENTAR CUANDO SE VAYA A GENERAR EL JAR
             Process process = proceso.start();
+            ejecutarArranque();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -146,6 +146,9 @@ public class App extends Application {
     }
 
 
+    /**
+     * Extrae el jar que se ejecutara en segundo plano
+     */
     public void extraerJar(){
         try {
             String[] ruta = getClass().getProtectionDomain().getCodeSource().getLocation().toString().split(":");
@@ -163,7 +166,6 @@ public class App extends Application {
                     if (!fl.exists()) {
                         fl.getParentFile().mkdirs();
                         fl = new java.io.File(destdir, je.getName());
-
                     }
                     if (je.isDirectory()) {
                         continue;
@@ -180,5 +182,24 @@ public class App extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Genera un archivo por lotes que inicia el proceso de lectura de rutinas 
+     * al arrancar el sistema
+     */
+    public void ejecutarArranque(){
+        File arranque = new File("%USERPROFILE%\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\EventProcess.bat");
+        String SO = System.getProperty("os.name").toLowerCase();
+        if(SO.contains("win")){
+            if(!arranque.exists()){
+                try{
+                    FileWriter escribir = new FileWriter(arranque, true);
+                    escribir.write("java -jar " + System.getProperty("user.home") + "/.MassiveMail/EventsProcess.jar");
+                    escribir.close();
+                }catch(Exception ex){}
+            }
+        }
+
     }
 }
