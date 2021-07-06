@@ -113,6 +113,27 @@ public class VentanaPrincipalController extends Window {
      */
     @FXML
     protected void ClickRutina(ActionEvent e) {
+
+        this.model.mailsProperty().clear();//Empty the mails before processing new ones
+        this.model.adjuntosProperty().clear();//Empty adjuntos before processing new ones
+
+        //-->Render mails
+        ArrayList<String> dest = this.model.excelTableProperty().getReceivers();//Array of strings
+        ArrayList<HashMap<String, String>> vars = this.model.excelTableProperty().getVars();//Array of hashmaps
+        for( int i = 0; i < vars.size() && i < dest.size(); i++ )
+            this.model.addMail( new Mail(dest.get(i), TfAsunto.getText(), TaMensaje.getText(), vars.get(i), this.model.getAdjuntos()) );
+        //<--Render mails
+        
+
+        //--> Serializa mails
+        File file = new File(System.getProperty("user.home") + "/.MassiveMail/PendingMails.ser");
+        try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file))){
+            out.writeObject(model);
+            System.out.println("Serialized data is in /PendingMails.ser");
+        } catch (Exception i) {
+            i.printStackTrace();
+        }
+        //<-- Serializa correo
         try {
             FXMLLoader loader = new FXMLLoader();
             String RutaFXML = getClass().getResource("/Envios_rutinas.fxml").toExternalForm();

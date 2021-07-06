@@ -1,5 +1,8 @@
 package com.uriegas.Model;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.*;
 
@@ -12,10 +15,10 @@ import javafx.collections.*;
  * @author Uriegas & Germany
  */
 public class Mail implements Serializable {
-    private final StringProperty destinatario = new SimpleStringProperty();
-    private final StringProperty asunto = new SimpleStringProperty();
-    private final StringProperty cuerpo = new SimpleStringProperty();
-    private final ObservableList<String> adjuntos = FXCollections.observableArrayList();
+    private transient StringProperty destinatario = new SimpleStringProperty();
+    private transient StringProperty asunto = new SimpleStringProperty();
+    private transient StringProperty cuerpo = new SimpleStringProperty();
+    private transient ObservableList<String> adjuntos = FXCollections.observableArrayList();
 
     public StringProperty destinatarioProperty(){return this.destinatario;}
     public StringProperty asuntoProperty(){return this.asunto;}
@@ -96,5 +99,20 @@ public class Mail implements Serializable {
                     if( !archivo.isEmpty())
                         if( archivo != null )
                             this.adjuntosProperty().add(archivo);
+    }
+
+
+    private void writeObject(ObjectOutputStream s) throws IOException, ClassNotFoundException {
+        s.defaultWriteObject();
+        s.writeUTF(getAsunto());
+        s.writeUTF(getCuerpo());
+        s.writeObject(getAdjuntos());
+        // s.writeUTF(getDestinatario());
+    }
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+        s.defaultReadObject();
+        asunto = new SimpleStringProperty(s.readUTF());
+        cuerpo = new SimpleStringProperty(s.readUTF());
+        adjuntos = FXCollections.observableArrayList((List<String>) s.readObject());
     }
 }

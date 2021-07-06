@@ -194,6 +194,7 @@ public class MailModel implements Serializable {
 		s.writeUTF(getMasterPassword());
 		s.writeObject(new ArrayList<Account>(accounts));
 		s.writeObject(new ArrayList<String>(lastViewedExcels));
+		s.writeObject(new ArrayList<Mail>(mails));
     }
 	/**
 	 * Serialize this object, expect for the mails
@@ -207,9 +208,10 @@ public class MailModel implements Serializable {
 		masterPassword = new SimpleStringProperty(s.readUTF());
 		accounts = FXCollections.observableList((List<Account>)s.readObject());
 		lastViewedExcels = FXCollections.observableList((List<String>)s.readObject());
+		mails = FXCollections.observableList((List<Mail>)s.readObject());
 		//-->Initialize not serialized objects(if not initialized they are null)
-		mails = FXCollections.observableArrayList(mail ->
-		new Observable[]{mail.destinatarioProperty(), mail.cuerpoProperty(), mail.asuntoProperty(), mail.adjuntosProperty()});
+		// mails = FXCollections.observableArrayList(mail ->
+		// new Observable[]{mail.destinatarioProperty(), mail.cuerpoProperty(), mail.asuntoProperty(), mail.adjuntosProperty()});
 		currentAdjuntos = FXCollections.observableArrayList();
 		// excelTable = new TableView<ObservableList<String>>();
 		excelTable = new ExcelTable();
