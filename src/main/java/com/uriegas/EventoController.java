@@ -51,16 +51,6 @@ public class EventoController implements Initializable {
      * @param url
      * @param resourceBundle
      */
-
-    // public void initModel(MailModel m){
-    //     if(this.model != null)
-    //         throw new IllegalStateException("Model only can be instantiated once");
-    //     else{
-    //         this.model = m;
-    //     }
-    // }
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -69,6 +59,16 @@ public class EventoController implements Initializable {
 
         TfHora.setText(hora.truncatedTo(ChronoUnit.MINUTES).toString()); //Asingo la hora al TextFeld
         DpFecha.setValue(fecha);  //Asingo la hora al DatePicker
+
+        //-->Load data model from file
+        File fileIn = new File(System.getProperty("user.home") + "/.MassiveMail/RoutineModel.ser");
+        try(ObjectInputStream out = new ObjectInputStream(new FileInputStream(fileIn))){
+            this.modelR = (RoutineModel)out.readObject();
+            System.out.println("Deserialized data from /RoutineModel.ser");
+        } catch (Exception i) {
+            i.printStackTrace();
+        }
+        //<--Load data model from file
     }
 
     /**
@@ -100,20 +100,9 @@ public class EventoController implements Initializable {
     protected void ClickDefRutina(ActionEvent e){
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); //Se define el formato
-
                                                 //Une la fecha y hora seleccionadas en la vista y se aplica el formato
         LocalDateTime fechaEnvio = LocalDateTime.parse(DpFecha.getValue() + " " + TfHora.getText(), formatter);
 
-        //Obtenemos la cuenta y el mensaje almacenados
-        // EventosSerializer<Account> Cserializer = new EventosSerializer<>();
-        // cuenta = Cserializer.deserealizarEventos(System.getProperty("user.home") + "/.MassiveMail/CuentaTemp.tmp");
-
-        // EventosSerializer<ArrayList<Mail>> Mserializer = new EventosSerializer<>();
-        // mensaje = Mserializer.deserealizarEventos(System.getProperty("user.home") + "/.MassiveMail/MensajeTemp.tmp");
-
-        // EventosSerializer<ArrayList<Routine>> serializer = new EventosSerializer<>();
-        //mensaje = model.getMails();
-        // System.out.println("Total mensajes: "+mensaje.size());
 
         //-->Load data model from file
         File fileIn = new File(System.getProperty("user.home") + "/.MassiveMail/PendingMails.ser");
@@ -125,10 +114,10 @@ public class EventoController implements Initializable {
         }
         //<--Load data model from file
 
-        //eventos.add(new Routine(fechaEnvio, CbRutinas.getValue(), model.getAccountList().get(0), model.getMails())); //Se agrega el evento al ArrayList
-
         modelR.addRoutine(new Routine(fechaEnvio, CbRutinas.getValue(), model.getAccountList().get(0), model.getMails()));
 
+
+        //-->Guarda el modelo Rutina
         File fileOut = new File(System.getProperty("user.home") + "/.MassiveMail/RoutineModel.ser");
         try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileOut))){
             out.writeObject(modelR);
@@ -136,9 +125,9 @@ public class EventoController implements Initializable {
         } catch (Exception i) {
             i.printStackTrace();
         }
-        // serializer.serealizarEventos(eventos, System.getProperty("user.home") + "/.MassiveMail/Eventos.dat");   //Se serealiza el ArrayList
+        //<--Guarda el modelo Rutina
 
-        // LvEventosPen.getItems().add(mensaje.get(0).getAsunto()+"\tFecha: "+fechaEnvio); //Se escribe el evento en el ListView
+        LvEventosPen.getItems().add(model.getMails().get(0).getAsunto()+"\tFecha: "+fechaEnvio); //Se escribe el evento en el ListView
 
         DaemonEventos.LeerEventos(); //Cargamos el ArrayList en la clase del demonio
 

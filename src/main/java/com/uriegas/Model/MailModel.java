@@ -195,6 +195,7 @@ public class MailModel implements Serializable {
 		s.writeObject(new ArrayList<Account>(accounts));
 		s.writeObject(new ArrayList<String>(lastViewedExcels));
 		s.writeObject(new ArrayList<Mail>(mails));
+		s.writeObject(new ArrayList<String>(currentAdjuntos));
     }
 	/**
 	 * Serialize this object, expect for the mails

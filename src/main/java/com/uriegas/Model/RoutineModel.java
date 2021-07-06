@@ -34,6 +34,9 @@ public class RoutineModel implements Serializable  {
 			routinesList.add(a);
 		return routinesList;
 	}
+	public void delRoutine(int i){
+		routines.remove(i);
+	}
 	public void addRoutines(ArrayList<Routine> rutinas){
 		this.routinesProperty().addAll(rutinas);
 	}

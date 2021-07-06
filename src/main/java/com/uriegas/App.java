@@ -3,6 +3,7 @@ package com.uriegas;
 import java.io.*;
 import java.nio.file.Files;
 import java.util.*;
+import java.util.jar.JarFile;
 
 import com.uriegas.Model.MailModel;
 
@@ -80,6 +81,7 @@ public class App extends Application {
             closeConfirmation.initOwner(primaryStage);
 
             Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
+
             if (!ButtonType.OK.equals(closeResponse.get()))
                 event.consume();
         });
@@ -120,6 +122,63 @@ public class App extends Application {
             System.out.println("Serialized data is in /MailModel.ser");
         } catch (Exception i) {
             i.printStackTrace();
+        }
+
+        //--> Ejecuta el proceso de lectura de rutinas
+        try{
+            // --> DESCOMENTAR CUANDO SE VAYA A GENERAR EL JAR
+            // File archivoJar = new File(System.getProperty("user.home") + "/.MassiveMail/EventsProcess.jar");
+            // if(!archivoJar.exists()){
+            //     extraerJar();
+            // }
+            // <-- DESCOMENTAR CUANDO SE VAYA A GENERAR EL JAR
+            
+            ProcessBuilder proceso = new ProcessBuilder();
+
+            //proceso.command("java", "-jar", System.getProperty("user.home") + "/.MassiveMail/EventsProcess.jar"); // <-- DESCOMENTAR CUANDO SE VAYA A GENERAR EL JAR
+            System.out.println("Se ejecuta proceso");
+            proceso.command("java", "-jar", "EventsProcess.jar"); // <-- COMENTAR CUANDO SE VAYA A GENERAR EL JAR
+            Process process = proceso.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //<-- Ejecuta el proceso de lectura de rutinas
+    }
+
+
+    public void extraerJar(){
+        try {
+            String[] ruta = getClass().getProtectionDomain().getCodeSource().getLocation().toString().split(":");
+            String ruta_jar = ruta[1];
+            JarFile jarFile = new JarFile(ruta_jar);
+            java.util.Enumeration<java.util.jar.JarEntry> enu= jarFile.entries();
+            while(enu.hasMoreElements())
+            {
+                String destdir = System.getProperty("user.home") + "/.MassiveMail";     //abc is my destination directory
+                java.util.jar.JarEntry je = enu.nextElement();
+
+                if(je.getName().equals("EventsProcess.jar") || je.getName().equals("EventsProcess.exe")) {
+
+                    java.io.File fl = new java.io.File(destdir, je.getName());
+                    if (!fl.exists()) {
+                        fl.getParentFile().mkdirs();
+                        fl = new java.io.File(destdir, je.getName());
+
+                    }
+                    if (je.isDirectory()) {
+                        continue;
+                    }
+                    java.io.InputStream is = jarFile.getInputStream(je);
+                    java.io.FileOutputStream fo = new java.io.FileOutputStream(fl);
+                    while (is.available() > 0) {
+                        fo.write(is.read());
+                    }
+                    fo.close();
+                    is.close();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

@@ -2,7 +2,9 @@ package com.uriegas.Model;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -14,7 +16,7 @@ import javax.mail.MessagingException;
 
 public class DaemonEventos extends Thread{
 
-    private static ArrayList<Routine> listaEventos;
+//    private static ArrayList<Routine> listaEventos;
     protected static RoutineModel modelR;
 
     /**
@@ -28,8 +30,8 @@ public class DaemonEventos extends Thread{
         } catch (Exception i) {
             i.printStackTrace();
         }
-        
-        listaEventos = modelR.getRoutines();
+
+        //modelR.getRoutines() = modelR.getRoutines();
         System.out.println("Eventos leidos");
     }
 
@@ -41,49 +43,52 @@ public class DaemonEventos extends Thread{
      */
     @Override
     public void run(){
+
+        System.out.println("Total correos a enviar: "+ modelR.getRoutines().get(0).getMails().size());
+
         System.out.println("Demonio ejecutado");
         while(true) {
-            for(int i = 0; i < listaEventos.size(); i++) {
-                if(listaEventos.isEmpty()){
+            for(int i = 0; i < modelR.getRoutines().size(); i++) {
+                if(modelR.getRoutines().isEmpty()){
                     /*interrupt();*/
                     System.out.println("Sin eventos pendientes");
                     break;
                 }
-                if(listaEventos.get(i).getRutina().equals("Solo una vez")){
+                if(modelR.getRoutines().get(i).getRutina().equals("Solo una vez")){
 
                     System.out.println("Solo una vez");
 
-                    System.out.println("Fecha definida: "+listaEventos.get(i).getFecha());
+                    System.out.println("Fecha definida: "+modelR.getRoutines().get(i).getFecha());
                     System.out.println("Fecha actual: "+LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
-                    if(listaEventos.get(i).getFecha().isEqual(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES))){
-                        ejecutarEvento(listaEventos.get(i), i);
+                    if(modelR.getRoutines().get(i).getFecha().isEqual(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES))){
+                        ejecutarEvento(modelR.getRoutines().get(i), i);
                     }
                 }
-                else if(listaEventos.get(i).getRutina().equals("Diariamente")) {
+                else if(modelR.getRoutines().get(i).getRutina().equals("Diariamente")) {
 
                     System.out.println("Diariamente");
 
                     String fechaActual = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
-                    if (listaEventos.get(i).getFecha().format(DateTimeFormatter.ofPattern("HH:mm")).equals(fechaActual)) {
-                        ejecutarEvento(listaEventos.get(i), i);
+                    if (modelR.getRoutines().get(i).getFecha().format(DateTimeFormatter.ofPattern("HH:mm")).equals(fechaActual)) {
+                        ejecutarEvento(modelR.getRoutines().get(i), i);
                     }
                 }
-                else if(listaEventos.get(i).getRutina().equals("Semanalmente")){
+                else if(modelR.getRoutines().get(i).getRutina().equals("Semanalmente")){
 
                     System.out.println("Semanalmente");
 
                     String fechaActual = LocalDateTime.now().format(DateTimeFormatter.ofPattern("E HH:mm"));
-                    if (listaEventos.get(i).getFecha().format(DateTimeFormatter.ofPattern("E HH:mm")).equals(fechaActual)) {
-                        ejecutarEvento(listaEventos.get(i), i);
+                    if (modelR.getRoutines().get(i).getFecha().format(DateTimeFormatter.ofPattern("E HH:mm")).equals(fechaActual)) {
+                        ejecutarEvento(modelR.getRoutines().get(i), i);
                     }
                 }
-                else if(listaEventos.get(i).getRutina().equals("Mensualmente")){
+                else if(modelR.getRoutines().get(i).getRutina().equals("Mensualmente")){
 
                     System.out.println("Mensualmente");
 
                     String fechaActual = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd HH:mm"));
-                    if (listaEventos.get(i).getFecha().format(DateTimeFormatter.ofPattern("dd HH:mm")).equals(fechaActual)) {
-                        ejecutarEvento(listaEventos.get(i), i);
+                    if (modelR.getRoutines().get(i).getFecha().format(DateTimeFormatter.ofPattern("dd HH:mm")).equals(fechaActual)) {
+                        ejecutarEvento(modelR.getRoutines().get(i), i);
                     }
                 }
             }
@@ -99,17 +104,31 @@ public class DaemonEventos extends Thread{
 
     public void ejecutarEvento(Routine evento, int i){
 
+        
+        
+        //-->Carga la sesion del usuario
         try {
             UseJavaMail.Login(evento.getCuenta());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        for(int j = 0; j < listaEventos.size(); j++)//Send messages
+        //<--Carga la sesion del usuario
+        
+        // -->Send messages
+        for(int j = 0; j < evento.getMails().size(); j++)
             UseJavaMail.sendEmail(evento.getMails().get(j));
+        //<--Send messages
 
-        /*UseJavaMail.sendEmail(evento.getMensaje()); //Se envia el correo*/
+        modelR.delRoutine(i); //remuevo el evento que ya se realizo
 
-        listaEventos.remove(i); //remuevo el evento que ya se realizo
-        //Actualizo el archivo serealizado
+        //-->Guarda el modelo Rutina
+        File fileOut = new File(System.getProperty("user.home") + "/.MassiveMail/RoutineModel.ser");
+        try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileOut))){
+            out.writeObject(modelR);
+            System.out.println("Serialized data is in /RoutineModel.ser");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        //<--Guarda el modelo Rutina
     }
 }

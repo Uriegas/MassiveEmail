@@ -104,6 +104,7 @@ public class Mail implements Serializable {
 
     private void writeObject(ObjectOutputStream s) throws IOException, ClassNotFoundException {
         s.defaultWriteObject();
+        s.writeUTF(getDestinatario());
         s.writeUTF(getAsunto());
         s.writeUTF(getCuerpo());
         s.writeObject(getAdjuntos());
@@ -111,6 +112,7 @@ public class Mail implements Serializable {
     }
     private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
         s.defaultReadObject();
+        destinatario = new SimpleStringProperty(s.readUTF());
         asunto = new SimpleStringProperty(s.readUTF());
         cuerpo = new SimpleStringProperty(s.readUTF());
         adjuntos = FXCollections.observableArrayList((List<String>) s.readObject());
