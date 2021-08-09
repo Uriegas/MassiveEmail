@@ -27,7 +27,7 @@
                   </image>
                </ImageView>
             </graphic>
-</Button>
+         </Button>
          <TextArea fx:id="TaMensaje" layoutX="109.0" layoutY="126.0" prefHeight="233.0" prefWidth="403.0" promptText="Escribe tu mensaje" wrapText="true" />
          <SplitMenuButton fx:id="SmbEnviar" layoutX="109.0" layoutY="421.0" mnemonicParsing="false" onAction="#ClickEnviar" text="Enviar">
            <items>

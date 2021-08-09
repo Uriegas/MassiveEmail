@@ -1,49 +1,195 @@
-.button {
-   -fx-text-fill: white;
-   -fx-background-color: rgb(255, 0, 0);
+.root{
+    -fx-background-color: rgb(86, 161, 231);
 }
 
-.background{
-    -fx-background-color: linear-gradient(to bottom right, #0f0c29 24%, #302b63 50%, #24243e 74%);
+#btnContinuar{
+    -fx-text-fill: black;
+    -fx-border-radius: 20px;
+    -fx-background-color: rgb(86, 161, 231);
+    -fx-border-color: black;
 }
 
-.label{
-    -fx-text-fill: rgb(0, 0, 0);
+#btnCancelar{
+    -fx-text-fill: black;
+    -fx-border-radius: 20px;
+    -fx-background-color: rgb(86, 161, 231);
+    -fx-border-color: black;
 }
 
-.widget{
-    -fx-background-color: derive(#0f0c29, 10%);
-    -fx-background-radius: 5px;
-    -fx-background-insets: 5px;
-    -fx-padding: 5px;
-    -fx-spacing: 5px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+#SmbEnviar{
+    -fx-text-fill: black;
+    -fx-border-radius: 2px;
+    -fx-background-color: rgb(86, 161, 231);
+    -fx-border-color: black;
 }
 
-.widget .label{
-    -fx-font-weight: bold;
-    -fx-font-size: 1.2em;
-    -fx-max-width: 100000;
-    -fx-alignment: center;
+#btnAplicar{
+    -fx-text-fill: black;
+    -fx-border-radius: 20px;
+    -fx-background-color: rgb(86, 161, 231);
+    -fx-border-color: black;
 }
 
-.item{
-    -fx-padding: 10px;
-    -fx-alignment: center-left;
-    -fx-spacing: 10px;
+#btnLogin{
+    -fx-text-fill: black;
+    -fx-border-radius: 20px;
+    -fx-background-color: rgb(86, 161, 231);
+    -fx-border-color: black;
 }
 
-.item .label{
-    -fx-font-weight: normal;
-    -fx-wrap-text: true;
+#btnConfig{
+    -fx-text-fill: black;
+    -fx-border-radius: 20px;
+    -fx-background-color: rgb(86, 161, 231);
+    -fx-border-color: black;
 }
 
-.text-field {
-  -fx-border-color: grey;
-  -fx-border-width: 0 0 1 0;
-  -fx-background-color: transparent;
+#btnCambiarCuenta{
+    -fx-text-fill: black;
+    -fx-border-radius: 20px;
+    -fx-background-color: rgb(86, 161, 231);
+    -fx-border-color: black;
 }
 
-.text-field:focused {
-    -fx-border-color: -fx-focus-color;
+#btnSelectFile{
+    -fx-text-fill: black;
+    -fx-border-radius: 2px;
+    -fx-background-color: rgb(211, 211, 211);
+    -fx-border-color: black;
+}
+
+#BtnInsertar{
+    -fx-text-fill: black;
+    -fx-border-radius: 2px;
+    -fx-background-color: rgb(211, 211, 211);
+    -fx-border-color: black;
+}
+
+#btnLogin:hover{
+    -fx-display: inline-block;
+    -fx-overflow: hidden;
+    -fx-transition: 0.2s;
+    -fx-border-radius: 20px;
+    -fx-border-color: white;
+    -fx-text-fill: white;
+}
+
+#btnContinuar:hover{
+    -fx-display: inline-block;
+    -fx-overflow: hidden;
+    -fx-transition: 0.2s;
+    -fx-border-radius: 20px;
+    -fx-border-color: white;
+    -fx-text-fill: white;
+}
+
+#btnCancelar:hover{
+    -fx-display: inline-block;
+    -fx-overflow: hidden;
+    -fx-transition: 0.2s;
+    -fx-border-radius: 20px;
+    -fx-border-color: white;
+    -fx-text-fill: white;
+}
+
+#btnAplicar:hover{
+    -fx-display: inline-block;
+    -fx-overflow: hidden;
+    -fx-transition: 0.2s;
+    -fx-border-radius: 20px;
+    -fx-border-color: white;
+    -fx-text-fill: white;
+}
+
+#btnConfig:hover{
+    -fx-display: inline-block;
+    -fx-overflow: hidden;
+    -fx-transition: 0.2s;
+    -fx-border-radius: 20px;
+    -fx-border-color: white;
+    -fx-text-fill: white;
+}
+
+#btnCambiarCuenta:hover{
+    -fx-display: inline-block;
+    -fx-overflow: hidden;
+    -fx-transition: 0.2s;
+    -fx-border-radius: 20px;
+    -fx-border-color: white;
+    -fx-text-fill: white;
+}
+
+#TfPass{
+    -fx-border-radius: 10px;
+    -fx-background-color: rgb(86, 161, 231);
+    -fx-border-color: black;
+}
+#TfPass:hover{
+    -fx-display: inline-block;
+    -fx-overflow: hidden;
+    -fx-transition: 0.2s;
+    -fx-border-radius: 10px;
+    -fx-border-color: rgb(255, 255, 255);
+}
+
+#TfUsuario{
+    -fx-border-radius: 8px;
+    -fx-background-color: rgb(86, 161, 231);
+    -fx-border-color: black;
+}
+
+#TfUsuario:hover{
+    -fx-display: inline-block;
+    -fx-overflow: hidden;
+    -fx-transition: 0.2s;
+    -fx-border-radius: 80px;
+    -fx-border-color: rgb(255, 255, 255);
+}
+
+#TfContra{
+    -fx-border-radius: 8px;
+    -fx-background-color: rgb(86, 161, 231);
+    -fx-border-color: black;
+}
+
+#TfContra:hover{
+    -fx-display: inline-block;
+    -fx-overflow: hidden;
+    -fx-transition: 0.2s;
+    -fx-border-radius: 80px;
+    -fx-border-color: rgb(255, 255, 255);
+}
+
+#LvCuentas{
+    -fx-background-color: rgb(86, 161, 231);
+    -fx-border-color: black;
+}
+
+#btnVerTabla{
+    -fx-border: none;
+    -fx-text-fill: black;
+}
+
+#TfDestinatarios{
+    -fx-border-color: black;
+}
+
+#TfAsunto{
+    -fx-border-color: black;
+}
+
+#TaMensaje{
+    -fx-border-color: black;
+}
+
+#lvAdjuntos{
+    -fx-border-color: black;
+}
+
+#CurrentPassword{
+    -fx-border-color: black;
+}
+
+#NewPassword{
+    -fx-border-color: black;
 }
