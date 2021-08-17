@@ -10,10 +10,12 @@ import com.calendarfx.view.YearMonthView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,7 +34,7 @@ import java.util.ResourceBundle;
 public class EventoController implements Initializable {
 
     protected MailModel model;
-    protected RoutineModel modelR = new RoutineModel();
+    protected static RoutineModel modelR = new RoutineModel();
 
     ArrayList<Routine> eventos = new ArrayList<>();
     Account cuenta;
@@ -67,7 +69,14 @@ public class EventoController implements Initializable {
         } catch (Exception i) {
             i.printStackTrace();
         }
+
+        LvEventosPen.setCellFactory(param -> new XCell());
         //<--Load data model from file
+
+        for(int i = 0; i < modelR.getRoutines().size(); i++){
+            LvEventosPen.getItems().add(modelR.getRoutines().get(i).getMails().get(i).getAsunto() +
+                    "\tFecha: "+ modelR.getRoutines().get(i).getFecha()); //Se escribe el evento en el ListView
+        }
     }
 
     /**
@@ -83,7 +92,9 @@ public class EventoController implements Initializable {
 
     @FXML
     protected void ClickCancelar(ActionEvent e){
-        //switchScene(e, "/Ventana_Principal.fxml");
+        Node source = (Node)e.getSource();
+        Stage stage = (Stage)source.getScene().getWindow();
+        stage.close();
     }
 
 
@@ -133,5 +144,57 @@ public class EventoController implements Initializable {
         Thread t = new DaemonEventos(); //Creamos el hilo
         t.setDaemon(true); //lo convertimos en demonio
         t.start(); //Ejecutamos el demonio (se ejecuta lo que esta en el metodo run() )
+    }
+
+
+    /**
+     * Agrega Button a ListView
+     */
+    static class XCell extends ListCell<String> {
+        HBox hbox = new HBox();
+        Label label = new Label("");
+        Pane pane = new Pane();
+        Button button = new Button();
+
+        public XCell() {
+            super();
+
+            hbox.getChildren().addAll(label, pane, button);
+            HBox.setHgrow(pane, Priority.ALWAYS);
+
+            button.setOnAction((ActionEvent event) -> {
+                /*indice = getListView().getItems().indexOf(getItem());*/
+                EventoController.modelR.delRoutine(getListView().getItems().indexOf(getItem()));
+
+                //-->Guarda el modelo Rutina
+                File fileOut = new File(System.getProperty("user.home") + "/.MassiveMail/RoutineModel.ser");
+                try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileOut))){
+                    out.writeObject(modelR);
+                    System.out.println("Serialized data is in /RoutineModel.ser");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                //<--Guarda el modelo Rutina
+
+                getListView().getItems().remove(getItem());
+
+            });
+            button.setStyle("-fx-background-color: #ce3f20;"+
+                    "-fx-text-fill: #ffffff;"+
+                    "-fx-background-radius: 6px;"+
+                    "-fx-graphic:url(\"drop_min.png\");");
+        }
+
+        @Override
+        protected void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            setText(null);
+            setGraphic(null);
+
+            if (item != null && !empty) {
+                label.setText(item);
+                setGraphic(hbox);
+            }
+        }
     }
 }
