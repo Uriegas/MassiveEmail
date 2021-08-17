@@ -8,7 +8,7 @@ import java.net.URL;
 import java.util.*;
 
 import javafx.fxml.*;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 /**
@@ -29,6 +29,8 @@ public class VentanaPrincipalController extends Window {
     private Button btnCambiarCuenta;
     @FXML
     private ListView<String> lastViewedExcels;
+    @FXML
+    private Button btnVerTabla;
     /**
      * Initialize model
      */
@@ -55,6 +57,31 @@ public class VentanaPrincipalController extends Window {
                     setText(item.substring(item.lastIndexOf("/") +1, item.length()));
             }
         });
+        btnVerTabla.setOnAction(e -> {//Mostar tabla de destinatarios
+            try {
+                // showTable();
+                createPopUp(e, "/VerTabla.fxml");
+            } catch (Exception ex) {
+                    ex.printStackTrace();
+                System.out.println(ex.getMessage());
+                Alert error = new Alert(Alert.AlertType.ERROR,
+                    "No hay ningun archivo cargado");
+                error.show();
+            }
+        });
+    }
+    /**
+     * Show table
+     */
+    public void showTable() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/VerTabla.fxml"));
+        Parent root = loader.load();
+        VerTablaController controller = loader.getController();
+        controller.initTable(this.model.excelTableProperty());
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
     /**
      * Init method

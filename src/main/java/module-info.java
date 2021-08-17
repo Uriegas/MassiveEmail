@@ -8,6 +8,6 @@ module massiveMail{
     requires html2pdf;
 
     opens com.uriegas to javafx.fxml;
-
+    exports com.uriegas.Model to com.uriegas;
     exports com.uriegas;
 }
