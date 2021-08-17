@@ -27,7 +27,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class EventoController implements Initializable {
@@ -42,7 +41,7 @@ public class EventoController implements Initializable {
     @FXML private YearMonthView Calendario;
     @FXML private DatePicker DpFecha;
     @FXML private TextField TfHora;
-    @FXML private ListView LvEventosPen;
+    @FXML private ListView<String> LvEventosPen;
     @FXML private ComboBox<String> CbRutinas;
 
     /**

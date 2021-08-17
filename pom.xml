@@ -23,6 +23,11 @@
     </dependency>
     <dependency>
       <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>4.1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
       <artifactId>poi-ooxml</artifactId>
       <version>4.1.2</version>
     </dependency>
@@ -37,36 +42,10 @@
       <version>11</version>
     </dependency>
     <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-controls</artifactId>
-      <version>11</version>
-      <classifier>linux</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-fxml</artifactId>
-      <version>11</version>
-      <classifier>linux</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-controls</artifactId>
-      <version>11</version>
-      <classifier>win</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-fxml</artifactId>
-      <version>11</version>
-      <classifier>win</classifier>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
-    <dependency>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.2.0</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
     <dependency>
         <groupId>javax.mail</groupId>
         <artifactId>javax.mail-api</artifactId>
@@ -77,277 +56,59 @@
         <artifactId>javax.mail</artifactId>
         <version>1.6.2</version>
     </dependency>
-    <!-- CalendarFX
-     https://mvnrepository.com/artifact/com.calendarfx/view -->
     <dependency>
       <groupId>com.calendarfx</groupId>
       <artifactId>view</artifactId>
       <version>11.10.1</version>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
-      <artifactId>jackson-dataformat-yaml</artifactId>
-      <version>2.10.3</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.10.3</version>
-    </dependency>
-    <!-- Dependencias para HTML2PDF -->
-    <!-- iText Core -->
-    <dependency>
       <groupId>com.itextpdf</groupId>
       <artifactId>itext7-core</artifactId>
       <version>7.1.9</version>
       <type>pom</type>
     </dependency>
-    <!-- iText pdfHTML add-on -->
     <dependency>
       <groupId>com.itextpdf</groupId>
       <artifactId>html2pdf</artifactId>
       <version>2.1.6</version>
     </dependency>
     <dependency>
-        <groupId>org.jetbrains</groupId>
-        <artifactId>annotations</artifactId>
-        <version>RELEASE</version>
-        <scope>compile</scope>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/io.datafx/flow -->
-    <dependency>
+    <!-- <dependency>
         <groupId>io.datafx</groupId>
         <artifactId>flow</artifactId>
         <version>8.0</version>
-    </dependency>
+    </dependency> -->
   </dependencies>
   <build>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <pluginManagement>
       <plugins>
-      <!--Added for packaging needs Java 1 based on https://stackoverflow.com/q/36981024/13991148-->
         <plugin>
-            <groupId>com.zenjava</groupId>
-            <artifactId>javafx-maven-plugin</artifactId>
-            <version>8.8.3</version>
-            <configuration>
-                <vendor>com.uriegas</vendor>
-                <mainClass>com.uriegas.AppLauncher</mainClass>
-            </configuration>
-        </plugin>
-        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
-        <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.1.0</version>
-        </plugin>
-        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.0.2</version>
-        </plugin>
-        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
-          <configuration>
-            <release>10</release>
-          </configuration>
+          <version>3.8.1</version>
         </plugin>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>exec-maven-plugin</artifactId>
-          <version>3.0.0</version>
-          <configuration>
-            <mainClass>com.uriegas.App</mainClass>
-          </configuration>
-        </plugin>
-        <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.22.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
-          <configuration>
-            <archive>
-              <manifest>
-                <addClasspath>true</addClasspath>
-                <!--<classpathPrefix>lib/</classpathPrefix>-->
-                <mainClass>com.uriegas.App</mainClass>
-              </manifest>
-            </archive>
-          </configuration>
-        </plugin>
-        <plugin>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>2.5.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.8.2</version>
-        </plugin>
-        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.7.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>3.0.0</version>
-        </plugin>
+
         <plugin>
           <groupId>org.openjfx</groupId>
           <artifactId>javafx-maven-plugin</artifactId>
           <version>0.0.6</version>
           <configuration>
-              <mainClass>App</mainClass>
+              <mainClass>com.uriegas.App</mainClass>
           </configuration>
         </plugin>
         <plugin>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>3.1.0</version>
-            <configuration>
-                <descriptorRefs>
-                    <descriptorRef>jar-with-dependencies</descriptorRef>
-                </descriptorRefs>
-                <archive>
-                    <manifest>
-                        <addClasspath>true</addClasspath>
-                        <mainClass>com.uriegas.App</mainClass>
-                    </manifest>
-                </archive>
-            </configuration>
-            <executions>
-                <execution>
-                    <id>make-assembly</id> <!-- this is used for inheritance merges -->
-                    <phase>package</phase> <!-- bind to the packaging phase -->
-                    <goals>
-                        <goal>single</goal>
-                    </goals>
-                </execution>
-            </executions>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.1</version>
+          <configuration>
+            <release>${maven.compiler.release}</release>
+          </configuration>
         </plugin>
-        <plugin>
-          <groupId>com.github.akman</groupId>
-          <artifactId>jpackage-maven-plugin</artifactId>
-          <version>0.1.2</version>
-        </plugin>
-    <!-- <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-dependency-plugin</artifactId>
-      <executions>
-          <execution>
-              <id>copy-dependencies</id>
-              <phase>install</phase>
-              <goals>
-                  <goal>copy-dependencies</goal>
-              </goals>
-              <configuration>
-                  <includeScope>runtime</includeScope>
-                  <outputDirectory>${application.dist}/lib</outputDirectory>
-                  <overWriteReleases>false</overWriteReleases>
-                  <overWriteSnapshots>true</overWriteSnapshots>
-                  <overWriteIfNewer>true</overWriteIfNewer>
-              </configuration>
-          </execution>
-      </executions>
-    </plugin>
-    <plugin>
-      <artifactId>maven-antrun-plugin</artifactId>
-      <version>1.7</version>
-      <executions>
-          <execution>
-              <phase>install</phase>
-              <configuration>
-                  <target xmlns:fx="javafx:com.sun.javafx.tools.ant">
-                      <property name="applet.width" value="330"/>
-                      <property name="applet.height" value="620"/>
-                      <property name="application.title" value="Title"/>
-                      <property name="application.vendor" value="Vendor"/>
-                      <manifestclasspath property="manifest.classpath"
-                                        jarfile="${application.dist}/MyApp.jar">
-                          <classpath>
-                              <path id="build.classpath">
-                                  <fileset dir="${application.dist}/lib">
-                                      <include name="*.jar"/>
-                                  </fileset>
-                              </path>
-                          </classpath>
-                      </manifestclasspath>
-
-                      <taskdef resource="com/sun/javafx/tools/ant/antlib.xml"
-                              uri="javafx:com.sun.javafx.tools.ant"
-                              classpath="${javafx.lib.ant-javafx.jar}"/>
-                      <fx:application id="AppLauncher"
-                                      name="AppLauncher"
-                                      mainClass="com.uriegas.AppLauncher"/>
-                      <fx:jar destfile="${application.dist}/AppLauncher.jar">
-                          <fx:application refid="AppLauncher"/>
-
-                          <manifest>
-                              <attribute name="Class-Path" value="${manifest.classpath}"/>
-                          </manifest>
-
-                          <fileset dir="${project.build.outputDirectory}"/>
-                      </fx:jar>
-                      <fx:resources id="appRes">
-                          <fx:fileset dir="${application.dist}" includes="*.jar"/>
-                          <fx:fileset dir="${application.dist}" includes="lib/*.jar"/>
-                      </fx:resources>
-                              
-                      <signjar keyStore="${basedir}\keystore.jks"
-                              destdir="${application.dist}"
-                              alias="certificatekey" storePass="cshcsh" keyPass="cshcsh">
-                          <fileset dir="${application.dist}" includes="*.jar"/>
-                          <fileset dir="${application.dist}" includes="lib/*.jar"/>
-                      </signjar>
-                      <fx:deploy width="${applet.width}" height="${applet.height}"
-                                outdir="${application.dist}" embedJNLP="true"
-                                outfile="${application.title}">
-
-                          <fx:application refId="AppLauncher"/>
-
-                          <fx:resources refid="appRes"/>
-                          <fx:info title="Sample app: ${application.title}"
-                                  vendor="${application.vendor}"/>
-
-                          <fx:permissions elevated="true"/>
-                      </fx:deploy>
-                  </target>
-              </configuration>
-              <goals>
-                  <goal>run</goal>
-              </goals>
-          </execution>
-      </executions>
-    </plugin> -->
       </plugins>
     </pluginManagement>
-    <!-- To use the plugin goals in your POM or parent POM -->
-    <!-- <plugins>
-      <plugin>
-        <groupId>com.github.akman</groupId>
-        <artifactId>jpackage-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>3.0.0</version>
-        <executions>
-            <execution>
-                <phase>package</phase>
-                <goals>
-                    <goal>shade</goal>
-                </goals>
-                <configuration>
-                    <transformers>
-                        <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <mainClass>com.uriegas.AppLauncher</mainClass>
-                        </transformer>
-                    </transformers>
-                </configuration>
-            </execution>
-        </executions>
-      </plugin>
-    </plugins> -->
   </build>
 </project>
