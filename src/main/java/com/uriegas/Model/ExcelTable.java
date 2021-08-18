@@ -32,6 +32,12 @@ public class ExcelTable extends TableView<ObservableList<String>> {
 			tmp.add( this.getItems().get(i) );
 		return tmp;
 	}
+	/**
+	 * Return rows in ObservableList without the headers
+	 */
+	public ObservableList<ObservableList<String>> getRowsObservable(){
+		return this.getItems();
+	}
 
 	/**
 	 * Get the email directions of each person: {@code 1930526@upv.edu.mx}

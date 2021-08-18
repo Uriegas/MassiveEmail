@@ -38,7 +38,7 @@
             </effect>
          </SplitMenuButton>
          <Button fx:id="BtnInsertar" ellipsisString="." graphicTextGap="1.0" layoutX="216.0" layoutY="419.0" minWidth="30.0" mnemonicParsing="false" onAction="#ClickAdjuntar" prefHeight="30.0" prefWidth="30.0" text="+" textOverrun="CLIP" />
-         <Button fx:id="btnConfig" layoutX="53.0" layoutY="4.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="29.0" onAction="#ClickSettings">
+         <Button fx:id="btnConfig" layoutX="53.0" layoutY="4.0" mnemonicParsing="false" onAction="#ClickSettings" prefHeight="29.0" prefWidth="29.0">
             <graphic>
                <ImageView fitHeight="21.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -56,7 +56,6 @@
                </ImageView>
             </graphic>
          </Button>
-         <Button fx:id="btnVerTabla" layoutX="438.0" layoutY="55.0" mnemonicParsing="false" style="-fx-background-color: false;" text="Ver tabla" textFill="#686767" />
          <ListView fx:id="lastViewedExcels" layoutX="525.0" layoutY="103.0" prefHeight="200.0" prefWidth="176.0" />
          <Label layoutX="526.0" layoutY="88.0" text="Archivos recientes" />
       </children></AnchorPane>

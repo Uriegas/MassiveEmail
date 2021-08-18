@@ -6,6 +6,7 @@ module massiveMail{
     requires poi;
     requires poi.ooxml;
     requires html2pdf;
+    requires pdfa;
 
     opens com.uriegas to javafx.fxml;
     exports com.uriegas.Model to com.uriegas;
